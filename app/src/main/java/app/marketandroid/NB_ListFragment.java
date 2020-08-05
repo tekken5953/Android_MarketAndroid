@@ -7,24 +7,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class NongBu_ListFragment extends Fragment {
+public class NB_ListFragment extends Fragment {
 
     ViewGroup viewGroup;
     RecyclerView mRecyclerView = null;
     ArrayList<RecyclerItem> mList = new ArrayList<RecyclerItem>();
-    RecyclerImageTextAdapter mAdapter;
+    RecyclerViewAdapter mAdapter;
     Drawable drawable_potato,drawable_apple;
     TextView main_title;
     @Override
@@ -36,42 +34,52 @@ public class NongBu_ListFragment extends Fragment {
         main_title = getActivity().findViewById(R.id.main_title);
         main_title.setText("등록 현황");
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
-        mAdapter = new RecyclerImageTextAdapter(mList);
+        mAdapter = new RecyclerViewAdapter(mList);
         mRecyclerView.setAdapter(mAdapter);
         addItem(drawable_potato,"감자","30kg, 2개");
         addItem(drawable_apple,"사과", "20kg, 3개");
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        mAdapter.setOnItemClickListener(new RecyclerImageTextAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                final View view = LayoutInflater.from(getContext()).inflate(R.layout.nongbu_deatil_dialog,null,false);
-                builder.setView(view);
-                final AlertDialog alertDialog = builder.create();
-                final Button detail_btn = view.findViewById(R.id.detail_ok);
-                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-                layoutParams.copyFrom(alertDialog.getWindow().getAttributes());
-                layoutParams.width = 1100;
-                layoutParams.height = 1450;
-                detail_btn.setOnClickListener(new View.OnClickListener() {
+                builder.create();
+                builder.setTitle("등록물품 상세정보");
+                builder.setMessage("\n등록 시간  :  시간\n\n품 종  :  품종\n\n중 량  :  중량\n\n수 량  :  수량");
+                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        alertDialog.dismiss();
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                     }
                 });
-                alertDialog.show();
-                Window window = alertDialog.getWindow();
-                window.setAttributes(layoutParams);
+                builder.show();
             }
         });
+
+//        mAdapter.setOnItemClickListener(new RecyclerImageTextAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View v, int position) {
+//                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//                final View view = LayoutInflater.from(getContext()).inflate(R.layout.nb_deatil_dialog,null,false);
+//                builder.setView(view);
+//                final AlertDialog alertDialog = builder.create();
+//                final Button detail_btn = view.findViewById(R.id.detail_ok);
+//                detail_btn.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        alertDialog.dismiss();
+//                    }
+//                });
+//                alertDialog.show();
+//            }
+//        });
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        viewGroup = (ViewGroup) inflater.inflate(R.layout.nongbu_list_fragment, container, false);
+        viewGroup = (ViewGroup) inflater.inflate(R.layout.nb_list_fragment, container, false);
         return viewGroup;
     }
 

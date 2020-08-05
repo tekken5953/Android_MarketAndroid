@@ -9,12 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NongBu_ListFragment"></activity>
-        <activity android:name=".NongBu_OptionFragment" />
-        <activity android:name=".NongBu_AddFragment" />
+        <activity android:name=".NB_ListFragment"></activity>
+        <activity android:name=".NB_OptionFragment" />
+        <activity android:name=".NB_AddFragment" />
         <activity android:name=".Manager_MainActivity" />
         <activity android:name=".Manager_SettingActivity" />
-        <activity android:name=".NongBu_MainActivity" />
+        <activity android:name=".NB_MainActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

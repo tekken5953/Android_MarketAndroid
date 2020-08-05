@@ -12,23 +12,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class RecyclerImageTextAdapter extends RecyclerView.Adapter<RecyclerImageTextAdapter.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private ArrayList<RecyclerItem> mData = null;
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    RecyclerImageTextAdapter(ArrayList<RecyclerItem> list) {
+    RecyclerViewAdapter(ArrayList<RecyclerItem> list) {
         mData = list;
     }
 
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
     @NonNull
     @Override
-    public RecyclerImageTextAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = inflater.inflate(R.layout.recyclerview, parent, false);
-        RecyclerImageTextAdapter.ViewHolder vh = new RecyclerImageTextAdapter.ViewHolder(view);
+        RecyclerViewAdapter.ViewHolder vh = new RecyclerViewAdapter.ViewHolder(view);
 
         return vh;
     }
@@ -47,7 +47,7 @@ public class RecyclerImageTextAdapter extends RecyclerView.Adapter<RecyclerImage
 
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
-    public void onBindViewHolder(RecyclerImageTextAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
 
         RecyclerItem item = mData.get(position);
 

@@ -4,20 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class NongBu_OptionFragment extends Fragment {
+public class NB_OptionFragment extends Fragment {
     ViewGroup viewGroup;
     ListView listView;
     ArrayAdapter adapter;
@@ -41,7 +38,7 @@ public class NongBu_OptionFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        viewGroup = (ViewGroup) inflater.inflate(R.layout.nongbu_option_fragment, container, false);
+        viewGroup = (ViewGroup) inflater.inflate(R.layout.nb_option_fragment, container, false);
         return viewGroup;
     }
 
