@@ -5,10 +5,23 @@
     android:layout_height="match_parent"
     tools:context=".NongBu_ListFragment">
 
+    <TextClock
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textclock"
+        android:format12Hour="yyyy년 MM월 dd일 hh:mm:ss a"
+        android:layout_centerHorizontal="true"
+        android:textStyle="italic"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:layout_marginTop="10dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerView"/>
+        android:id="@+id/recyclerView"
+        android:layout_below="@+id/textclock"
+        android:layout_marginTop="5dp"/>
 
 
 </RelativeLayout>

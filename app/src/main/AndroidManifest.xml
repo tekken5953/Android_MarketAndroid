@@ -14,7 +14,6 @@
         <activity android:name=".NongBu_AddFragment" />
         <activity android:name=".Manager_MainActivity" />
         <activity android:name=".Manager_SettingActivity" />
-        <activity android:name=".NongBu_DetailActivity" />
         <activity android:name=".NongBu_MainActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>

@@ -6,16 +6,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.content.Intent;
+import android.app.AlertDialog;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -47,9 +46,24 @@ public class NongBu_ListFragment extends Fragment {
         mAdapter.setOnItemClickListener(new RecyclerImageTextAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                Intent intent = new Intent(getActivity(),NongBu_DetailActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                final View view = LayoutInflater.from(getContext()).inflate(R.layout.nongbu_deatil_dialog,null,false);
+                builder.setView(view);
+                final AlertDialog alertDialog = builder.create();
+                final Button detail_btn = view.findViewById(R.id.detail_ok);
+                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+                layoutParams.copyFrom(alertDialog.getWindow().getAttributes());
+                layoutParams.width = 1100;
+                layoutParams.height = 1450;
+                detail_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.show();
+                Window window = alertDialog.getWindow();
+                window.setAttributes(layoutParams);
             }
         });
     }

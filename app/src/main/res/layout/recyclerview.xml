@@ -18,7 +18,7 @@
             android:id="@+id/recycle_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="22dp"
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@+id/recycle_img"
             android:text="품종이름"
@@ -34,7 +34,7 @@
             android:layout_toRightOf="@+id/recycle_img"
             android:layout_marginLeft="15dp"
             android:text="출하정보"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="7dp"/>
 
         <View
             android:layout_width="match_parent"

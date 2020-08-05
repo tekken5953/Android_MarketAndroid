@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="등록물품 상세정보 화면"
+        android:id="@+id/detail_title"
+        android:textSize="25sp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"/>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detail_title"
+        android:id="@+id/table1"
+        android:gravity="center"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="등록 시간 : "
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:id="@+id/detail_time_tx"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시간"
+            android:textSize="17sp"
+            android:textColor="@color/line"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/detail_time_tx" />
+    </TableRow>
+
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/table1"
+        android:id="@+id/table2"
+        android:gravity="center"
+        android:layout_marginTop="30dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="품 종 : "
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:id="@+id/detail_kinds_tx"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="품종"
+            android:textSize="17sp"
+            android:textColor="@color/line"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/detail_kinds_tx" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/table2"
+        android:id="@+id/table3"
+        android:gravity="center"
+        android:layout_marginTop="30dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="중 량 : "
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:id="@+id/detail_weight_tx"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="중량"
+            android:textSize="17sp"
+            android:textColor="@color/line"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/detail_weight_tx"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/table3"
+        android:id="@+id/table4"
+        android:gravity="center"
+        android:layout_marginTop="30dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수 량 : "
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:id="@+id/detail_sell_num_tx"
+            android:layout_below="@+id/detail_weight_tx"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수량"
+            android:textSize="17sp"
+            android:textColor="@color/line"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/detail_sell_num_tx" />
+
+    </TableRow>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="확인"
+        android:id="@+id/detail_ok"
+        android:layout_below="@+id/table4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="15dp"/>
+
+</RelativeLayout>
