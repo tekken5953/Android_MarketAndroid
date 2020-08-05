@@ -13,6 +13,17 @@
         android:textSize="25sp"
         android:textColor="@color/black"/>
 
+    <TextClock
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textclock"
+        android:format12Hour="yyyy년 MM월 dd일 hh:mm:ss a"
+        android:textStyle="italic"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:layout_below="@+id/add_text"
+        android:layout_margin="10dp"/>
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
