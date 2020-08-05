@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="등록 현황"
+        android:icon="@drawable/list"
+        android:enabled="true"
+        android:id="@+id/bottom_list"/>
+
+    <item
+        android:title="물품 등록"
+        android:icon="@drawable/add"
+        android:enabled="true"
+        android:id="@+id/bottom_add"/>
+
+    <item
+        android:title="설정"
+        android:icon="@drawable/option"
+        android:enabled="true"
+        android:id="@+id/bottom_option"/>
+
+</menu>

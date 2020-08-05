@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MarketAndroid</string>
+    <string name="nongbu">농부</string>
+    <string name="manager">관리자</string>
+    <string name="list">등록 현황</string>
+    <string name="add">물품 등록</string>
+    <string name="option">설정</string>
+</resources>
