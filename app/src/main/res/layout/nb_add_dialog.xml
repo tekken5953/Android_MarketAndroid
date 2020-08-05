@@ -18,6 +18,7 @@
         android:id="@+id/add_dial_max_tx"
         android:layout_below="@+id/add_dial_title"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
         android:textColor="@color/black"/>
 
     <TextView
@@ -27,6 +28,7 @@
         android:id="@+id/add_dial_weight"
         android:layout_toRightOf="@+id/add_dial_max_tx"
         android:layout_below="@+id/add_dial_title"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"/>
 
     <TextView
@@ -36,6 +38,7 @@
         android:layout_toRightOf="@+id/add_dial_weight"
         android:layout_below="@+id/add_dial_title"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"/>
 
     <TextView
@@ -46,7 +49,7 @@
         android:layout_below="@+id/add_dial_max_tx"
         android:textColor="@color/black"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="30dp"/>
 
     <Spinner
         android:layout_width="70dp"
@@ -54,7 +57,7 @@
         android:id="@+id/add_dial_sell_spinner"
         android:layout_toRightOf="@+id/add_dial_sell_weight"
         android:layout_below="@+id/add_dial_max_tx"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="10dp"/>
 
     <TextView
@@ -63,34 +66,31 @@
         android:text="Kg"
         android:layout_toRightOf="@id/add_dial_sell_spinner"
         android:layout_below="@+id/add_dial_max_tx"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="15dp"/>
 
-    <Button
-        android:layout_width="wrap_content"
+    <TableRow
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#00ffff00"
-        android:text="등 록"
-        android:id="@+id/add_dial_add_btn"
         android:layout_below="@+id/add_dial_sell_spinner"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="20dp"/>
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="30dp">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00ffff00"
+            android:text="등 록"
+            android:id="@+id/add_dial_add_btn" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00ffff00"
-        android:text="취 소"
-        android:id="@+id/add_dial_cancel_btn"
-        android:layout_toRightOf="@+id/add_dial_add_btn"
-        android:layout_below="@+id/add_dial_sell_spinner"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="20dp"/>
-
-
-
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00ffff00"
+            android:text="취 소"
+            android:id="@+id/add_dial_cancel_btn"
+            android:layout_toRightOf="@+id/add_dial_add_btn"
+            android:layout_marginLeft="25dp" />
+    </TableRow>
 </RelativeLayout>
