@@ -23,10 +23,13 @@ public class NongBu_AddFragment extends Fragment {
 
     ViewGroup viewGroup;
     Button btn1;
+    TextView main_title;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        main_title = getActivity().findViewById(R.id.main_title);
+        main_title.setText("물품 등록");
         btn1 = getActivity().findViewById(R.id.button);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +44,7 @@ public class NongBu_AddFragment extends Fragment {
                     }
                 });
                 builder.show();
+
             }
         });
 

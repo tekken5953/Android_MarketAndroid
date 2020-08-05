@@ -9,25 +9,53 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/login_text"
+        android:text="App Name"
+        android:textColor="@color/black"
+        android:textSize="60sp"
+        android:fontFamily="serif"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/login_edit_id"/>
+
+    <EditText
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/login_edit_id"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/login_edit_pwd"
+        android:layout_marginTop="50dp"
+        android:hint="이메일을 입력하세요."
+        android:backgroundTint="@color/black"
+        android:gravity="center"/>
+
+    <EditText
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/login_edit_pwd"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:hint="비밀번호를 입력하세요."
+        android:backgroundTint="@color/black"
+        android:inputType="numberPassword"
+        android:gravity="center"/>
+
+    <Button
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/login_btn"
         android:text="로그인"
-        android:textSize="30sp"
-        android:textColor="@color/black"/>
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/login_edit_pwd"
+        android:layout_marginTop="40dp"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:text="@string/manager"
-        android:layout_centerVertical="true"
-        android:id="@+id/login_manager"
-        android:layout_marginLeft="80dp"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nongbu"
-        android:layout_centerVertical="true"
-        android:id="@+id/login_nonbu"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="80dp"/>
+        android:id="@+id/sign_up"
+        android:text="회원가입"
+        android:layout_below="@id/login_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
 
 </RelativeLayout>

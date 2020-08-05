@@ -5,18 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".NongBu_OptionFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/option"
-        android:textSize="25sp"
-        android:id="@+id/option_text"
-        android:textColor="@color/black"/>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/option_text"
         android:scrollbars="vertical"
         android:id="@+id/option_listView"
         android:overScrollMode="ifContentScrolls"

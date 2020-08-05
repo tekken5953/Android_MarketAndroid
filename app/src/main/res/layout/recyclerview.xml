@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp">
+
+        <ImageView
+            android:id="@+id/recycle_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/recycle_potato"/>
+
+        <TextView
+            android:id="@+id/recycle_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/recycle_img"
+            android:text="품종이름"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/recycle_detail"
+            android:layout_below="@+id/recycle_name"
+            android:layout_toRightOf="@+id/recycle_img"
+            android:layout_marginLeft="15dp"
+            android:text="출하정보"
+            android:layout_marginTop="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/line"/>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -21,10 +22,13 @@ public class NongBu_OptionFragment extends Fragment {
     ListView listView;
     ArrayAdapter adapter;
     ArrayList<String> list = new ArrayList<>();
+    TextView main_title;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        main_title = getActivity().findViewById(R.id.main_title);
+        main_title.setText("설정");
         listView = getActivity().findViewById(R.id.option_listView);
         for (int i = 1; i <= 20; i++){
             list.add(i+"번 옵션 아이템");

@@ -5,29 +5,20 @@
     android:layout_height="match_parent"
     tools:context=".NongBu_AddFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add"
-        android:id="@+id/add_text"
-        android:textSize="25sp"
-        android:textColor="@color/black"/>
-
     <TextClock
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textclock"
         android:format12Hour="yyyy년 MM월 dd일 hh:mm:ss a"
+        android:layout_centerHorizontal="true"
         android:textStyle="italic"
         android:textColor="@color/black"
         android:textSize="17sp"
-        android:layout_below="@+id/add_text"
         android:layout_margin="10dp"/>
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/add_text"
         android:gravity="center">
 
         <TableRow
