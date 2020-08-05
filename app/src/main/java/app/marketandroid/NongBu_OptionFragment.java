@@ -8,14 +8,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class NongBu_OptionFragment extends Fragment {
     ViewGroup viewGroup;
+    ListView listView;
+    ArrayAdapter adapter;
+    ArrayList<String> list = new ArrayList<>();
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        listView = getActivity().findViewById(R.id.option_listView);
+        for (int i = 1; i <= 10; i++){
+            list.add(i+"번 옵션");
+        }
+        adapter = new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,list);
+        listView.setAdapter(adapter);
     }
 
     @Nullable
