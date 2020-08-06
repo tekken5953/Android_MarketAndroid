@@ -98,7 +98,6 @@ public class NB_AddFragment extends Fragment {
                 alertDialog.dismiss();
             }
         });
-
         alertDialog.show();
     }
 
