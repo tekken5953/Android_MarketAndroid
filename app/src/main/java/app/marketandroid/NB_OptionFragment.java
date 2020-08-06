@@ -27,7 +27,7 @@ public class NB_OptionFragment extends Fragment {
         main_title = getActivity().findViewById(R.id.main_title);
         main_title.setText("설정");
         listView = getActivity().findViewById(R.id.option_listView);
-        for (int i = 1; i <= 20; i++){
+        for (int i = 1; i <= 10; i++){
             list.add(i+"번 옵션 아이템");
         }
         adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,list);

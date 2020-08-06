@@ -51,6 +51,7 @@ public class NB_ListFragment extends Fragment {
                 RecyclerItem item = mData.get(position);
                 builder.create();
                 builder.setTitle("등록물품 상세정보");
+                //TODO
                 builder.setMessage("\n등록 시간  :  시간\n\n품 종  :  " + item.getNameStr() + "\n\n중 량  :  " + item.getDetailStr() + "\n\n수 량  :  수량\n\n총 가격  :  가격");
                 builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
@@ -61,24 +62,6 @@ public class NB_ListFragment extends Fragment {
                 builder.show();
             }
         });
-
-//        mAdapter.setOnItemClickListener(new RecyclerImageTextAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(View v, int position) {
-//                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//                final View view = LayoutInflater.from(getContext()).inflate(R.layout.nb_deatil_dialog,null,false);
-//                builder.setView(view);
-//                final AlertDialog alertDialog = builder.create();
-//                final Button detail_btn = view.findViewById(R.id.detail_ok);
-//                detail_btn.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        alertDialog.dismiss();
-//                    }
-//                });
-//                alertDialog.show();
-//            }
-//        });
     }
 
     @Nullable
@@ -94,11 +77,11 @@ public class NB_ListFragment extends Fragment {
         mList.clear();
     }
 
-    public void addItem(Drawable icon, String title, String desc) {
+    public void addItem(Drawable icon, String title, String detail) {
         RecyclerItem item = new RecyclerItem();
         item.setIconDrawable(icon);
         item.setNameStr(title);
-        item.setDetailStr(desc);
+        item.setDetailStr(detail);
         mList.add(item);
     }
 }

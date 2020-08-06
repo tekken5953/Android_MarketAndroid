@@ -14,12 +14,6 @@
         android:id="@+id/bottom_add"/>
 
     <item
-        android:title="오늘의 시세"
-        android:icon="@drawable/price"
-        android:enabled="true"
-        android:id="@+id/bottom_price"/>
-
-    <item
         android:title="설정"
         android:icon="@drawable/option"
         android:enabled="true"

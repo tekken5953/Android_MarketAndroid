@@ -88,6 +88,7 @@ public class NB_AddFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "등록 완료", Toast.LENGTH_SHORT).show();
+                //TODO
                 alertDialog.dismiss();
             }
         });

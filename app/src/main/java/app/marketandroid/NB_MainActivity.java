@@ -19,7 +19,6 @@ public class NB_MainActivity extends AppCompatActivity {
     private NB_AddFragment NB_addFragment = new NB_AddFragment();
     private NB_OptionFragment NB_optionFragment = new NB_OptionFragment();
     private FragmentManager fragmentManager = getSupportFragmentManager();
-    private NB_PriceFragment NB_priceFragment = new NB_PriceFragment();
     Boolean isExitFlag = false;
 
     @Override
@@ -70,10 +69,6 @@ public class NB_MainActivity extends AppCompatActivity {
                     }
                     case R.id.bottom_option: {
                         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, NB_optionFragment).commitAllowingStateLoss();
-                        break;
-                    }
-                    case R.id.bottom_price: {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, NB_priceFragment).commitAllowingStateLoss();
                         break;
                     }
                 }

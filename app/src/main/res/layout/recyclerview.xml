@@ -32,7 +32,7 @@
             android:id="@+id/recycle_detail"
             android:layout_below="@+id/recycle_name"
             android:layout_toRightOf="@+id/recycle_img"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="17dp"
             android:text="출하정보"
             android:layout_marginTop="7dp"/>
 

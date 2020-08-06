@@ -5,6 +5,52 @@
     android:layout_height="match_parent"
     tools:context=".NB_OptionFragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User 님"
+        android:id="@+id/option_username"
+        android:textSize="45sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_margin="35dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:background="@color/line"
+        android:layout_below="@+id/option_username"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/option_account_tx"
+        android:text="고객님의 계좌 정보"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_below="@+id/option_username"
+        android:layout_marginTop="20dp"
+        android:textStyle="italic"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/option_account"
+        android:text="농협 1234-5678-0123451"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        android:layout_below="@+id/option_account_tx"
+        android:layout_margin="15dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:background="@color/line"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/option_account"/>
+
 
     <ListView
         android:layout_width="match_parent"
@@ -12,7 +58,8 @@
         android:scrollbars="vertical"
         android:id="@+id/option_listView"
         android:overScrollMode="ifContentScrolls"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/option_account"/>
 
 </RelativeLayout>
