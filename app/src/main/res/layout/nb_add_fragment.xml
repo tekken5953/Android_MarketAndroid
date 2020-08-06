@@ -8,6 +8,7 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/table_layout"
         android:gravity="center">
 
         <TableRow
@@ -97,6 +98,34 @@
                 android:layout_height="110dp"
                 android:text="물품9" />
         </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="15dp">
+
+            <Button
+                android:id="@+id/button10"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:text="물품10"
+                android:layout_marginRight="10dp"/>
+
+            <Button
+                android:id="@+id/button11"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:text="물품11"
+                android:layout_marginRight="10dp"/>
+
+            <Button
+                android:id="@+id/button12"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:text="물품12" />
+        </TableRow>
+
     </TableLayout>
 
 
