@@ -13,33 +13,33 @@
         android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/add_dial_price_tx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="오늘의 품종 시세 : "
-        android:textColor="@color/black"
-        android:id="@+id/add_dial_price_tx"
         android:layout_below="@+id/add_dial_title"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="N"
-        android:layout_toRightOf="@+id/add_dial_price_tx"
-        android:layout_below="@+id/add_dial_title"
         android:layout_marginTop="10dp"
+        android:text="오늘의 품종 시세 : "
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/add_dial_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_dial_title"
         android:layout_marginLeft="10dp"
-        android:id="@+id/add_dial_price"/>
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/add_dial_price_tx"
+        android:text="N" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="원"
-        android:layout_toRightOf="@+id/add_dial_price"
         android:layout_below="@+id/add_dial_title"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/add_dial_price"
+        android:text="원" />
 
     <TextView
         android:id="@+id/add_dial_max_tx"
@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:background="#00ffff00"
             android:text="등 록"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/primary_blue" />
 
         <Button
             android:id="@+id/add_dial_cancel_btn"
@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:background="#00ffff00"
-            android:textColor="@color/colorAccent"
-            android:text="취 소" />
+            android:text="취 소"
+            android:textColor="@color/primary_blue" />
     </TableRow>
 </RelativeLayout>

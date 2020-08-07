@@ -17,7 +17,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, NB_MainActivity.class);
                 startActivity(intent);
-                finish();
+//                finish();
             }
         });
         findViewById(R.id.login_sign_up).setOnClickListener(new View.OnClickListener() {
@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, Manager_MainActivity.class);
                 startActivity(intent);
+//                finish();
             }
         });
     }

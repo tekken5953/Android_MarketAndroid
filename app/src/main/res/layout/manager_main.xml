@@ -17,41 +17,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="관리자메인"
+            android:text="관리자 모드"
             android:textColor="@color/white"
             android:textSize="25sp" />
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/manager_linear"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:orientation="horizontal"
-        android:id="@+id/manager_linear"
-        android:layout_below="@id/titlebar">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/manager_list_btn"
-            android:text="등록 된 품목"
-            android:textColor="@color/primary_blue"
-            android:background="@color/white"
-            android:textSize="17sp"
-            android:layout_weight="1"/>
+        android:layout_below="@id/titlebar"
+        android:orientation="horizontal">
 
         <Button
+            android:id="@+id/manager_list_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="설정"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:text="등록 된 품목"
+            android:textColor="@color/primary_blue"
+            android:textSize="17sp" />
+
+        <Button
             android:id="@+id/manager_setting_btn"
-            android:textSize="17sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@color/primary_blue"
+            android:text="설정"
             android:textColor="@color/white"
-            android:layout_weight="1"/>
+            android:textSize="17sp" />
     </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager
+        android:id="@+id/manager_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/manager_linear"
-        android:id="@+id/manager_viewpager"/>
+        android:layout_below="@+id/manager_linear" />
 </RelativeLayout>
