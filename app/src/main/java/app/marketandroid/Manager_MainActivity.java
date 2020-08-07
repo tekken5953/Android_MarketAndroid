@@ -45,18 +45,18 @@ public class Manager_MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                switch (position) {
+                switch (position){
                     case 0:
+                        setting_btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                        setting_btn.setTextColor(Color.parseColor("#ffffff"));;
+                        list_btn.setBackgroundColor(Color.parseColor("#00ffff00"));
+                        list_btn.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        break;
+                    case 1:
                         list_btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                         list_btn.setTextColor(Color.parseColor("#ffffff"));
                         setting_btn.setBackgroundColor(Color.parseColor("#00ffff00"));
-                        setting_btn.setTextColor(Color.parseColor("#000000"));
-                        break;
-                    case 1:
-                        setting_btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                        setting_btn.setTextColor(Color.parseColor("#ffffff"));
-                        list_btn.setBackgroundColor(Color.parseColor("#00ffff00"));
-                        list_btn.setTextColor(Color.parseColor("#000000"));
+                        setting_btn.setTextColor(getResources().getColor(R.color.colorPrimary));
                         break;
                 }
             }
@@ -81,7 +81,7 @@ public class Manager_MainActivity extends AppCompatActivity {
     }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {
-        ArrayList<Fragment> items = new ArrayList<>();
+        ArrayList<Fragment> items = new ArrayList<Fragment>();
 
         public ViewPagerAdapter(@NonNull FragmentManager fm) {
 

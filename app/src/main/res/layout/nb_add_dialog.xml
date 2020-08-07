@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/add_dial_max_tx"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="17dp"
         android:layout_toRightOf="@+id/add_dial_sell_weight" />
 
     <TextView

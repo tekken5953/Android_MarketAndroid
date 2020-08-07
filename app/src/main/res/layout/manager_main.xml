@@ -33,8 +33,9 @@
             android:layout_height="match_parent"
             android:id="@+id/manager_list_btn"
             android:text="등록 된 품목"
-            android:textColor="#ffffff"
-            android:background="@color/primary_blue"
+            android:textColor="@color/primary_blue"
+            android:background="@color/white"
+            android:textSize="17sp"
             android:layout_weight="1"/>
 
         <Button
@@ -42,7 +43,9 @@
             android:layout_height="match_parent"
             android:text="설정"
             android:id="@+id/manager_setting_btn"
-            android:background="#00ffff00"
+            android:textSize="17sp"
+            android:background="@color/primary_blue"
+            android:textColor="@color/white"
             android:layout_weight="1"/>
     </LinearLayout>
 
