@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Manager_ListFragment">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleX="0.9"
+        android:layout_toRightOf="@id/manager_search"
+        android:id="@+id/manager_list_edit"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/primary_blue"/>
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/search"
+        android:id="@+id/manager_search"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="17dp"
+        android:layout_marginLeft="10dp"
+        android:tint="@color/primary_blue"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/manager_list"
+        android:layout_below="@+id/manager_list_edit"
+        android:layout_marginTop="10dp"/>
+
+</RelativeLayout>

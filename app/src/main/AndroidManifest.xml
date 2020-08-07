@@ -9,12 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NB_PriceFragment"></activity>
-        <activity android:name=".NB_ListFragment" />
-        <activity android:name=".NB_OptionFragment" />
-        <activity android:name=".NB_AddFragment" />
         <activity android:name=".Manager_MainActivity" />
-        <activity android:name=".Manager_SettingActivity" />
         <activity android:name=".NB_MainActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>

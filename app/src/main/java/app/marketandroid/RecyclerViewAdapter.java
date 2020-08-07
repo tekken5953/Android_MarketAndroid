@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,9 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private ArrayList<RecyclerItem> mData = null;
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+    private ArrayList<RecyclerItem> mData;
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
     RecyclerViewAdapter(ArrayList<RecyclerItem> list) {
@@ -34,7 +37,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     private OnItemClickListener mListener = null;
-
 
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
@@ -88,6 +90,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             icon = itemView.findViewById(R.id.recycle_img);
             title = itemView.findViewById(R.id.recycle_name);
             detail = itemView.findViewById(R.id.recycle_detail);
+
         }
     }
 }

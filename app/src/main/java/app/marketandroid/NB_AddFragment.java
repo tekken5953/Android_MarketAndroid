@@ -8,12 +8,19 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class NB_AddFragment extends Fragment {
@@ -22,6 +29,9 @@ public class NB_AddFragment extends Fragment {
     Button btn_potato, btn_apple, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12;
     TextView main_title;
     Drawable alpha_potato, alpha_apple;
+    RetrofitData retrofitData;
+    Call<List<PostItem>> put_call;
+    Call<PostItem> post_call;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -59,6 +69,49 @@ public class NB_AddFragment extends Fragment {
         alpha_apple = btn_apple.getBackground();
         alpha_apple.setAlpha(100);
 
+//        retrofitData.initMyAPI();
+//
+//        retrofitData.getCall(put_call);
+//        put_call.enqueue(new Callback<List<PostItem>>() {
+//            @Override
+//            public void onResponse(Call<List<PostItem>> call, Response<List<PostItem>> response) {
+//                if( response.isSuccessful()){
+//                    List<PostItem> mList = response.body();
+//                    StringBuilder result = new StringBuilder();
+//                    assert mList != null;
+//                    for( PostItem item : mList){
+//                        result.append("타이틀 : ").append(item.getTitle()).append(" 텍스트: ").append(item.getText()).append("\n");
+//                    }
+//                    텍스트뷰.setText(result.toString());
+//                }else {
+//                    Log.d("retrofit","Status Code : " + response.code());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<PostItem>> call, Throwable t) {
+//                Log.d("retrofit","Fail msg : " + t.getMessage());
+//            }
+//        });
+//
+//        retrofitData.postCall(post_call);
+//        post_call.enqueue(new Callback<PostItem>() {
+//            @Override
+//            public void onResponse(Call<PostItem> call, Response<PostItem> response) {
+//                if(response.isSuccessful()){
+//                    Log.d("retrofit","등록 완료");
+//                }else {
+//                    Log.d("retrofit","Status Code : " + response.code());
+//                    Log.d("retrofit",response.errorBody().toString());
+//                    Log.d("retrofit",call.request().body().toString());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<PostItem> call, Throwable t) {
+//                Log.d("retrofit","Fail msg : " + t.getMessage());
+//            }
+//        });
 
     }
 
