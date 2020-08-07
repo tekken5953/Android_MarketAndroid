@@ -48,7 +48,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:background="@drawable/button_blue"
-        android:text="농부 모드 로그인"
+        android:text="농부 모드 로그인(임시)"
         android:textColor="#ffffff" />
     <!--        android:text="@string/login"-->
 
@@ -60,8 +60,19 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:background="@drawable/button_white"
-        android:text="관리자 모드 로그인" />
+        android:text="관리자 모드 로그인(임시)" />
     <!--        android:text="@string/sign_up" -->
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:text="회원가입"
+        android:id="@+id/login_sign"
+        android:layout_below="@+id/login_sign_up"
+        android:background="@drawable/button_blue"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:layout_marginTop="30dp"/>
 
 
 </RelativeLayout>
