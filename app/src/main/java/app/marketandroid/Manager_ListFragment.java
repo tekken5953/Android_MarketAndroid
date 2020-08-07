@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,7 +26,6 @@ public class Manager_ListFragment extends Fragment {
     ArrayList<RecyclerItem> mList = new ArrayList<>();
     RecyclerViewAdapter mAdapter;
     Drawable drawable_potato, drawable_apple;
-    TextView main_title;
     ArrayList<RecyclerItem> mData = null;
     RecyclerItem item;
 
@@ -60,12 +61,14 @@ public class Manager_ListFragment extends Fragment {
                 builder.show();
             }
         });
+
+
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        viewGroup = (ViewGroup) inflater.inflate(R.layout.manager_list_fragment,container,false);
+        viewGroup = (ViewGroup) inflater.inflate(R.layout.manager_list_fragment, container, false);
         return viewGroup;
     }
 

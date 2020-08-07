@@ -7,55 +7,58 @@
     tools:context=".LoginActivity">
 
     <TextView
+        android:id="@+id/login_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/login_text"
+        android:layout_above="@+id/login_edit_id"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="serif"
         android:text="App Name"
         android:textColor="@color/black"
         android:textSize="60sp"
-        android:fontFamily="serif"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/login_edit_id"/>
+        android:textStyle="bold" />
 
     <EditText
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
         android:id="@+id/login_edit_id"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/login_edit_pwd"
-        android:layout_marginTop="50dp"
-        android:hint="이메일을 입력하세요."
-        android:backgroundTint="@color/black"
-        android:gravity="center"/>
-
-    <EditText
         android:layout_width="220dp"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/login_edit_pwd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/black"
+        android:gravity="center"
+        android:hint="이메일을 입력하세요." />
+
+    <EditText
         android:id="@+id/login_edit_pwd"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
-        android:hint="비밀번호를 입력하세요."
         android:backgroundTint="@color/black"
-        android:inputType="numberPassword"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:hint="비밀번호를 입력하세요."
+        android:inputType="numberPassword" />
 
     <Button
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
         android:id="@+id/login_btn"
-        android:text="로그인"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/login_edit_pwd"
-        android:layout_marginTop="40dp"/>
-
-    <Button
         android:layout_width="130dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/login_edit_pwd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_blue"
+        android:text="@string/login"
+        android:textColor="#ffffff" />
+
+    <Button
         android:id="@+id/login_sign_up"
-        android:text="회원가입"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/login_btn"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_white"
+        android:text="@string/sign_up" />
 
 </RelativeLayout>

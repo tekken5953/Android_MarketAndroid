@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/pop_edit"
+        android:icon="@drawable/edit"
+        android:title="수정하기"/>
+    <item
+        android:id="@+id/pop_delete"
+        android:icon="@drawable/delete"
+        android:title="삭제하기"/>
+
+</menu>

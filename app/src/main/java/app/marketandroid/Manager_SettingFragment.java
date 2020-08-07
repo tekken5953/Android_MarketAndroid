@@ -23,7 +23,7 @@ public class Manager_SettingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        viewGroup = (ViewGroup) inflater.inflate(R.layout.manager_setting_fragment,container,false);
+        viewGroup = (ViewGroup) inflater.inflate(R.layout.manager_setting_fragment, container, false);
         return viewGroup;
     }
 }

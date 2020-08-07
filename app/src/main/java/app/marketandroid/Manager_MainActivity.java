@@ -45,7 +45,7 @@ public class Manager_MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                switch (position){
+                switch (position) {
                     case 0:
                         list_btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                         list_btn.setTextColor(Color.parseColor("#ffffff"));
