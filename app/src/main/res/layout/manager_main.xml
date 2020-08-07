@@ -18,8 +18,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="관리자 모드"
+            android:fontFamily="@font/cookierunbold"
             android:textColor="@color/white"
-            android:textSize="25sp" />
+            android:textSize="28sp" />
     </RelativeLayout>
 
     <LinearLayout
@@ -36,8 +37,9 @@
             android:layout_weight="1"
             android:background="@color/white"
             android:text="등록 된 품목"
+            android:fontFamily="@font/cookierunregular"
             android:textColor="@color/primary_blue"
-            android:textSize="19sp" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/manager_setting_btn"
@@ -45,6 +47,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/primary_blue"
+            android:fontFamily="@font/cookierunregular"
             android:text="설정"
             android:textColor="@color/white"
             android:textSize="15sp" />

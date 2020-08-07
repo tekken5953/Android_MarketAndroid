@@ -13,6 +13,7 @@
         android:textColor="@color/primary_blue"
         android:textSize="30sp"
         android:id="@+id/main_text"
+        android:fontFamily="@font/cookierunregular"
         android:textStyle="bold" />
 
     <TextView

@@ -60,7 +60,7 @@ public class Manager_MainActivity extends AppCompatActivity {
                         list_btn.setTextSize(15);
                         setting_btn.setBackgroundColor(Color.parseColor("#00ffff00"));
                         setting_btn.setTextColor(getResources().getColor(R.color.colorPrimary));
-                        setting_btn.setTextSize(19);
+                        setting_btn.setTextSize(18);
                         break;
                 }
             }

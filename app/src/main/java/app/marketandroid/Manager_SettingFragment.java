@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ public class Manager_SettingFragment extends Fragment {
     Button edit_btn;
     EditText editText;
     RelativeLayout relativeLayout;
+    RadioGroup rg1, rg2;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -35,6 +37,9 @@ public class Manager_SettingFragment extends Fragment {
         edit_btn = getActivity().findViewById(R.id.rd_btn);
         editText = getActivity().findViewById(R.id.rd_edit);
         relativeLayout = getActivity().findViewById(R.id.rd_relative);
+        rg1 = getActivity().findViewById(R.id.rg_1);
+        rg2 = getActivity().findViewById(R.id.rg_2);
+
         for (int i = 1; i <= 12; i++) {
             list.add("품목" + i);
         }
@@ -46,6 +51,10 @@ public class Manager_SettingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "변경 완료", Toast.LENGTH_SHORT).show();
+                rg1.clearCheck();
+                rg2.clearCheck();
+                editText.setText("");
+                editText.clearFocus();
             }
         });
     }

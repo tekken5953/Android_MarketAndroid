@@ -15,15 +15,15 @@
         android:backgroundTint="@color/primary_blue"
         android:textColor="@color/primary_blue"
         android:gravity="center"
-        android:scaleX="0.9" />
+        android:scaleX="0.8" />
 
     <ImageView
         android:id="@+id/manager_search"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/search"
         android:tint="@color/primary_blue" />
 
