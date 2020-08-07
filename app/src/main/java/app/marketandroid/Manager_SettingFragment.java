@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,11 +35,11 @@ public class Manager_SettingFragment extends Fragment {
         edit_btn = getActivity().findViewById(R.id.rd_btn);
         editText = getActivity().findViewById(R.id.rd_edit);
         relativeLayout = getActivity().findViewById(R.id.rd_relative);
-        for (int i=1; i<=9; i++){
-            list.add("품목"+i);
+        for (int i = 1; i <= 12; i++) {
+            list.add("품목" + i);
         }
         listView = getActivity().findViewById(R.id.manager_setting_list);
-        adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,list);
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
 
         edit_btn.setOnClickListener(new View.OnClickListener() {

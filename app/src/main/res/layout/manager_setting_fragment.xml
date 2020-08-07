@@ -5,187 +5,219 @@
     android:layout_height="match_parent"
     tools:context=".Manager_SettingFragment">
 
-    <TextView
-        android:id="@+id/main_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="중량 제한 및 시세 확인"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
-
-    <ListView
-        android:id="@+id/manager_setting_list"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:layout_below="@+id/main_text"
-        android:background="@drawable/boundary"
+        android:layout_height="match_parent"
         android:overScrollMode="ifContentScrolls"
-        android:scrollbars="none" />
+        android:scrollbars="none">
 
-    <TextView
-        android:id="@+id/edit_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/manager_setting_list"
-        android:layout_margin="10dp"
-        android:text="수정하기"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/rd_relative"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_below="@+id/edit_tv"
-        android:layout_margin="10dp"
-        android:background="@drawable/boundary">
-
-        <RadioGroup
-            android:id="@+id/rg_1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp">
-
-            <RadioButton
-                android:id="@+id/rd1_1"
+            <TextView
+                android:id="@+id/main_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="중량" />
+                android:layout_margin="10dp"
+                android:text="중량 제한 및 시세 확인"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
-            <RadioButton
-                android:id="@+id/rd1_2"
+            <RelativeLayout
+                android:id="@+id/list_relative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/main_text"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp">
+
+                <ListView
+                    android:id="@+id/manager_setting_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="280dp"
+                    android:background="@drawable/boundary"
+                    android:overScrollMode="ifContentScrolls"
+                    android:scrollbars="none" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/edit_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="시세" />
-        </RadioGroup>
+                android:layout_below="@+id/list_relative"
+                android:layout_margin="10dp"
+                android:text="수정하기"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
-        <View
-            android:id="@+id/rd_line1"
-            android:layout_width="0.7dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_toRightOf="@+id/rg_1"
-            android:background="@color/line" />
+            <RelativeLayout
+                android:id="@+id/rd_relative"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_below="@+id/edit_tv"
+                android:layout_margin="10dp"
+                android:background="@drawable/boundary">
 
-        <ScrollView
-            android:id="@+id/rd_scroll1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_toRightOf="@+id/rd_line1"
-            android:scrollbars="none">
+                <RadioGroup
+                    android:id="@+id/rg_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp">
 
-            <RadioGroup
-                android:id="@+id/rg_2"
+                    <RadioButton
+                        android:id="@+id/rd1_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="중량" />
+
+                    <RadioButton
+                        android:id="@+id/rd1_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="시세" />
+                </RadioGroup>
+
+                <View
+                    android:id="@+id/rd_line1"
+                    android:layout_width="0.7dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@+id/rg_1"
+                    android:background="@color/line" />
+
+                <ScrollView
+                    android:id="@+id/rd_scroll1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_toRightOf="@+id/rd_line1"
+                    android:scrollbars="none">
+
+                    <RadioGroup
+                        android:id="@+id/rg_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <RadioButton
+                            android:id="@+id/rd2_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="품목1" />
+
+                        <RadioButton
+                            android:id="@+id/rd2_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="품목2" />
+
+                        <RadioButton
+                            android:id="@+id/rd2_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="품목3" />
+
+                        <RadioButton
+                            android:id="@+id/rd2_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="품목4" />
+
+                        <RadioButton
+                            android:id="@+id/rd2_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="품목5" />
+
+                        <RadioButton
+                            android:id="@+id/rd2_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="품목6" />
+
+                        <RadioButton
+                            android:id="@+id/rd2_7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="품목7" />
+
+                        <RadioButton
+                            android:id="@+id/rd2_8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="품목8" />
+
+                        <RadioButton
+                            android:id="@+id/rd2_9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="품목9" />
+
+                        <RadioButton
+                            android:id="@+id/rd2_10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="품목10" />
+
+                        <RadioButton
+                            android:id="@+id/rd2_11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="품목11" />
+
+                        <RadioButton
+                            android:id="@+id/rd2_12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="품목12" />
+
+                    </RadioGroup>
+                </ScrollView>
+
+                <View
+                    android:id="@+id/rd_line2"
+                    android:layout_width="0.7dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="50dp"
+                    android:layout_toRightOf="@+id/rd_scroll1"
+                    android:background="@color/line" />
+
+                <EditText
+                    android:id="@+id/rd_edit"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@+id/rd_line2"
+                    android:background="@drawable/boundary"
+                    android:gravity="center"
+                    android:hint="변경 값"
+                    android:inputType="number"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/rd_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-
-                <RadioButton
-                    android:id="@+id/rd2_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="품목1" />
-
-                <RadioButton
-                    android:id="@+id/rd2_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="품목2" />
-
-                <RadioButton
-                    android:id="@+id/rd2_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="품목2" />
-
-                <RadioButton
-                    android:id="@+id/rd2_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="품목3" />
-
-                <RadioButton
-                    android:id="@+id/rd2_5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="품목4" />
-
-                <RadioButton
-                    android:id="@+id/rd2_6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="품목5" />
-
-                <RadioButton
-                    android:id="@+id/rd2_7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="품목6" />
-
-                <RadioButton
-                    android:id="@+id/rd2_8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="품목7" />
-
-                <RadioButton
-                    android:id="@+id/rd2_9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="품목8" />
-
-                <RadioButton
-                    android:id="@+id/rd2_10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="품목9" />
-            </RadioGroup>
-        </ScrollView>
-
-        <View
-            android:id="@+id/rd_line2"
-            android:layout_width="0.7dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="50dp"
-            android:layout_toRightOf="@+id/rd_scroll1"
-            android:background="@color/line" />
-
-        <EditText
-            android:id="@+id/rd_edit"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_toRightOf="@+id/rd_line2"
-            android:backgroundTint="@color/black"
-            android:gravity="center"
-            android:hint="변경 값"
-            android:inputType="number"
-            android:textSize="15sp" />
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/rd_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rd_relative"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="7dp"
-        android:background="@drawable/button_blue"
-        android:text="변 경"
-        android:textColor="@color/white" />
-
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rd_relative"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/button_blue"
+                android:text="변 경"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

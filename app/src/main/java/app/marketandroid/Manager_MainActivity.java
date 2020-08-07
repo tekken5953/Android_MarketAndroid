@@ -48,15 +48,19 @@ public class Manager_MainActivity extends AppCompatActivity {
                 switch (position){
                     case 0:
                         setting_btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                        setting_btn.setTextColor(Color.parseColor("#ffffff"));;
+                        setting_btn.setTextColor(Color.parseColor("#ffffff"));
+                        setting_btn.setTextSize(15);
                         list_btn.setBackgroundColor(Color.parseColor("#00ffff00"));
                         list_btn.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        list_btn.setTextSize(19);
                         break;
                     case 1:
                         list_btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                         list_btn.setTextColor(Color.parseColor("#ffffff"));
+                        list_btn.setTextSize(15);
                         setting_btn.setBackgroundColor(Color.parseColor("#00ffff00"));
                         setting_btn.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        setting_btn.setTextSize(19);
                         break;
                 }
             }

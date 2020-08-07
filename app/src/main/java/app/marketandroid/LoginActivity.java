@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                View v = LayoutInflater.from(LoginActivity.this).inflate(R.layout.sign_up_dialog,null,false);
+                View v = LayoutInflater.from(LoginActivity.this).inflate(R.layout.sign_up_dialog, null, false);
                 builder.setView(v);
                 final AlertDialog alertDialog = builder.create();
                 final Button ok = v.findViewById(R.id.sign_up_ok);
@@ -55,29 +55,29 @@ public class LoginActivity extends AppCompatActivity {
                 ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (ph.getText().toString().equals("")){
+                        if (ph.getText().toString().equals("")) {
                             Toast.makeText(LoginActivity.this, "핸드폰 번호를 입력 해 주세요.", Toast.LENGTH_SHORT).show();
                             keyboardUp(ph);
                         } else if (name.getText().toString().equals("")) {
                             Toast.makeText(LoginActivity.this, "이름을 입력 해 주세요.", Toast.LENGTH_SHORT).show();
                             keyboardUp(name);
-                        }else if (pwd.getText().toString().equals("")){
+                        } else if (pwd.getText().toString().equals("")) {
                             Toast.makeText(LoginActivity.this, "비밀번호를 입력 해 주세요.", Toast.LENGTH_SHORT).show();
                             keyboardUp(pwd);
-                        }else if (repwd.getText().toString().equals("")){
+                        } else if (repwd.getText().toString().equals("")) {
                             Toast.makeText(LoginActivity.this, "비밀번호 확인을 입력 해 주세요.", Toast.LENGTH_SHORT).show();
                             keyboardUp(repwd);
-                        } else if(!ph.getText().toString().equals("") && !ph.getText().toString().startsWith("010")){
+                        } else if (!ph.getText().toString().equals("") && !ph.getText().toString().startsWith("010")) {
                             Toast.makeText(LoginActivity.this, "핸드폰 번호는 010으로 시작해야 합니다.", Toast.LENGTH_SHORT).show();
                             ph.setText("");
                             keyboardUp(ph);
-                        }else if(!ph.getText().toString().equals("") && !(ph.getText().toString().length() == 11)){
+                        } else if (!ph.getText().toString().equals("") && !(ph.getText().toString().length() == 11)) {
                             Toast.makeText(LoginActivity.this, "핸드폰 번호를 다시 확인해주세요.", Toast.LENGTH_SHORT).show();
                             keyboardUp(ph);
-                        } else if(!pwd.getText().toString().equals(repwd.getText().toString())){
+                        } else if (!pwd.getText().toString().equals(repwd.getText().toString())) {
                             Toast.makeText(LoginActivity.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                             keyboardUp(pwd);
-                        } else{
+                        } else {
                             Toast.makeText(LoginActivity.this, "\t\t\t\t가입이 완료되었습니다.\n해당 정보로 로그인이 가능합니다.", Toast.LENGTH_SHORT).show();
                             alertDialog.dismiss();
                         }

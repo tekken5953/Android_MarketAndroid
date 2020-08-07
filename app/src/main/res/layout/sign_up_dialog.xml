@@ -63,17 +63,18 @@
         android:layout_marginRight="10dp"/>
 
     <EditText
-        android:layout_width="100dp"
+        android:id="@+id/sign_up_name"
+        android:layout_width="120dp"
         android:layout_height="35dp"
         android:layout_below="@+id/warning_msg"
-        android:inputType="textNoSuggestions"
-        android:background="@drawable/signup_edit"
-        android:id="@+id/sign_up_name"
-        android:textSize="15sp"
-        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="21dp"
         android:layout_toRightOf="@+id/sign_up_name_tx"
-        android:layout_marginTop="22dp"/>
-        
+        android:background="@drawable/signup_edit"
+        android:gravity="center"
+        android:inputType="textNoSuggestions"
+        android:textSize="15sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

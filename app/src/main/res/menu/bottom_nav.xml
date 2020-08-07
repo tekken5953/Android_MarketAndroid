@@ -14,8 +14,8 @@
         android:id="@+id/bottom_add"/>
 
     <item
-        android:title="설정"
-        android:icon="@drawable/option"
+        android:title="마이페이지"
+        android:icon="@drawable/person"
         android:enabled="true"
         android:id="@+id/bottom_option"/>
 

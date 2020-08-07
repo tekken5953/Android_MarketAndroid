@@ -13,6 +13,7 @@
         android:layout_marginTop="15dp"
         android:layout_toRightOf="@id/manager_search"
         android:backgroundTint="@color/primary_blue"
+        android:textColor="@color/primary_blue"
         android:gravity="center"
         android:scaleX="0.9" />
 

@@ -37,7 +37,7 @@
             android:background="@color/white"
             android:text="등록 된 품목"
             android:textColor="@color/primary_blue"
-            android:textSize="17sp" />
+            android:textSize="19sp" />
 
         <Button
             android:id="@+id/manager_setting_btn"
@@ -47,7 +47,7 @@
             android:background="@color/primary_blue"
             android:text="설정"
             android:textColor="@color/white"
-            android:textSize="17sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager

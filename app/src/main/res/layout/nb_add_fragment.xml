@@ -42,7 +42,9 @@
                 android:id="@+id/button3"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:text="품목3" />
+                android:text="품목3"
+                android:background="@drawable/button_white"
+                android:textColor="@color/black"/>
         </TableRow>
 
         <TableRow
@@ -56,20 +58,28 @@
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:text="품목4"
-                android:layout_marginRight="10dp"/>
+                android:background="@drawable/button_white"
+                android:textColor="@color/black"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"/>
 
             <Button
                 android:id="@+id/button5"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:text="품목5"
+                android:background="@drawable/button_white"
+                android:textColor="@color/black"
                 android:layout_marginRight="10dp"/>
 
             <Button
                 android:id="@+id/button6"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:text="품목6" />
+                android:text="품목6"
+                android:background="@drawable/button_white"
+                android:textColor="@color/black"/>
         </TableRow>
 
         <TableRow
@@ -83,20 +93,28 @@
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:text="품목7"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button_white"
+                android:textColor="@color/black"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"/>
 
             <Button
                 android:id="@+id/button8"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:text="품목8"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button_white"
+                android:textColor="@color/black"/>
 
             <Button
                 android:id="@+id/button9"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:text="품목9" />
+                android:text="품목9"
+                android:background="@drawable/button_white"
+                android:textColor="@color/black"/>
         </TableRow>
 
         <TableRow
@@ -110,20 +128,28 @@
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:text="품목10"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button_white"
+                android:textColor="@color/black"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"/>
 
             <Button
                 android:id="@+id/button11"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:text="품목11"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button_white"
+                android:textColor="@color/black"/>
 
             <Button
                 android:id="@+id/button12"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:text="품목12" />
+                android:text="품목12"
+                android:background="@drawable/button_white"
+                android:textColor="@color/black"/>
         </TableRow>
 
     </TableLayout>
