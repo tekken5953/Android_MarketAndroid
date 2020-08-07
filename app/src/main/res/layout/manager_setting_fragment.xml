@@ -216,6 +216,7 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/button_blue"
                 android:text="변 경"
+                android:fontFamily="@font/cookierunregular"
                 android:textColor="@color/white"
                 android:layout_marginBottom="15dp"/>
         </RelativeLayout>
