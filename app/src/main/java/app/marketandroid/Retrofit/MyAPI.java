@@ -1,4 +1,4 @@
-package app.marketandroid;
+package app.marketandroid.Retrofit;
 
 import java.util.List;
 

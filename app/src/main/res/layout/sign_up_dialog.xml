@@ -36,7 +36,7 @@
         android:gravity="center"
         android:layout_toRightOf="@+id/sign_up_id_tx"
         android:inputType="textNoSuggestions|number"
-        android:background="@drawable/boundary"
+        android:background="@drawable/signup_edit"
         android:layout_marginTop="35dp"/>
     
     <TextView
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:text="핸드폰 번호는 ' - ' 없이 입력 해 주세요."
         android:layout_below="@+id/sign_up_id_tx"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         android:textSize="13sp"
         android:textColor="@android:color/holo_red_light"
@@ -67,7 +67,7 @@
         android:layout_height="35dp"
         android:layout_below="@+id/warning_msg"
         android:inputType="textNoSuggestions"
-        android:background="@drawable/boundary"
+        android:background="@drawable/signup_edit"
         android:id="@+id/sign_up_name"
         android:textSize="15sp"
         android:gravity="center"
@@ -91,7 +91,7 @@
         android:layout_height="35dp"
         android:layout_below="@+id/sign_up_name_tx"
         android:inputType="numberPassword"
-        android:background="@drawable/boundary"
+        android:background="@drawable/signup_edit"
         android:id="@+id/sign_up_pwd"
         android:textSize="15sp"
         android:gravity="center"
@@ -120,7 +120,7 @@
         android:layout_toRightOf="@id/sign_up_repwd_tx"
         android:layout_marginTop="32dp"
         android:inputType="numberPassword"
-        android:background="@drawable/boundary"/>
+        android:background="@drawable/signup_edit"/>
 
 
 

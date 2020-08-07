@@ -1,4 +1,4 @@
-package app.marketandroid;
+package app.marketandroid.Retrofit;
 
 public class PostItem {
     private String title;

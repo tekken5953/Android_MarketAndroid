@@ -21,21 +21,22 @@
     <EditText
         android:id="@+id/login_edit_id"
         android:layout_width="220dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_above="@+id/login_edit_pwd"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:backgroundTint="@color/black"
+        android:background="@drawable/boundary"
+        android:inputType="number"
         android:gravity="center"
-        android:hint="이메일을 입력하세요." />
+        android:hint="핸드폰 번호를 입력하세요." />
 
     <EditText
         android:id="@+id/login_edit_pwd"
         android:layout_width="220dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/black"
+        android:background="@drawable/boundary"
         android:gravity="center"
         android:hint="비밀번호를 입력하세요."
         android:inputType="numberPassword" />

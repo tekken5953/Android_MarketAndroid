@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +17,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import app.marketandroid.Retrofit.PostItem;
+import app.marketandroid.Retrofit.RetrofitData;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -69,6 +70,7 @@ public class NB_AddFragment extends Fragment {
         alpha_apple = btn_apple.getBackground();
         alpha_apple.setAlpha(100);
 
+        //Retrofit
 //        retrofitData.initMyAPI();
 //
 //        retrofitData.getCall(put_call);

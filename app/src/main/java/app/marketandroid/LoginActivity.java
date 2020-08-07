@@ -51,17 +51,34 @@ public class LoginActivity extends AppCompatActivity {
                 final EditText name = v.findViewById(R.id.sign_up_name);
                 final EditText pwd = v.findViewById(R.id.sign_up_pwd);
                 final EditText repwd = v.findViewById(R.id.sign_up_repwd);
+                alertDialog.setCanceledOnTouchOutside(true);
                 ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(!ph.getText().toString().equals("") && !ph.getText().toString().startsWith("010")){
+                        if (ph.getText().toString().equals("")){
+                            Toast.makeText(LoginActivity.this, "핸드폰 번호를 입력 해 주세요.", Toast.LENGTH_SHORT).show();
+                            keyboardUp(ph);
+                        } else if (name.getText().toString().equals("")) {
+                            Toast.makeText(LoginActivity.this, "이름을 입력 해 주세요.", Toast.LENGTH_SHORT).show();
+                            keyboardUp(name);
+                        }else if (pwd.getText().toString().equals("")){
+                            Toast.makeText(LoginActivity.this, "비밀번호를 입력 해 주세요.", Toast.LENGTH_SHORT).show();
+                            keyboardUp(pwd);
+                        }else if (repwd.getText().toString().equals("")){
+                            Toast.makeText(LoginActivity.this, "비밀번호 확인을 입력 해 주세요.", Toast.LENGTH_SHORT).show();
+                            keyboardUp(repwd);
+                        } else if(!ph.getText().toString().equals("") && !ph.getText().toString().startsWith("010")){
                             Toast.makeText(LoginActivity.this, "핸드폰 번호는 010으로 시작해야 합니다.", Toast.LENGTH_SHORT).show();
                             ph.setText("");
                             keyboardUp(ph);
-                        }else if(!(ph.getText().toString().length() == 11)){
+                        }else if(!ph.getText().toString().equals("") && !(ph.getText().toString().length() == 11)){
                             Toast.makeText(LoginActivity.this, "핸드폰 번호를 다시 확인해주세요.", Toast.LENGTH_SHORT).show();
                             keyboardUp(ph);
-                        }else{
+                        } else if(!pwd.getText().toString().equals(repwd.getText().toString())){
+                            Toast.makeText(LoginActivity.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                            keyboardUp(pwd);
+                        } else{
+                            Toast.makeText(LoginActivity.this, "\t\t\t\t가입이 완료되었습니다.\n해당 정보로 로그인이 가능합니다.", Toast.LENGTH_SHORT).show();
                             alertDialog.dismiss();
                         }
                     }
