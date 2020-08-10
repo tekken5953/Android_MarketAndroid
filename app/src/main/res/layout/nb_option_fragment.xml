@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:text="User 님"
+        android:fontFamily="@font/tmoneyroundwindextrabold"
         android:textColor="@color/black"
         android:textSize="45sp"
         android:textStyle="bold" />
@@ -19,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.7dp"
         android:layout_below="@+id/option_username"
+        android:layout_marginTop="5dp"
         android:background="@color/line" />
 
 
@@ -28,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/option_username"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:text="고객님의 계좌 정보"
         android:textColor="@color/black"
         android:textSize="17sp"
@@ -41,6 +43,7 @@
         android:layout_below="@+id/option_account_tx"
         android:layout_margin="15dp"
         android:text="농협 1234-5678-0123451"
+        android:fontFamily="@font/montserrat_bold"
         android:textColor="@color/black"
         android:textSize="25sp" />
 
@@ -48,9 +51,8 @@
         android:layout_width="match_parent"
         android:layout_height="0.7dp"
         android:layout_below="@+id/option_account"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:background="@color/line" />
-
 
     <ListView
         android:id="@+id/option_listView"

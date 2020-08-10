@@ -82,7 +82,7 @@ public class NB_AddFragment extends Fragment {
 //                    StringBuilder result = new StringBuilder();
 //                    assert mList != null;
 //                    for( PostItem item : mList){
-//                        result.append("타이틀 : ").append(item.getTitle()).append(" 텍스트: ").append(item.getText()).append("\n");
+//                        result.append("전화번호 : ").append(item.getTitle()).append(" 비밀번호: ").append(item.getText()).append("\n");
 //                    }
 //                    텍스트뷰.setText(result.toString());
 //                }else {

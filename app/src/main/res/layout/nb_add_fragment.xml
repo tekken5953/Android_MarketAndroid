@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="20dp">
 
             <Button
                 android:id="@+id/button4"
@@ -86,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="20dp">
 
             <Button
                 android:id="@+id/button7"
@@ -121,7 +121,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="20dp">
 
             <Button
                 android:id="@+id/button10"

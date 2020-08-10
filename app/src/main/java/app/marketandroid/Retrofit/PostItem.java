@@ -19,4 +19,5 @@ public class PostItem {
     public void setText(String s){
         text = s;
     }
+
 }

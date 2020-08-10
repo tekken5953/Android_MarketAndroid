@@ -20,6 +20,7 @@
 
     <EditText
         android:id="@+id/login_edit_id"
+
         android:layout_width="230dp"
         android:layout_height="60dp"
         android:layout_above="@+id/login_edit_pwd"

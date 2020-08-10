@@ -20,8 +20,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -39,7 +41,7 @@ public class NB_ListFragment extends Fragment {
     RecyclerItem item;
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState){
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mRecyclerView = getActivity().findViewById(R.id.recyclerView);
         drawable_potato = getResources().getDrawable(R.drawable.recycle_potato);
@@ -57,19 +59,20 @@ public class NB_ListFragment extends Fragment {
         mAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 item = mData.get(position);
-                builder.create();
-                builder.setTitle("등록물품 상세정보");
-                //TODO
-                builder.setMessage("\n등록 시간  :  시간\n\n품 종  :  " + item.getNameStr() + "\n\n신청 중량  :  " + item.getDetailStr() + "\n\n판매 총 가격  :  가격");
-                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                final BaseDialog baseDialog = new BaseDialog(getContext(), R.layout.nb_list_dialog);
+                final TextView kinds = baseDialog.findViewById(R.id.nb_list_dialog_kinds);
+                final TextView weight = baseDialog.findViewById(R.id.nb_list_dialog_weight);
+                final ImageView btn = baseDialog.findViewById(R.id.nb_list_dialog_btn);
+                kinds.setText(item.getNameStr());
+                weight.setText(item.getDetailStr());
+                btn.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                    public void onClick(View view) {
+                        baseDialog.dismiss();
                     }
                 });
-                builder.show();
+                baseDialog.show();
             }
         });
     }
