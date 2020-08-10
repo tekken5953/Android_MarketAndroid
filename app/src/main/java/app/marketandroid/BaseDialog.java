@@ -13,14 +13,14 @@ public class BaseDialog extends Dialog {
     public BaseDialog(Context context, int layoutId ) {
         super( context );
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView( layoutId );
+        setContentView(layoutId);
         this.mContext = context;
 
-        setCancelable( true );
-        setCanceledOnTouchOutside( true );
+        setCancelable(true);
+        setCanceledOnTouchOutside(true);
 
         Window window = getWindow();
-        if( window != null ) {
+        if(window != null) {
             // 백그라운드 투명
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -31,9 +31,9 @@ public class BaseDialog extends Dialog {
 
             // 열기&닫기 시 애니메이션 설정
             params.windowAnimations = R.style.AnimationPopupStyle;
-            window.setAttributes( params );
+            window.setAttributes(params);
             // UI 정렬
-            window.setGravity( Gravity.CENTER );
+            window.setGravity(Gravity.CENTER);
         }
     }
 }

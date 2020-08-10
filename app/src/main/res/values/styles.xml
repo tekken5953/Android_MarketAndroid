@@ -14,7 +14,7 @@
 
     <style name="PauseDialogAnimation">
         <item name="android:windowEnterAnimation">@anim/spin_in</item>
-        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+        <item name="android:windowExitAnimation">@anim/spin_out</item>
     </style>
 
 </resources>

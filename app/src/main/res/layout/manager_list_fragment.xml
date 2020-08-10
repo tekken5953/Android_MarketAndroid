@@ -8,14 +8,14 @@
 
     <EditText
         android:id="@+id/manager_list_edit"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_toRightOf="@id/manager_search"
         android:backgroundTint="@color/primary_blue"
         android:textColor="@color/primary_blue"
         android:gravity="center"
-        android:scaleX="0.8" />
+        android:layout_marginLeft="30dp"/>
 
     <ImageView
         android:id="@+id/manager_search"
@@ -27,11 +27,15 @@
         android:src="@drawable/search"
         android:tint="@color/primary_blue" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ListView
         android:id="@+id/manager_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/manager_list_edit"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="20dp"
+        android:dividerHeight="60dp"
+        android:divider="#00ffff00"
+        android:scrollbars="vertical"
+        android:overScrollMode="ifContentScrolls"/>
 
 </RelativeLayout>

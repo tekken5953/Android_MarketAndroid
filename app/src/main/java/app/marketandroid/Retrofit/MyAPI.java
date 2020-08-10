@@ -18,9 +18,6 @@ public interface MyAPI{
     @PATCH("/posts/{pk}/")
     Call<PostItem> patch_posts(@Path("pk") int pk, @Body PostItem post);
 
-    @DELETE("/posts/{pk}/")
-    Call<PostItem> delete_posts(@Path("pk") int pk);
-
     @GET("/posts/")
     Call<List<PostItem>> get_posts();
 
