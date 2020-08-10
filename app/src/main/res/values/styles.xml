@@ -12,4 +12,9 @@
         <item name="android:windowExitAnimation">@anim/hide</item>
     </style>
 
+    <style name="PauseDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/spin_in</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+    </style>
+
 </resources>

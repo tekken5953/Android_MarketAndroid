@@ -43,7 +43,7 @@
         android:layout_below="@+id/option_account_tx"
         android:layout_margin="15dp"
         android:text="농협 1234-5678-0123451"
-        android:fontFamily="@font/montserrat_bold"
+        android:fontFamily="@font/tmoneyroundwindextrabold"
         android:textColor="@color/black"
         android:textSize="25sp" />
 

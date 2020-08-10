@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.Objects;
 
 import app.marketandroid.Retrofit.PostItem;
 import app.marketandroid.Retrofit.RetrofitData;
@@ -136,6 +137,7 @@ public class NB_AddFragment extends Fragment {
         final View view = LayoutInflater.from(getContext()).inflate(R.layout.nb_add_dialog, null, false);
         builder.setView(view);
         final AlertDialog alertDialog = builder.create();
+        Objects.requireNonNull(alertDialog.getWindow()).getAttributes().windowAnimations = R.style.PauseDialogAnimation;
         final Button add_btn = view.findViewById(R.id.add_dial_add_btn);
         final Button cancel_btn = view.findViewById(R.id.add_dial_cancel_btn);
         alertDialog.setCanceledOnTouchOutside(false);

@@ -9,8 +9,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="판매 신청"
+        android:textStyle="bold"
         android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/add_dial_price_tx"
@@ -116,6 +117,7 @@
             android:layout_height="wrap_content"
             android:background="#00ffff00"
             android:text="등 록"
+            android:textStyle="bold"
             android:textColor="@color/primary_blue" />
 
         <Button
@@ -125,6 +127,7 @@
             android:layout_marginLeft="25dp"
             android:background="#00ffff00"
             android:text="취 소"
+            android:textStyle="bold"
             android:textColor="@color/primary_blue" />
     </TableRow>
 </RelativeLayout>
