@@ -1,4 +1,4 @@
-package app.marketandroid;
+package app.marketandroid.Farmer;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +13,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import app.marketandroid.R;
 
 public class NB_OptionFragment extends Fragment {
     ViewGroup viewGroup;

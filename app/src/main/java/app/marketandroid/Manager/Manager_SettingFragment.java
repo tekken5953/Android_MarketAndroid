@@ -1,4 +1,4 @@
-package app.marketandroid;
+package app.marketandroid.Manager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import app.marketandroid.R;
 
 public class Manager_SettingFragment extends Fragment {
     ViewGroup viewGroup;

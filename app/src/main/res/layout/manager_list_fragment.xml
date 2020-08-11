@@ -4,38 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Manager_ListFragment">
+    tools:context=".Manager.Manager_ListFragment">
 
-    <EditText
-        android:id="@+id/manager_list_edit"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_toRightOf="@id/manager_search"
-        android:backgroundTint="@color/primary_blue"
-        android:textColor="@color/primary_blue"
-        android:gravity="center"
-        android:layout_marginLeft="30dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:id="@+id/mg_list_layout"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp">
+        <Spinner
+            android:layout_width="85dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/mg_products_spinner"
+            android:backgroundTint="@color/primary_blue"
+            android:layout_marginLeft="10dp"/>
 
-    <ImageView
-        android:id="@+id/manager_search"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/search"
-        android:tint="@color/primary_blue" />
+        <Spinner
+            android:layout_width="85dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/mg_weight_spinner"
+            android:backgroundTint="@color/primary_blue"
+            android:layout_marginLeft="20dp"/>
 
-    <ListView
-        android:id="@+id/manager_list"
+        <EditText
+            android:layout_width="130dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/mg_filllter_edit"
+            android:backgroundTint="@color/primary_blue"
+            android:layout_marginLeft="25dp"/>
+
+        <ImageView
+            android:layout_width="33dp"
+            android:layout_height="fill_parent"
+            android:src="@drawable/search"
+            android:tint="@color/primary_blue"
+            android:layout_marginLeft="15dp"/>
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/manager_list_edit"
-        android:layout_marginTop="20dp"
-        android:dividerHeight="60dp"
-        android:divider="#00ffff00"
-        android:scrollbars="vertical"
-        android:overScrollMode="ifContentScrolls"/>
+        android:id="@+id/mgrecyclerView"
+        android:layout_below="@+id/mg_list_layout"
+        android:layout_marginTop="15dp"/>
 
 </RelativeLayout>

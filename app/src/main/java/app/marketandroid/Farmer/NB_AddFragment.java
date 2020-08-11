@@ -1,4 +1,4 @@
-package app.marketandroid;
+package app.marketandroid.Farmer;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,18 +11,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.Objects;
 
+import app.marketandroid.R;
+import app.marketandroid.Retrofit.MyAPI;
 import app.marketandroid.Retrofit.PostItem;
-import app.marketandroid.Retrofit.RetrofitData;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class NB_AddFragment extends Fragment {
@@ -31,13 +38,16 @@ public class NB_AddFragment extends Fragment {
     Button btn_potato, btn_apple, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12;
     TextView main_title;
     Drawable alpha_potato, alpha_apple;
-    RetrofitData retrofitData;
-    Call<List<PostItem>> put_call;
-    Call<PostItem> post_call;
+    ArrayList<String> list = new ArrayList<>();
+    ArrayAdapter<String> adapter;
+    MyAPI mMyAPI;
+    final PostItem item = new PostItem();
+    TextView user_id_tv;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        user_id_tv = getActivity().findViewById(R.id.user_id_tv);
         main_title = getActivity().findViewById(R.id.main_title);
         main_title.setText("출하물품 등록");
         btn_apple = getActivity().findViewById(R.id.button2);
@@ -52,6 +62,10 @@ public class NB_AddFragment extends Fragment {
         btn10 = getActivity().findViewById(R.id.button10);
         btn11 = getActivity().findViewById(R.id.button11);
         btn12 = getActivity().findViewById(R.id.button12);
+        for (int i = 1; i <= 10; i++) {
+            list.add(String.valueOf(10 * i));
+        }
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, list);
 
         buttonClick(btn_potato);
         buttonClick(btn_apple);
@@ -71,51 +85,7 @@ public class NB_AddFragment extends Fragment {
         alpha_apple = btn_apple.getBackground();
         alpha_apple.setAlpha(100);
 
-        //Retrofit
-//        retrofitData.initMyAPI();
-//
-//        retrofitData.getCall(put_call);
-//        put_call.enqueue(new Callback<List<PostItem>>() {
-//            @Override
-//            public void onResponse(Call<List<PostItem>> call, Response<List<PostItem>> response) {
-//                if( response.isSuccessful()){
-//                    List<PostItem> mList = response.body();
-//                    StringBuilder result = new StringBuilder();
-//                    assert mList != null;
-//                    for( PostItem item : mList){
-//                        result.append("전화번호 : ").append(item.getTitle()).append(" 비밀번호: ").append(item.getText()).append("\n");
-//                    }
-//                    텍스트뷰.setText(result.toString());
-//                }else {
-//                    Log.d("retrofit","Status Code : " + response.code());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<PostItem>> call, Throwable t) {
-//                Log.d("retrofit","Fail msg : " + t.getMessage());
-//            }
-//        });
-//
-//        retrofitData.postCall(post_call);
-//        post_call.enqueue(new Callback<PostItem>() {
-//            @Override
-//            public void onResponse(Call<PostItem> call, Response<PostItem> response) {
-//                if(response.isSuccessful()){
-//                    Log.d("retrofit","등록 완료");
-//                }else {
-//                    Log.d("retrofit","Status Code : " + response.code());
-//                    Log.d("retrofit",response.errorBody().toString());
-//                    Log.d("retrofit",call.request().body().toString());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<PostItem> call, Throwable t) {
-//                Log.d("retrofit","Fail msg : " + t.getMessage());
-//            }
-//        });
-
+        initMyAPI();
     }
 
     @Nullable
@@ -140,12 +110,33 @@ public class NB_AddFragment extends Fragment {
         Objects.requireNonNull(alertDialog.getWindow()).getAttributes().windowAnimations = R.style.PauseDialogAnimation;
         final Button add_btn = view.findViewById(R.id.add_dial_add_btn);
         final Button cancel_btn = view.findViewById(R.id.add_dial_cancel_btn);
+        final Spinner spinner = view.findViewById(R.id.add_dial_sell_spinner);
+        spinner.setAdapter(adapter);
         alertDialog.setCanceledOnTouchOutside(false);
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                item.setWeight(spinner.getSelectedItem().toString());
+                item.setUser_id(user_id_tv.getText().toString());
+                Call<PostItem> post_call = mMyAPI.post_sells(item);
+                post_call.enqueue(new Callback<PostItem>() {
+                    @Override
+                    public void onResponse(Call<PostItem> call, Response<PostItem> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("retrofit", "등록 완료");
+                        } else {
+                            Log.d("retrofit", "Status Code : " + response.code());
+                            Log.d("retrofit", response.errorBody().toString());
+                            Log.d("retrofit", call.request().body().toString());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PostItem> call, Throwable t) {
+                        Log.d("retrofit", "Fail msg : " + t.getMessage());
+                    }
+                });
                 Toast.makeText(getContext(), "등록 완료", Toast.LENGTH_SHORT).show();
-                //TODO
                 alertDialog.dismiss();
             }
         });
@@ -158,12 +149,23 @@ public class NB_AddFragment extends Fragment {
         alertDialog.show();
     }
 
-    public void buttonClick(Button btn) {
+    public void buttonClick(final Button btn) {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                item.setProducts_id(btn.getText().toString());
                 alertDialog();
             }
         });
+    }
+
+    private void initMyAPI(){
+        Log.d("retrofit","initMyAPI : " + "http://13.209.84.206/");
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://13.209.84.206/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        mMyAPI = retrofit.create(MyAPI.class);
     }
 }

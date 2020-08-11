@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NB_OptionFragment">
+    tools:context=".Farmer.NB_OptionFragment">
 
     <TextView
         android:id="@+id/option_username"

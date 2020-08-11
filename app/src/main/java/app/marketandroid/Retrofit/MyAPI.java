@@ -12,15 +12,35 @@ import retrofit2.http.Path;
 
 public interface MyAPI{
 
-    @POST("/posts/")
-    Call<PostItem> post_posts(@Body PostItem post);
+    //로그인 정보 post
+    @POST("/users/{pk}")
+    Call<PostItem> post_users(@Path("pk") int pk, @Body PostItem post);
 
-    @PATCH("/posts/{pk}/")
-    Call<PostItem> patch_posts(@Path("pk") int pk, @Body PostItem post);
+    //로그인 정보 전체 get
+    @GET("/users/")
+    Call<List<PostItem>> get_users();
 
-    @GET("/posts/")
-    Call<List<PostItem>> get_posts();
+    //로그인 정보 patch
+    @PATCH("/users/{pk}/")
+    Call<PostItem> patch_users(@Path("pk") int pk, @Body PostItem post);
 
-    @GET("/posts/{pk}/")
-    Call<PostItem> get_post_pk(@Path("pk") int pk);
+    //로그인 정보 delete
+    @DELETE("/users/{pk}/")
+    Call<PostItem> delete_users(@Path("pk") int pk);
+
+    //로그인 정보 특정 유저 get
+    @GET("/users/{pk}/")
+    Call<PostItem> get_users_pk(@Path("pk") int pk);
+
+    //판매정보 post
+    @POST("/sells/")
+    Call<PostItem> post_sells(@Body PostItem post);
+
+    //판매정보 전체 get
+    @GET("/sells/")
+    Call<List<PostItem>> get_sells();
+
+    //판매정보 특정 유저 get
+    @GET("/sells/{pk}/")
+    Call<PostItem> get_sells_pk(@Path("pk") int pk);
 }

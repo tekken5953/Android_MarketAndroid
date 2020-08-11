@@ -5,6 +5,11 @@
     <string name="list">등록 현황</string>
     <string name="add">물품 등록</string>
     <string name="option">설정</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="login">Login</string>
+    <string name="sign_up">회원가입</string>
+    <string name="login">로그인</string>
+    <string name="products">품종</string>
+    <string name="weight">중량</string>
+    <string name="total_price">총 가격</string>
+    <string name="count">수량</string>
+    <string name="user_name">유저이름</string>
 </resources>

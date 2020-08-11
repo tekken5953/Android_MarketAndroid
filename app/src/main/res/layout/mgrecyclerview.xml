@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="110dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/mg_list_layout">
+
+        <TextView
+            android:id="@+id/mgrecycle_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_name"
+            android:layout_alignParentTop="true"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/mgrecycle_products"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mgrecycle_user_name"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="6dp"
+            android:text="@string/products"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mgrecycle_weight"
+            android:layout_toRightOf="@+id/mgrecycle_products"
+            android:text="@string/weight"
+            android:textColor="@color/black"
+            android:layout_marginLeft="50dp"
+            android:layout_below="@+id/mgrecycle_user_name"
+            android:layout_marginTop="6dp"
+            android:textSize="17sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mgrecycle_count"
+            android:layout_toRightOf="@+id/mgrecycle_weight"
+            android:text="@string/count"
+            android:layout_below="@+id/mgrecycle_user_name"
+            android:textColor="@color/black"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="6dp"
+            android:textSize="17sp"/>
+
+        <TextView
+            android:id="@+id/mgrecycle_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="17dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="5dp"
+            android:text="@string/total_price"/>
+
+        <TextView
+            android:id="@+id/mgrecycle_personal_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="7dp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@+id/mgrecycle_total_price"
+            android:layout_marginBottom="5dp"
+            android:text="(1Box 당 가격)"/>
+
+        <Button
+            android:id="@+id/mgrecycle_call_btn"
+            android:layout_width="95dp"
+            android:layout_height="fill_parent"
+            android:background="@drawable/button_blue"
+            android:text="전화\n걸기"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"/>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

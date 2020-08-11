@@ -1,4 +1,4 @@
-package app.marketandroid;
+package app.marketandroid.Manager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import app.marketandroid.R;
 
 public class Manager_MainActivity extends AppCompatActivity {
 

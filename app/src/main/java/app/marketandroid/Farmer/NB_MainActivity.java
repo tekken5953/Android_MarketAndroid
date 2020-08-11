@@ -1,19 +1,17 @@
-package app.marketandroid;
+package app.marketandroid.Farmer;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.view.Window;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import app.marketandroid.R;
 
 public class NB_MainActivity extends AppCompatActivity {
 
@@ -23,6 +21,7 @@ public class NB_MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
     Boolean isExitFlag = false;
+    TextView textView;
 
 //    @Override
 //    public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -53,6 +52,8 @@ public class NB_MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nb_main_activity);
+        textView = findViewById(R.id.user_id_tv);
+        textView.setText(getIntent().getExtras().getString("user_id"));
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
         // 첫화면에 띄워야 할 것들 지정해주기
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, NB_listFragment).commitAllowingStateLoss();

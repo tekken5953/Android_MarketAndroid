@@ -20,7 +20,6 @@
 
     <EditText
         android:id="@+id/login_edit_id"
-
         android:layout_width="230dp"
         android:layout_height="60dp"
         android:layout_above="@+id/login_edit_pwd"
@@ -52,33 +51,48 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:background="@drawable/button_blue"
-        android:text="농부 모드 로그인(임시)"
+        android:text="@string/login"
         android:fontFamily="@font/cookierunregular"
         android:textColor="#ffffff" />
-    <!--        android:text="@string/login"-->
 
-    <Button
-        android:id="@+id/login_sign_up"
-        android:layout_width="200dp"
-        android:layout_height="55dp"
-        android:layout_below="@id/login_btn"
-        android:layout_centerHorizontal="true"
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tr1"
         android:layout_marginTop="30dp"
-        android:background="@drawable/button_white"
-        android:fontFamily="@font/cookierunregular"
-        android:text="관리자 모드 로그인(임시)" />
-    <!--        android:text="@string/sign_up" -->
+        android:layout_below="@id/login_btn"
+        android:gravity="center">
+        <Button
+            android:id="@+id/login_farmer"
+            android:layout_width="100dp"
+            android:layout_height="55dp"
+            android:background="@drawable/button_blue"
+            android:text="농부모드\n로그인"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/cookierunregular"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/login_manager"
+            android:layout_width="100dp"
+            android:layout_height="55dp"
+            android:layout_toRightOf="@+id/login_farmer"
+            android:background="@drawable/button_white"
+            android:fontFamily="@font/cookierunregular"
+            android:text="관리자모드\n로그인" />
+    </TableRow>
+
 
     <Button
         android:layout_width="200dp"
         android:layout_height="55dp"
-        android:text="회원가입"
-        android:id="@+id/login_sign"
-        android:layout_below="@+id/login_sign_up"
-        android:background="@drawable/button_blue"
+        android:text="@string/sign_up"
+        android:id="@+id/login_sign_up"
+        android:layout_below="@+id/tr1"
+        android:background="@drawable/button_white"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/cookierunregular"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_marginTop="30dp"/>
 
 
