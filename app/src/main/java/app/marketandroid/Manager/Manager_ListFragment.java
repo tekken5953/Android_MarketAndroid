@@ -51,13 +51,13 @@ public class Manager_ListFragment extends Fragment {
         mAdapter = new MGRecyclerViewAdapter(mList);
         mData = mList;
         mRecyclerView.setAdapter(mAdapter);
-        addItem("농부1","감자","20Kg","3개","300,000원","(1Box 당 100,000원)");
-        addItem("농부2","고구마","20Kg","3개","300,000원","(1Box 당 100,000원)");
-        addItem("농부3","당근","20Kg","3개","300,000원","(1Box 당 100,000원)");
-        addItem("농부4","사과","20Kg","3개","300,000원","(1Box 당 100,000원)");
-        addItem("농부5","감자","20Kg","3개","300,000원","(1Box 당 100,000원)");
-        addItem("농부6","복숭아","20Kg","3개","300,000원","(1Box 당 100,000원)");
-        addItem("농부7","가지","20Kg","3개","300,000원","(1Box 당 100,000원)");
+        addItem("농부1","감자","20Kg","3Box","300,000원","(1Box 당 100,000원)");
+        addItem("농부2","고구마","20Kg","3Box","300,000원","(1Box 당 100,000원)");
+        addItem("농부3","당근","20Kg","3Box","300,000원","(1Box 당 100,000원)");
+        addItem("농부4","사과","20Kg","3Box","300,000원","(1Box 당 100,000원)");
+        addItem("농부5","감자","20Kg","3Box","300,000원","(1Box 당 100,000원)");
+        addItem("농부6","복숭아","20Kg","3Box","300,000원","(1Box 당 100,000원)");
+        addItem("농부7","가지","20Kg","3Box","300,000원","(1Box 당 100,000원)");
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }

@@ -39,7 +39,7 @@
             android:layout_toRightOf="@+id/mgrecycle_products"
             android:text="@string/weight"
             android:textColor="@color/black"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="45dp"
             android:layout_below="@+id/mgrecycle_user_name"
             android:layout_marginTop="6dp"
             android:textSize="17sp"/>
@@ -52,7 +52,7 @@
             android:text="@string/count"
             android:layout_below="@+id/mgrecycle_user_name"
             android:textColor="@color/black"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="45dp"
             android:layout_marginTop="6dp"
             android:textSize="17sp"/>
 
@@ -86,7 +86,7 @@
             android:textSize="18sp"
             android:textColor="@color/white"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="5dp"/>
+            android:layout_marginRight="7dp"/>
 
     </RelativeLayout>
 

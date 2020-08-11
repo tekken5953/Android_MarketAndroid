@@ -28,7 +28,7 @@
             android:layout_marginLeft="20dp"/>
 
         <EditText
-            android:layout_width="130dp"
+            android:layout_width="135dp"
             android:layout_height="fill_parent"
             android:id="@+id/mg_filllter_edit"
             android:backgroundTint="@color/primary_blue"
@@ -39,7 +39,7 @@
             android:layout_height="fill_parent"
             android:src="@drawable/search"
             android:tint="@color/primary_blue"
-            android:layout_marginLeft="15dp"/>
+            android:layout_marginLeft="10dp"/>
     </LinearLayout>
 
 

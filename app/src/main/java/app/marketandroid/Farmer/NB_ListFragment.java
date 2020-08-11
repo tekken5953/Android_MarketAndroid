@@ -39,8 +39,8 @@ public class NB_ListFragment extends Fragment {
         mAdapter = new NBRecyclerViewAdapter(mList);
         mData = mList;
         mRecyclerView.setAdapter(mAdapter);
-        addItem(drawable_potato, "감자","20Kg","3개","300,000원","(1Box 당 100,000원)");
-        addItem(drawable_apple, "사과","10Kg","5개","200,000원","(1Box 당 40,000원)");
+        addItem(drawable_potato, "감자","20Kg","3Box","300,000원","(1Box 당 100,000원)");
+        addItem(drawable_apple, "사과","10Kg","5Box","200,000원","(1Box 당 40,000원)");
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
