@@ -7,47 +7,48 @@
     tools:context=".Manager.Manager_ListFragment">
 
     <LinearLayout
+        android:id="@+id/mg_list_layout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:id="@+id/mg_list_layout"
+        android:layout_marginTop="10dp"
         android:gravity="center_vertical"
-        android:layout_marginTop="10dp">
-        <Spinner
-            android:layout_width="85dp"
-            android:layout_height="fill_parent"
-            android:id="@+id/mg_products_spinner"
-            android:backgroundTint="@color/primary_blue"
-            android:layout_marginLeft="10dp"/>
+        android:orientation="horizontal">
 
         <Spinner
+            android:id="@+id/mg_products_spinner"
             android:layout_width="85dp"
             android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:backgroundTint="@color/primary_blue" />
+
+        <Spinner
             android:id="@+id/mg_weight_spinner"
-            android:backgroundTint="@color/primary_blue"
-            android:layout_marginLeft="20dp"/>
+            android:layout_width="85dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="20dp"
+            android:backgroundTint="@color/primary_blue" />
 
         <EditText
+            android:id="@+id/mg_filllter_edit"
             android:layout_width="135dp"
             android:layout_height="fill_parent"
-            android:id="@+id/mg_filllter_edit"
-            android:backgroundTint="@color/primary_blue"
-            android:layout_marginLeft="25dp"/>
+            android:layout_marginLeft="25dp"
+            android:backgroundTint="@color/primary_blue" />
 
         <ImageView
             android:layout_width="33dp"
             android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/search"
-            android:tint="@color/primary_blue"
-            android:layout_marginLeft="10dp"/>
+            android:tint="@color/primary_blue" />
     </LinearLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mgrecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/mgrecyclerView"
         android:layout_below="@+id/mg_list_layout"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp" />
 
 </RelativeLayout>

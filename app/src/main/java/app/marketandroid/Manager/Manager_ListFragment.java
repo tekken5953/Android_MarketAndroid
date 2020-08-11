@@ -8,29 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import app.marketandroid.BaseDialog;
-import app.marketandroid.Farmer.NBRecyclerItem;
-import app.marketandroid.Farmer.NBRecyclerViewAdapter;
 import app.marketandroid.R;
-import app.marketandroid.Retrofit.MyAPI;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Manager_ListFragment extends Fragment {
     ViewGroup viewGroup;

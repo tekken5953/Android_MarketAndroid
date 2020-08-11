@@ -28,19 +28,10 @@ public class Manager_SettingFragment extends Fragment {
     ListView listView;
     ArrayList<String> list = new ArrayList<>();
     ArrayAdapter<String> adapter;
-    Button edit_btn;
-    EditText editText;
-    RelativeLayout relativeLayout;
-    RadioGroup rg1, rg2;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        edit_btn = getActivity().findViewById(R.id.rd_btn);
-        editText = getActivity().findViewById(R.id.rd_edit);
-        relativeLayout = getActivity().findViewById(R.id.rd_relative);
-        rg1 = getActivity().findViewById(R.id.rg_1);
-        rg2 = getActivity().findViewById(R.id.rg_2);
 
         for (int i = 1; i <= 12; i++) {
             list.add("품목" + i);
@@ -48,17 +39,6 @@ public class Manager_SettingFragment extends Fragment {
         listView = getActivity().findViewById(R.id.manager_setting_list);
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
-
-        edit_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "변경 완료", Toast.LENGTH_SHORT).show();
-                rg1.clearCheck();
-                rg2.clearCheck();
-                editText.setText("");
-                editText.clearFocus();
-            }
-        });
     }
 
     @Override
