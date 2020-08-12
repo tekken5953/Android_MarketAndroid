@@ -42,12 +42,12 @@ public class NB_AddFragment extends Fragment {
     ArrayAdapter<String> adapter;
     MyAPI mMyAPI;
     final PostItem item = new PostItem();
-    TextView user_id_tv;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        user_id_tv = getActivity().findViewById(R.id.user_id_tv);
+        initMyAPI();
+
         main_title = getActivity().findViewById(R.id.main_title);
         main_title.setText("출하물품 등록");
         btn_apple = getActivity().findViewById(R.id.button2);
@@ -62,10 +62,10 @@ public class NB_AddFragment extends Fragment {
         btn10 = getActivity().findViewById(R.id.button10);
         btn11 = getActivity().findViewById(R.id.button11);
         btn12 = getActivity().findViewById(R.id.button12);
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 4; i++) {
             list.add(String.valueOf(10 * i));
         }
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, list);
+        adapter = new ArrayAdapter<>(getContext(), R.layout.spinneritem, list);
 
         buttonClick(btn_potato);
         buttonClick(btn_apple);
@@ -84,8 +84,6 @@ public class NB_AddFragment extends Fragment {
         alpha_potato.setAlpha(100);
         alpha_apple = btn_apple.getBackground();
         alpha_apple.setAlpha(100);
-
-        initMyAPI();
     }
 
     @Nullable
@@ -100,6 +98,7 @@ public class NB_AddFragment extends Fragment {
         super.onDestroyView();
         alpha_potato.setAlpha(255);
         alpha_apple.setAlpha(255);
+        adapter.clear();
     }
 
     public void alertDialog() {
@@ -112,30 +111,53 @@ public class NB_AddFragment extends Fragment {
         final Button cancel_btn = view.findViewById(R.id.add_dial_cancel_btn);
         final Spinner spinner = view.findViewById(R.id.add_dial_sell_spinner);
         spinner.setAdapter(adapter);
+        spinner.setMinimumHeight(110);
+        spinner.setDropDownVerticalOffset(spinner.getMinimumHeight());
         alertDialog.setCanceledOnTouchOutside(false);
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                item.setWeight(spinner.getSelectedItem().toString());
-                item.setUser_id(user_id_tv.getText().toString());
-                Call<PostItem> post_call = mMyAPI.post_sells(item);
-                post_call.enqueue(new Callback<PostItem>() {
-                    @Override
-                    public void onResponse(Call<PostItem> call, Response<PostItem> response) {
-                        if (response.isSuccessful()) {
-                            Log.d("retrofit", "등록 완료");
-                        } else {
-                            Log.d("retrofit", "Status Code : " + response.code());
-                            Log.d("retrofit", response.errorBody().toString());
-                            Log.d("retrofit", call.request().body().toString());
-                        }
-                    }
+//                Call<PostItem> get_call = mMyAPI.get_products();
+//                get_call.enqueue(new Callback<PostItem>() {
+//                    @Override
+//                    public void onResponse(Call<PostItem> call, Response<PostItem> response) {
+//                        if (response.isSuccessful()){
+//                            PostItem item = new PostItem();
+//                            Log.d("retrofit","valid");
+////                            Log.d("retrofit", item.getProducts_id()+"\n"+item.get);
+//                        }else{
+//                            Log.d("retrofit","invalid");
+//                            Log.d("retrofit",String.valueOf(response.code()));
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<PostItem> call, Throwable t) {
+//
+//                    }
+//                });
 
-                    @Override
-                    public void onFailure(Call<PostItem> call, Throwable t) {
-                        Log.d("retrofit", "Fail msg : " + t.getMessage());
-                    }
-                });
+
+//                Call<PostItem> post_call = mMyAPI.post_products(4,item);
+//                item.setWeight("20");
+//                item.setProducts_id("4");
+//                post_call.enqueue(new Callback<PostItem>() {
+//                    @Override
+//                    public void onResponse(Call<PostItem> call, Response<PostItem> response) {
+//                        if (response.isSuccessful()) {
+//                            Log.d("retrofit", "등록 완료");
+//                        } else {
+//                            Log.d("retrofit", "Status Code : " + response.code());
+//                            Log.d("retrofit", response.errorBody().toString());
+//                            Log.d("retrofit", call.request().body().toString());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<PostItem> call, Throwable t) {
+//                        Log.d("retrofit", "Fail msg : " + t.getMessage());
+//                    }
+//                });
                 Toast.makeText(getContext(), "등록 완료", Toast.LENGTH_SHORT).show();
                 alertDialog.dismiss();
             }
@@ -159,10 +181,10 @@ public class NB_AddFragment extends Fragment {
         });
     }
 
-    private void initMyAPI(){
-        Log.d("retrofit","initMyAPI : " + "http://13.209.84.206/");
+    private void initMyAPI() {
+        Log.d("retrofit", "initMyAPI : " + "https://e61c7e832bc9.ngrok.io/");
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://13.209.84.206/")
+                .baseUrl("https://e61c7e832bc9.ngrok.io/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

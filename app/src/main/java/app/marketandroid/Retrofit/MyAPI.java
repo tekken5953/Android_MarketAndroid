@@ -6,41 +6,22 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface MyAPI{
 
-    //로그인 정보 post
-    @POST("/users/{pk}")
-    Call<PostItem> post_users(@Path("pk") int pk, @Body PostItem post);
+    //아이디, 비밀번호 입력 후 서버에 사용자인지 아닌지 확인
+    //사용자인 경우 토큰 값 받아오기
+    @POST("/api/v1/auth/")
+    Call<LoginItem> post_users(@Body LoginItem post);
 
-    //로그인 정보 전체 get
-    @GET("/users/")
-    Call<List<PostItem>> get_users();
+    //토큰 값 입력 후 사용자 정보 받아오기
+    @GET("/api/v1/auth/info/")
+    Call<LoginItem> get_my_info(@Header("Authorization") String token);
 
-    //로그인 정보 patch
-    @PATCH("/users/{pk}/")
-    Call<PostItem> patch_users(@Path("pk") int pk, @Body PostItem post);
-
-    //로그인 정보 delete
-    @DELETE("/users/{pk}/")
-    Call<PostItem> delete_users(@Path("pk") int pk);
-
-    //로그인 정보 특정 유저 get
-    @GET("/users/{pk}/")
-    Call<PostItem> get_users_pk(@Path("pk") int pk);
-
-    //판매정보 post
-    @POST("/sells/")
-    Call<PostItem> post_sells(@Body PostItem post);
-
-    //판매정보 전체 get
-    @GET("/sells/")
-    Call<List<PostItem>> get_sells();
-
-    //판매정보 특정 유저 get
-    @GET("/sells/{pk}/")
-    Call<PostItem> get_sells_pk(@Path("pk") int pk);
+    @POST("/api/v1/auth/register/")
+    Call<SignUpItem> post_signup_info(@Body SignUpItem post);
 }

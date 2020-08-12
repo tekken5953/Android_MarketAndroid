@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/add_dial_price_tx"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:text="최대 등록 가능 한 중량 : "
         android:textColor="@color/black" />
 
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/add_dial_price_tx"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_toRightOf="@+id/add_dial_max_tx"
         android:text=" N " />
 
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/add_dial_price_tx"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="15dp"
         android:layout_toRightOf="@+id/add_dial_weight"
         android:text=" Kg" />
@@ -79,25 +79,28 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/add_dial_max_tx"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         android:text="판매 등록 할 중량 : "
         android:textColor="@color/black" />
 
     <Spinner
         android:id="@+id/add_dial_sell_spinner"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/signup_edit"
         android:layout_below="@+id/add_dial_max_tx"
+        android:dropDownWidth="100dp"
+        android:gravity="center"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="22dp"
         android:layout_toRightOf="@+id/add_dial_sell_weight" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/add_dial_max_tx"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="35dp"
         android:layout_marginRight="15dp"
         android:layout_toRightOf="@id/add_dial_sell_spinner"
         android:text="Kg" />
@@ -105,7 +108,7 @@
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_below="@+id/add_dial_sell_spinner"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"

@@ -12,12 +12,14 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import app.marketandroid.Farmer.NB_MainActivity;
 import app.marketandroid.Manager.Manager_MainActivity;
 import app.marketandroid.Retrofit.MyAPI;
-import app.marketandroid.Retrofit.PostItem;
+import app.marketandroid.Retrofit.LoginItem;
+import app.marketandroid.Retrofit.SignUpItem;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,6 +59,73 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.login_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                initMyAPI();
+                final LoginItem item = new LoginItem();
+                item.setPhone(edit_id.getText().toString());
+                item.setPassword(edit_pwd.getText().toString());
+                Call<LoginItem> post_call = mMyAPI.post_users(item);
+                post_call.enqueue(new Callback<LoginItem>() { //아이디, 비밀번호 입력 후 서버에 사용자인지 아닌지 확인
+                    @Override
+                    public void onResponse(Call<LoginItem> call, Response<LoginItem> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("retrofit", "가입된 사용자");
+                            if (response.code() == 200) {
+                                Call<LoginItem> get_call = mMyAPI.post_users(item);
+                                item.setUser_id(edit_id.getText().toString());
+                                item.setPassword(edit_pwd.getText().toString());
+                                get_call.enqueue(new Callback<LoginItem>() { //사용자인 경우 토큰 값 받아오기
+                                    @Override
+                                    public void onResponse(Call<LoginItem> call, Response<LoginItem> response) {
+                                        StringBuilder result = new StringBuilder();
+                                        assert response.body() != null;
+                                        result.append("token : ").append(response.body().getToken());
+                                        Log.d("retrofit", result.toString());
+                                        Call<LoginItem> post_token = mMyAPI.get_my_info("JWT " + response.body().getToken());
+                                        post_token.enqueue(new Callback<LoginItem>() { //토큰 값 입력 후 사용자 정보 받아오기
+                                            @Override
+                                            public void onResponse(Call<LoginItem> call, Response<LoginItem> response) {
+                                                Log.d("retrofit", response.toString());
+                                                assert response.body() != null;
+                                                Log.d("retrofit", response.body().getPhone());
+                                                Log.d("retrofit", response.body().getName());
+                                                Log.d("retrofit", response.body().getIs_active());
+                                                Log.d("retrofit", response.body().getIs_admin());
+                                                if (response.body().getIs_admin().equals("true")){
+                                                    Intent intent = new Intent(LoginActivity.this,Manager_MainActivity.class);
+                                                    startActivity(intent);
+                                                    Toast.makeText(LoginActivity.this,
+                                                            "관리자로 로그인 하였습니다.", Toast.LENGTH_SHORT).show();
+                                                }else if (response.body().getIs_admin().equals("false")){
+                                                    Intent intent = new Intent(LoginActivity.this,NB_MainActivity.class);
+                                                    startActivity(intent);
+                                                    Toast.makeText(LoginActivity.this,
+                                                            "유저로 로그인 하였습니다.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                            @Override
+                                            public void onFailure(Call<LoginItem> call, Throwable t) {
+                                            }
+                                        });
+                                    }
+                                    @Override
+                                    public void onFailure(Call<LoginItem> call, Throwable t) {
+                                    }
+                                });
+                            } else {
+                                Log.d("retrofit", "Status Code : " + response.code());
+                            }
+                        } else {
+                            Log.d("retrofit", "Status Code : " + response.code());
+                            Log.d("retrofit", response.errorBody().toString());
+                            Log.d("retrofit", call.request().body().toString());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginItem> call, Throwable t) {
+                        Log.d("retrofit", "Fail msg : " + t.getMessage());
+                    }
+                });
             }
         });
 
@@ -104,25 +173,24 @@ public class LoginActivity extends AppCompatActivity {
 
                             initMyAPI();
 
-                            final PostItem item = new PostItem();
-                            item.setHp_num(hp.getText().toString());
-                            item.setUser_name(name.getText().toString());
-                            item.setUser_pwd(pwd.getText().toString());
-                            Call<PostItem> post_call = mMyAPI.post_users(Integer.parseInt(hp.getText().toString()), item);
-                            post_call.enqueue(new Callback<PostItem>() {
+                            final SignUpItem item = new SignUpItem();
+                            item.setPhone(hp.getText().toString());
+                            item.setName(name.getText().toString());
+                            item.setPassword1(pwd.getText().toString());
+                            item.setPassword2(repwd.getText().toString());
+                            Call<SignUpItem> post_call = mMyAPI.post_signup_info(item);
+                            post_call.enqueue(new Callback<SignUpItem>() {
                                 @Override
-                                public void onResponse(Call<PostItem> call, Response<PostItem> response) {
+                                public void onResponse(Call<SignUpItem> call, Response<SignUpItem> response) {
                                     if (response.isSuccessful()) {
-                                        Log.d("retrofit", "등록 완료");
+                                        Log.d("retrofit", response.body().toString());
+                                        Log.d("retrofit", "Status Code : " + response.code());
                                     } else {
                                         Log.d("retrofit", "Status Code : " + response.code());
-                                        Log.d("retrofit", response.errorBody().toString());
-                                        Log.d("retrofit", call.request().body().toString());
                                     }
                                 }
-
                                 @Override
-                                public void onFailure(Call<PostItem> call, Throwable t) {
+                                public void onFailure(Call<SignUpItem> call, Throwable t) {
                                     Log.d("retrofit", "Fail msg : " + t.getMessage());
                                 }
                             });

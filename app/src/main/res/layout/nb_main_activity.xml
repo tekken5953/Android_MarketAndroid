@@ -24,12 +24,6 @@
             android:textSize="28sp" />
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/user_id_tv"
-        android:visibility="gone"/>
-
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"

@@ -21,7 +21,6 @@ public class NB_MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
     Boolean isExitFlag = false;
-    TextView textView;
 
 //    @Override
 //    public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -52,8 +51,6 @@ public class NB_MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nb_main_activity);
-        textView = findViewById(R.id.user_id_tv);
-        textView.setText(getIntent().getExtras().getString("user_id"));
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
         // 첫화면에 띄워야 할 것들 지정해주기
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, NB_listFragment).commitAllowingStateLoss();

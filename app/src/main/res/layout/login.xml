@@ -41,7 +41,7 @@
         android:gravity="center"
         android:hint="비밀번호를 입력하세요."
         android:textSize="15sp"
-        android:inputType="numberPassword" />
+         />
 
     <Button
         android:id="@+id/login_btn"
@@ -81,7 +81,6 @@
             android:fontFamily="@font/cookierunregular"
             android:text="관리자모드\n로그인" />
     </TableRow>
-
 
     <Button
         android:layout_width="200dp"
