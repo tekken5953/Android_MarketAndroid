@@ -107,6 +107,7 @@ public class NB_AddFragment extends Fragment {
                     Log.d("retrofit", "Status Code : " + response.code());
                 }
             }
+
             @Override
             public void onFailure(Call<List<ProductItem>> call, Throwable t) {
                 Log.d("retrofit", "Status Code : " + t.getMessage());
@@ -177,7 +178,6 @@ public class NB_AddFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 relativeLayout.setVisibility(View.GONE);
-
             }
         });
 
