@@ -45,7 +45,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(final int groupPosition, int childPosition, boolean isLastChild, View convertView, final ViewGroup parent) {
+    public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, final ViewGroup parent) {
         if (convertView == null) {
             convertView = myinf.inflate(this.chlidLayout, parent, false);
         }
@@ -73,6 +73,10 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
                 final EditText et_limit = v.findViewById(R.id.child_dial_limit_edit);
                 final Button btn_ok = v.findViewById(R.id.child_dial_add_btn);
                 final Button btn_no = v.findViewById(R.id.child_dial_cancel_btn);
+
+                et_weight.setText(DataList.get(groupPosition).child_1.get(childPosition));
+                et_price.setText(DataList.get(groupPosition).child_2.get(childPosition));
+                et_limit.setText(DataList.get(groupPosition).child_3.get(childPosition));
 
                 child_dial_title.setText(DataList.get(groupPosition).groupName + " 설정 변경");
 

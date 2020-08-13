@@ -25,12 +25,14 @@
 
     <EditText
         android:id="@+id/child_dial_weight_edit"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_below="@+id/child_dial_title"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/boundary"
+        android:textSize="14sp"
+        android:gravity="center"
         android:layout_toRightOf="@+id/child_dial_weight_tx"/>
 
     <TextView
@@ -55,11 +57,13 @@
 
     <EditText
         android:id="@+id/child_dial_price_edit"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_below="@+id/child_dial_weight_edit"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="30dp"
+        android:textSize="14sp"
+        android:gravity="center"
         android:background="@drawable/boundary"
         android:layout_toRightOf="@+id/child_dial_weight_tx"/>
 
@@ -87,12 +91,14 @@
 
     <EditText
         android:id="@+id/child_dial_limit_edit"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_below="@+id/child_dial_price_edit"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/boundary"
+        android:textSize="14sp"
+        android:gravity="center"
         android:layout_toRightOf="@+id/child_dial_limit_tx"/>
 
     <TextView
@@ -111,7 +117,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@+id/child_dial_limit_edit"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="20dp"
         android:gravity="center">
 
