@@ -5,15 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import app.marketandroid.Manager.Manager_MainActivity;
 import app.marketandroid.R;
 
 public class NB_MainActivity extends AppCompatActivity {
@@ -40,7 +46,7 @@ public class NB_MainActivity extends AppCompatActivity {
             finish();
         } else {
             isExitFlag = true;
-            Toast.makeText(this, "뒤로가기를 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            toastMsg("뒤로가기를 한번 더 누르면 종료됩니다.");
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -79,5 +85,18 @@ public class NB_MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    public void toastMsg(String s) {
+        final LayoutInflater inflater = getLayoutInflater();
+        final View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+        final TextView text = layout.findViewById(R.id.text);
+        Toast toast = new Toast(NB_MainActivity.this);
+        text.setTextSize(13);
+        text.setTextColor(Color.BLACK);
+        toast.setGravity(Gravity.BOTTOM, 0, 200);
+        toast.setView(layout);
+        text.setText(s);
+        toast.show();
     }
 }

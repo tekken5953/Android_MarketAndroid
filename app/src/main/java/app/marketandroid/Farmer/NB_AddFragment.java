@@ -6,11 +6,10 @@ import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -191,7 +190,7 @@ public class NB_AddFragment extends Fragment {
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "등록 완료", Toast.LENGTH_SHORT).show();
+                toastMsg("신청 완료");
                 alertDialog.dismiss();
             }
         });
@@ -256,4 +255,18 @@ public class NB_AddFragment extends Fragment {
 
         mMyAPI = retrofit.create(MyAPI.class);
     }
+
+    public void toastMsg(String s) {
+        final LayoutInflater inflater = getLayoutInflater();
+        final View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) getActivity().findViewById(R.id.toast_layout));
+        final TextView text = layout.findViewById(R.id.text);
+        Toast toast = new Toast(getContext());
+        text.setTextSize(13);
+        text.setTextColor(Color.BLACK);
+        toast.setGravity(Gravity.BOTTOM, 0, 200);
+        toast.setView(layout);
+        text.setText(s);
+        toast.show();
+    }
+
 }

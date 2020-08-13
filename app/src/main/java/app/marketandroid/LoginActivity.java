@@ -6,13 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import app.marketandroid.Farmer.NB_MainActivity;
@@ -41,78 +45,90 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.login_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initMyAPI();
-                final LoginItem item = new LoginItem();
-                item.setPhone(edit_id.getText().toString());
-                item.setPassword(edit_pwd.getText().toString());
-                Call<LoginItem> post_call = mMyAPI.post_users(item);
-                post_call.enqueue(new Callback<LoginItem>() { //아이디, 비밀번호 입력 후 서버에 사용자인지 아닌지 확인
-                    @Override
-                    public void onResponse(Call<LoginItem> call, Response<LoginItem> response) {
-                        if (response.isSuccessful()) {
-                            Log.d("retrofit", "가입된 사용자");
-                            if (response.code() == 200) {
-                                Call<LoginItem> get_call = mMyAPI.post_users(item);
-                                item.setUser_id(edit_id.getText().toString());
-                                item.setPassword(edit_pwd.getText().toString());
-                                get_call.enqueue(new Callback<LoginItem>() { //사용자인 경우 토큰 값 받아오기
-                                    @Override
-                                    public void onResponse(Call<LoginItem> call, Response<LoginItem> response) {
-                                        StringBuilder result = new StringBuilder();
-                                        assert response.body() != null;
-                                        result.append("token : ").append(response.body().getToken());
-                                        SharedPreferenceManager.setString(LoginActivity.this,
-                                                "token","JWT " + response.body().getToken());
-                                        Log.d("retrofit", result.toString());
-                                        Call<LoginItem> post_token = mMyAPI.get_my_info("JWT " + response.body().getToken());
-                                        post_token.enqueue(new Callback<LoginItem>() { //토큰 값 입력 후 사용자 정보 받아오기
-                                            @Override
-                                            public void onResponse(Call<LoginItem> call, Response<LoginItem> response) {
-                                                Log.d("retrofit", response.toString());
-                                                assert response.body() != null;
-                                                Log.d("retrofit", response.body().getPhone());
-                                                Log.d("retrofit", response.body().getName());
-                                                Log.d("retrofit", response.body().getIs_active());
-                                                Log.d("retrofit", response.body().getIs_admin());
-                                                if (response.body().getIs_admin().equals("true")) {
-                                                    Intent intent = new Intent(LoginActivity.this, Manager_MainActivity.class);
-                                                    startActivity(intent);
-                                                    Toast.makeText(LoginActivity.this,
-                                                            "관리자로 로그인 하였습니다.", Toast.LENGTH_SHORT).show();
-                                                } else if (response.body().getIs_admin().equals("false")) {
-                                                    Intent intent = new Intent(LoginActivity.this, NB_MainActivity.class);
-                                                    startActivity(intent);
-                                                    Toast.makeText(LoginActivity.this,
-                                                            "유저로 로그인 하였습니다.", Toast.LENGTH_SHORT).show();
-                                                    finish();
+                if (edit_id.getText().toString().equals("")) {
+                    toastMsg("핸드폰 번호를 입력 해 주세요.");
+                    keyboardUp(edit_id);
+                } else if (edit_pwd.getText().toString().equals("")) {
+                    toastMsg("비밀번호를 입력 해 주세요.");
+                    keyboardUp(edit_pwd);
+                } else {
+                    initMyAPI();
+                    final LoginItem item = new LoginItem();
+                    item.setPhone(edit_id.getText().toString());
+                    item.setPassword(edit_pwd.getText().toString());
+                    Call<LoginItem> post_call = mMyAPI.post_users(item);
+                    post_call.enqueue(new Callback<LoginItem>() { //아이디, 비밀번호 입력 후 서버에 사용자인지 아닌지 확인
+                        @Override
+                        public void onResponse(Call<LoginItem> call, Response<LoginItem> response) {
+                            if (response.isSuccessful()) {
+                                Log.d("retrofit", "가입된 사용자");
+                                if (response.code() == 200) {
+                                    Call<LoginItem> get_call = mMyAPI.post_users(item);
+                                    item.setUser_id(edit_id.getText().toString());
+                                    item.setPassword(edit_pwd.getText().toString());
+                                    get_call.enqueue(new Callback<LoginItem>() { //사용자인 경우 토큰 값 받아오기
+                                        @Override
+                                        public void onResponse(Call<LoginItem> call, Response<LoginItem> response) {
+                                            StringBuilder result = new StringBuilder();
+                                            assert response.body() != null;
+                                            result.append("token : ").append(response.body().getToken());
+                                            SharedPreferenceManager.setString(LoginActivity.this,
+                                                    "token", "JWT " + response.body().getToken());
+                                            Log.d("retrofit", result.toString());
+                                            Call<LoginItem> post_token = mMyAPI.get_my_info("JWT " + response.body().getToken());
+                                            post_token.enqueue(new Callback<LoginItem>() { //토큰 값 입력 후 사용자 정보 받아오기
+                                                @Override
+                                                public void onResponse(Call<LoginItem> call, Response<LoginItem> response) {
+                                                    Log.d("retrofit", response.toString());
+                                                    assert response.body() != null;
+                                                    Log.d("retrofit", response.body().getPhone());
+                                                    Log.d("retrofit", response.body().getName());
+                                                    Log.d("retrofit", response.body().getIs_active());
+                                                    Log.d("retrofit", response.body().getIs_admin());
+                                                    if (response.body().getIs_admin().equals("true")) {
+                                                        toastMsg(response.body().getName() + "님\n관리자로 로그인 하셨습니다.");
+                                                        Intent intent = new Intent(LoginActivity.this, Manager_MainActivity.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    } else if (response.body().getIs_admin().equals("false")) {
+                                                        toastMsg(response.body().getName() + "님\n유저로 로그인 하셨습니다.");
+                                                        Intent intent = new Intent(LoginActivity.this, NB_MainActivity.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    } else {
+                                                        toastMsg("아이디 혹은 비밀번호가 올바르지 않습니다.");
+                                                    }
                                                 }
-                                            }
 
-                                            @Override
-                                            public void onFailure(Call<LoginItem> call, Throwable t) {
-                                            }
-                                        });
-                                    }
+                                                @Override
+                                                public void onFailure(Call<LoginItem> call, Throwable t) {
+                                                }
+                                            });
+                                        }
 
-                                    @Override
-                                    public void onFailure(Call<LoginItem> call, Throwable t) {
-                                    }
-                                });
+                                        @Override
+                                        public void onFailure(Call<LoginItem> call, Throwable t) {
+                                        }
+                                    });
+                                } else {
+                                    toastMsg("아이디 혹은 비밀번호가 올바르지 않습니다.");
+                                    Log.d("retrofit", "Status Code : " + response.code());
+                                }
                             } else {
+                                toastMsg("아이디 혹은 비밀번호가 올바르지 않습니다.");
                                 Log.d("retrofit", "Status Code : " + response.code());
+                                Log.d("retrofit", response.errorBody().toString());
+                                Log.d("retrofit", call.request().body().toString());
                             }
-                        } else {
-                            Log.d("retrofit", "Status Code : " + response.code());
-                            Log.d("retrofit", response.errorBody().toString());
-                            Log.d("retrofit", call.request().body().toString());
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<LoginItem> call, Throwable t) {
-                        Log.d("retrofit", "Fail msg : " + t.getMessage());
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<LoginItem> call, Throwable t) {
+                            Log.d("retrofit", "Fail msg : " + t.getMessage());
+                        }
+                    });
+                }
+
             }
         });
 
@@ -134,30 +150,29 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         if (hp.getText().toString().equals("")) {
-                            Toast.makeText(LoginActivity.this, "핸드폰 번호를 입력 해 주세요.", Toast.LENGTH_SHORT).show();
+                            toastMsg("핸드폰 번호를 입력 해 주세요.");
                             keyboardUp(hp);
                         } else if (name.getText().toString().equals("")) {
-                            Toast.makeText(LoginActivity.this, "이름을 입력 해 주세요.", Toast.LENGTH_SHORT).show();
+                            toastMsg("이름을 입력 해 주세요.");
                             keyboardUp(name);
                         } else if (pwd.getText().toString().equals("")) {
-                            Toast.makeText(LoginActivity.this, "비밀번호를 입력 해 주세요.", Toast.LENGTH_SHORT).show();
+                            toastMsg("비밀번호를 입력 해 주세요.");
                             keyboardUp(pwd);
                         } else if (repwd.getText().toString().equals("")) {
-                            Toast.makeText(LoginActivity.this, "비밀번호 확인을 입력 해 주세요.", Toast.LENGTH_SHORT).show();
+                            toastMsg("비밀번호 확인을 입력 해 주세요.");
                             keyboardUp(repwd);
                         } else if (!hp.getText().toString().equals("") && !hp.getText().toString().startsWith("010")) {
-                            Toast.makeText(LoginActivity.this, "핸드폰 번호는 010으로 시작해야 합니다.", Toast.LENGTH_SHORT).show();
+                            toastMsg("핸드폰 번호는 010으로 시작해야 합니다.");
                             hp.setText("");
                             keyboardUp(hp);
                         } else if (!hp.getText().toString().equals("") && !(hp.getText().toString().length() == 11)) {
-                            Toast.makeText(LoginActivity.this, "핸드폰 번호를 다시 확인해주세요.", Toast.LENGTH_SHORT).show();
+                            toastMsg("핸드폰 번호를 다시 확인해주세요.");
                             keyboardUp(hp);
                         } else if (!pwd.getText().toString().equals(repwd.getText().toString())) {
-                            Toast.makeText(LoginActivity.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                            toastMsg("비밀번호가 일치하지 않습니다.");
                             keyboardUp(pwd);
                         } else {
-                            Toast.makeText(LoginActivity.this, "\t\t\t\t가입이 신청되었습니다.\n관리자 승인 후 로그인이 가능합니다.", Toast.LENGTH_SHORT).show();
-
+                            toastMsg("\t\t\t\t가입이 신청되었습니다.\n관리자 승인 후 로그인이 가능합니다.");
                             initMyAPI();
 
                             final SignUpItem item = new SignUpItem();
@@ -214,5 +229,18 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
 
         mMyAPI = retrofit.create(MyAPI.class);
+    }
+
+    public void toastMsg(String s) {
+        final LayoutInflater inflater = getLayoutInflater();
+        final View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+        final TextView text = layout.findViewById(R.id.text);
+        Toast toast = new Toast(LoginActivity.this);
+        text.setTextSize(13);
+        text.setTextColor(Color.BLACK);
+        toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 200);
+        toast.setView(layout);
+        text.setText(s);
+        toast.show();
     }
 }

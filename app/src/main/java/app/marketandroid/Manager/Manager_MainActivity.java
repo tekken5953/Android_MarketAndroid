@@ -9,12 +9,18 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import app.marketandroid.LoginActivity;
 import app.marketandroid.R;
 
 public class Manager_MainActivity extends AppCompatActivity {
@@ -23,6 +29,7 @@ public class Manager_MainActivity extends AppCompatActivity {
     private Fragment settingFragment = new Manager_SettingFragment();
     Button list_btn, setting_btn;
     TextView main_title;
+    Boolean isExitFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +93,22 @@ public class Manager_MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        if (isExitFlag) {
+            finish();
+        } else {
+            isExitFlag = true;
+            toastMsg("뒤로가기를 한번 더 누르면 종료됩니다.");
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    isExitFlag = false;
+                }
+            }, 2000);
+        }
+    }
+
     static class ViewPagerAdapter extends FragmentPagerAdapter {
         ArrayList<Fragment> items = new ArrayList<Fragment>();
 
@@ -109,5 +132,17 @@ public class Manager_MainActivity extends AppCompatActivity {
             return items.size();
         }
 
+    }
+    public void toastMsg(String s) {
+        final LayoutInflater inflater = getLayoutInflater();
+        final View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+        final TextView text = layout.findViewById(R.id.text);
+        Toast toast = new Toast(Manager_MainActivity.this);
+        text.setTextSize(13);
+        text.setTextColor(Color.BLACK);
+        toast.setGravity(Gravity.BOTTOM, 0, 200);
+        toast.setView(layout);
+        text.setText(s);
+        toast.show();
     }
 }
