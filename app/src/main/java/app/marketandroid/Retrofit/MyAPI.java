@@ -24,4 +24,7 @@ public interface MyAPI{
 
     @POST("/api/v1/auth/register/")
     Call<SignUpItem> post_signup_info(@Body SignUpItem post);
+
+    @GET("/products/")
+    Call<List<ProductItem>> get_product(@Header("Authorization") String token);
 }

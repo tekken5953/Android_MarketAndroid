@@ -31,8 +31,8 @@ public class NB_ListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mRecyclerView = getActivity().findViewById(R.id.nbrecyclerView);
-        drawable_potato = getResources().getDrawable(R.drawable.recycle_potato);
-        drawable_apple = getResources().getDrawable(R.drawable.recycle_apple);
+        drawable_potato = getResources().getDrawable(R.drawable.potato);
+        drawable_apple = getResources().getDrawable(R.drawable.apple);
         main_title = getActivity().findViewById(R.id.main_title);
         main_title.setText("금일 등록 현황");
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.

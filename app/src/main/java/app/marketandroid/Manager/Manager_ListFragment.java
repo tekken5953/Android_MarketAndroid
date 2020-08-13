@@ -18,7 +18,6 @@ import app.marketandroid.R;
 
 public class Manager_ListFragment extends Fragment {
     ViewGroup viewGroup;
-    Drawable drawable_potato, drawable_apple;
     ArrayList<MGRecyclerItem> mData = null;
     RecyclerView mRecyclerView = null;
     ArrayList<MGRecyclerItem> mList = new ArrayList<>();
@@ -27,8 +26,6 @@ public class Manager_ListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        drawable_potato = getResources().getDrawable(R.drawable.recycle_potato);
-        drawable_apple = getResources().getDrawable(R.drawable.recycle_apple);
 
         mRecyclerView = getActivity().findViewById(R.id.mgrecyclerView);
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.

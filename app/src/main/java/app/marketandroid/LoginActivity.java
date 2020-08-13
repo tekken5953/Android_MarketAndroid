@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText edit_id, edit_pwd;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         edit_id = findViewById(R.id.login_edit_id);
@@ -60,6 +61,8 @@ public class LoginActivity extends AppCompatActivity {
                                         StringBuilder result = new StringBuilder();
                                         assert response.body() != null;
                                         result.append("token : ").append(response.body().getToken());
+                                        SharedPreferenceManager.setString(LoginActivity.this,
+                                                "token","JWT " + response.body().getToken());
                                         Log.d("retrofit", result.toString());
                                         Call<LoginItem> post_token = mMyAPI.get_my_info("JWT " + response.body().getToken());
                                         post_token.enqueue(new Callback<LoginItem>() { //토큰 값 입력 후 사용자 정보 받아오기

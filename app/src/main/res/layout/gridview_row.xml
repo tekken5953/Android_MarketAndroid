@@ -8,7 +8,8 @@
         android:id="@+id/imageView1"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:src="@drawable/recycle_potato" />
+        android:src="@drawable/potato"
+        android:layout_gravity="center"/>
 
     <TextView
         android:id="@+id/textView1"
@@ -16,8 +17,8 @@
         android:layout_height="wrap_content"
         android:text="감자"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:layout_marginLeft="35dp"
+        android:textSize="18sp"
+        android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/lotte_medium"/>
 

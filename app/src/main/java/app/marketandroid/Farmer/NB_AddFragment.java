@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,13 +25,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import app.marketandroid.R;
 import app.marketandroid.Retrofit.MyAPI;
-import app.marketandroid.Retrofit.PostItem;
+import app.marketandroid.Retrofit.ProductItem;
+import app.marketandroid.SharedPreferenceManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -43,65 +50,84 @@ public class NB_AddFragment extends Fragment {
     ArrayAdapter<String> adapter_weight;
     MyAPI mMyAPI;
     int text_position = 0;
-    ArrayList<String> text = new ArrayList<>();
-    final PostItem item = new PostItem();
+    int count = 0;
+    String[] text;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         initMyAPI();
+
+        final Call<List<ProductItem>> get_product = mMyAPI.get_product(SharedPreferenceManager.getString(getContext(), "token"));
+        get_product.enqueue(new Callback<List<ProductItem>>() {
+            @Override
+            public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
+                if (response.isSuccessful()) {
+                    List<ProductItem> mList = response.body();
+                    assert mList != null;
+                    text = new String[mList.size()];
+                    for (ProductItem item : mList) {
+                        for (int i = 9; i <= mList.size() + 15; i++) {
+                            if (item.getId() == i) {
+                                text[count] = item.getName();
+                                count++;
+                                break;
+                            }
+                        }
+                    }
+                    int[] img = {
+                            R.drawable.potato,
+                            R.drawable.sweetpotato,
+                            R.drawable.carrot,
+                            R.drawable.garlic,
+                            R.drawable.apple,
+                            R.drawable.cucomber,
+                            R.drawable.pumpkin,
+                    };
+
+                    MyAdapter adapter = new MyAdapter(
+                            getContext(),
+                            R.layout.gridview_row,       // GridView 항목의 레이아웃 row.xml
+                            img,
+                            text);    // 데이터
+
+                    GridView gv = (GridView) getActivity().findViewById(R.id.gridView1);
+                    gv.setAdapter(adapter);  // 커스텀 아답타를 GridView 에 적용
+
+                    // GridView 아이템을 클릭하면 상단 텍스트뷰에 position 출력
+                    gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view,
+                                                int position, long id) {
+                            text_position = position;
+                            alertDialog();
+                        }
+                    });
+                } else {
+                    Log.d("retrofit", "Status Code : " + response.code());
+                }
+            }
+            @Override
+            public void onFailure(Call<List<ProductItem>> call, Throwable t) {
+                Log.d("retrofit", "Status Code : " + t.getMessage());
+            }
+        });
 
         main_title = getActivity().findViewById(R.id.main_title);
         main_title.setText("출하물품 등록");
 
-        list_weight.add(0,"눌러서 선택");
-        list_count.add(0,"눌러서 선택");
+        list_weight.add(0, "눌러서 선택");
+        list_count.add(0, "눌러서 선택");
         for (int i = 1; i <= 9; i++) {
             list_count.add(String.valueOf(i));
         }
 
-        for (int i = 1; i <= 5; i++){
+        for (int i = 1; i <= 5; i++) {
             list_weight.add(String.valueOf(10 * i));
         }
         adapter_count = new ArrayAdapter<>(getContext(), R.layout.spinneritem, list_count);
         adapter_weight = new ArrayAdapter<>(getContext(), R.layout.spinneritem, list_weight);
-
-        int img[] = {
-                R.drawable.recycle_potato,
-                R.drawable.recycle_apple,
-                R.drawable.recycle_potato,
-                R.drawable.recycle_apple,
-                R.drawable.recycle_potato,
-                R.drawable.recycle_apple,
-                R.drawable.recycle_potato,
-        };
-
-        for (int i = 1; i<= 7; i++){
-            if( i % 2 == 1){
-                text.add("감자");
-            }else{
-                text.add("사과");
-            }
-        }
-
-        MyAdapter adapter = new MyAdapter(
-                getActivity().getApplicationContext(),
-                R.layout.gridview_row,       // GridView 항목의 레이아웃 row.xml
-                img,
-                text);    // 데이터
-
-        GridView gv = (GridView) getActivity().findViewById(R.id.gridView1);
-        gv.setAdapter(adapter);  // 커스텀 아답타를 GridView 에 적용
-
-        // GridView 아이템을 클릭하면 상단 텍스트뷰에 position 출력
-        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                text_position = position;
-                alertDialog();
-            }
-        });
 
     }
 
@@ -116,6 +142,9 @@ public class NB_AddFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         adapter_count.clear();
+        adapter_weight.clear();
+        count = 0;
+        text_position = 0;
     }
 
     public void alertDialog() {
@@ -130,7 +159,7 @@ public class NB_AddFragment extends Fragment {
         final TextView add_dial_title = view.findViewById(R.id.add_dial_title);
         final Spinner spinner_weight = view.findViewById(R.id.add_dial_weight_spinner);
         final RelativeLayout relativeLayout = view.findViewById(R.id.add_dial_layout);
-        add_dial_title.setText(text.get(text_position) +" 판매 신청");
+        add_dial_title.setText(text[text_position] + " 판매 신청");
 
         spinner_weight.setAdapter(adapter_weight);
         spinner_weight.setMinimumHeight(110);
@@ -139,9 +168,9 @@ public class NB_AddFragment extends Fragment {
         spinner_weight.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (spinner_weight.getSelectedItemPosition() != 0){
+                if (spinner_weight.getSelectedItemPosition() != 0) {
                     relativeLayout.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     relativeLayout.setVisibility(View.GONE);
                 }
             }
@@ -179,10 +208,10 @@ public class NB_AddFragment extends Fragment {
         Context context;
         int layout;
         int[] img;
-        ArrayList<String> text;
+        String[] text;
         LayoutInflater inf;
 
-        public MyAdapter(Context context, int layout, int[] img, ArrayList<String> text) {
+        public MyAdapter(Context context, int layout, int[] img, String[] text) {
             this.context = context;
             this.layout = layout;
             this.img = img;
@@ -198,7 +227,7 @@ public class NB_AddFragment extends Fragment {
 
         @Override
         public Object getItem(int position) {
-            return text.get(position);
+            return text[position];
         }
 
         @Override
@@ -213,15 +242,15 @@ public class NB_AddFragment extends Fragment {
             ImageView iv = (ImageView) convertView.findViewById(R.id.imageView1);
             TextView tv = (TextView) convertView.findViewById(R.id.textView1);
             iv.setImageResource(img[position]);
-            tv.setText(text.get(position));
+            tv.setText(text[position]);
             return convertView;
         }
     }
 
     private void initMyAPI() {
-        Log.d("retrofit", "initMyAPI : " + "https://e61c7e832bc9.ngrok.io/");
+        Log.d("retrofit", "initMyAPI : " + "http://13.209.84.206/");
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://e61c7e832bc9.ngrok.io/")
+                .baseUrl("http://13.209.84.206/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

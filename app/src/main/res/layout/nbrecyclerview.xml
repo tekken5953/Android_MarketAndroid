@@ -13,7 +13,7 @@
             android:id="@+id/nbrecycle_img"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/recycle_potato" />
+            android:src="@drawable/potato" />
 
         <TextView
             android:id="@+id/mgrecycle_products"
