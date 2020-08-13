@@ -6,17 +6,50 @@
     android:layout_marginBottom="5dp">
 
     <TextView
+        android:id="@+id/child_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:layout_centerVertical="true"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
         android:id="@+id/child1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="30dp"
-        android:text="text : "
+        android:layout_toRightOf="@+id/child_number"
+        android:text="중량정보"
         android:textColor="@color/black"
         android:textSize="15sp" />
 
+    <TextView
+        android:id="@+id/child2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="시세"
+        android:layout_toRightOf="@id/child1"
+        android:layout_marginLeft="30dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/child3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textColor="@color/black"
+        android:layout_toRightOf="@+id/child2"
+        android:layout_marginLeft="30dp"
+        android:text="등록제한"
+        android:textSize="15sp"/>
+
     <Button
-        android:id="@+id/child1_btn"
+        android:id="@+id/child_btn"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_alignParentRight="true"
@@ -25,7 +58,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/button_blue"
-        android:text="수 정"
+        android:text="수정"
         android:textColor="@color/white"
         android:textStyle="bold" />
 

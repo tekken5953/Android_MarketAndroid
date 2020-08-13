@@ -40,8 +40,12 @@ public class Manager_SettingFragment extends Fragment {
 
         for (int i = 1; i <= 12; i++) {
             myGroup temp = new myGroup("품목" + i);
-            temp.child.add("시세");
-            temp.child.add("등록 제한");
+            for (int j=1; j<=3; j++){
+                temp.child__num.add(String.valueOf(j));
+                temp.child_1.add("중량 정보"+j);
+                temp.child_2.add("시세"+j);
+                temp.child_3.add("등록 제한"+j);
+            }
             list.add(temp);
         }
         ExpandAdapter adapter = new ExpandAdapter(getContext().getApplicationContext(), R.layout.group_row, R.layout.child_row, list);

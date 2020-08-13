@@ -55,39 +55,12 @@
         android:fontFamily="@font/cookierunregular"
         android:textColor="#ffffff" />
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tr1"
-        android:layout_marginTop="30dp"
-        android:layout_below="@id/login_btn"
-        android:gravity="center">
-        <Button
-            android:id="@+id/login_farmer"
-            android:layout_width="100dp"
-            android:layout_height="55dp"
-            android:background="@drawable/button_blue"
-            android:text="농부모드\n로그인"
-            android:layout_marginRight="20dp"
-            android:fontFamily="@font/cookierunregular"
-            android:textColor="#ffffff" />
-
-        <Button
-            android:id="@+id/login_manager"
-            android:layout_width="100dp"
-            android:layout_height="55dp"
-            android:layout_toRightOf="@+id/login_farmer"
-            android:background="@drawable/button_white"
-            android:fontFamily="@font/cookierunregular"
-            android:text="관리자모드\n로그인" />
-    </TableRow>
-
     <Button
         android:layout_width="200dp"
         android:layout_height="55dp"
         android:text="@string/sign_up"
         android:id="@+id/login_sign_up"
-        android:layout_below="@+id/tr1"
+        android:layout_below="@+id/login_btn"
         android:background="@drawable/button_white"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/cookierunregular"

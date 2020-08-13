@@ -38,24 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         edit_id = findViewById(R.id.login_edit_id);
         edit_pwd = findViewById(R.id.login_edit_pwd);
 
-        findViewById(R.id.login_farmer).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, NB_MainActivity.class);
-                intent.putExtra("user_id", edit_id.getText().toString());
-                startActivity(intent);
-//                finish();
-            }
-        });
-        findViewById(R.id.login_manager).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, Manager_MainActivity.class);
-                startActivity(intent);
-//                finish();
-            }
-        });
-
         findViewById(R.id.login_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,23 +72,26 @@ public class LoginActivity extends AppCompatActivity {
                                                 Log.d("retrofit", response.body().getName());
                                                 Log.d("retrofit", response.body().getIs_active());
                                                 Log.d("retrofit", response.body().getIs_admin());
-                                                if (response.body().getIs_admin().equals("true")){
-                                                    Intent intent = new Intent(LoginActivity.this,Manager_MainActivity.class);
+                                                if (response.body().getIs_admin().equals("true")) {
+                                                    Intent intent = new Intent(LoginActivity.this, Manager_MainActivity.class);
                                                     startActivity(intent);
                                                     Toast.makeText(LoginActivity.this,
                                                             "관리자로 로그인 하였습니다.", Toast.LENGTH_SHORT).show();
-                                                }else if (response.body().getIs_admin().equals("false")){
-                                                    Intent intent = new Intent(LoginActivity.this,NB_MainActivity.class);
+                                                } else if (response.body().getIs_admin().equals("false")) {
+                                                    Intent intent = new Intent(LoginActivity.this, NB_MainActivity.class);
                                                     startActivity(intent);
                                                     Toast.makeText(LoginActivity.this,
                                                             "유저로 로그인 하였습니다.", Toast.LENGTH_SHORT).show();
+                                                    finish();
                                                 }
                                             }
+
                                             @Override
                                             public void onFailure(Call<LoginItem> call, Throwable t) {
                                             }
                                         });
                                     }
+
                                     @Override
                                     public void onFailure(Call<LoginItem> call, Throwable t) {
                                     }
@@ -189,6 +174,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Log.d("retrofit", "Status Code : " + response.code());
                                     }
                                 }
+
                                 @Override
                                 public void onFailure(Call<SignUpItem> call, Throwable t) {
                                     Log.d("retrofit", "Fail msg : " + t.getMessage());
