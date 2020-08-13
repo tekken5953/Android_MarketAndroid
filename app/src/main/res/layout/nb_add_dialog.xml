@@ -9,108 +9,149 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="판매 신청"
-        android:textStyle="bold"
         android:textColor="@color/black"
-        android:textSize="22sp" />
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/add_dial_price_tx"
+        android:id="@+id/add_dial_weight_tx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/add_dial_title"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:text="오늘의 품종 시세 : "
-        android:textColor="@color/black" />
-
-    <TextView
-        android:id="@+id/add_dial_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/add_dial_title"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/add_dial_price_tx"
-        android:text="N" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/add_dial_title"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/add_dial_price"
-        android:text="원" />
-
-    <TextView
-        android:id="@+id/add_dial_max_tx"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/add_dial_price_tx"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:text="최대 등록 가능 한 중량 : "
-        android:textColor="@color/black" />
-
-    <TextView
-        android:id="@+id/add_dial_weight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/add_dial_price_tx"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_toRightOf="@+id/add_dial_max_tx"
-        android:text=" N " />
-
-    <TextView
-        android:id="@+id/kg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/add_dial_price_tx"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="15dp"
-        android:layout_toRightOf="@+id/add_dial_weight"
-        android:text=" Kg" />
-
-    <TextView
-        android:id="@+id/add_dial_sell_weight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/add_dial_max_tx"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="35dp"
-        android:text="판매 등록 할 중량 : "
+        android:text="신청 가능 한 중량"
         android:textColor="@color/black" />
 
     <Spinner
-        android:id="@+id/add_dial_sell_spinner"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:background="@drawable/signup_edit"
-        android:layout_below="@+id/add_dial_max_tx"
-        android:dropDownWidth="100dp"
-        android:gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="22dp"
-        android:layout_toRightOf="@+id/add_dial_sell_weight" />
+        android:id="@+id/add_dial_weight_spinner"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/add_dial_weight_tx"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:dropDownWidth="150dp"
+        android:background="@drawable/boundary" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/add_dial_max_tx"
-        android:layout_marginLeft="7dp"
-        android:layout_marginTop="35dp"
+        android:layout_below="@+id/add_dial_weight_tx"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="22dp"
         android:layout_marginRight="15dp"
-        android:layout_toRightOf="@id/add_dial_sell_spinner"
-        android:text="Kg" />
+        android:layout_toRightOf="@id/add_dial_weight_spinner"
+        android:text="@string/kg"
+        android:textColor="@color/black" />
+
+    <RelativeLayout
+        android:id="@+id/add_dial_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/add_dial_weight_spinner">
+        <TextView
+            android:id="@+id/add_dial_price_tx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:text="선택한 중량 시세 : "
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/add_dial_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_toRightOf="@+id/add_dial_price_tx"
+            android:text="N"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_toRightOf="@+id/add_dial_price"
+            android:text="@string/won"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/add_dial_max_tx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/add_dial_price_tx"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="35dp"
+            android:text="최대 등록 가능 한 수량 : "
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/add_dial_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/add_dial_price_tx"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="35dp"
+            android:layout_toRightOf="@+id/add_dial_max_tx"
+            android:text=" N "
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/kg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/add_dial_price_tx"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginRight="15dp"
+            android:layout_toRightOf="@+id/add_dial_weight"
+            android:text="@string/box"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/add_dial_sell_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/add_dial_max_tx"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="35dp"
+            android:text="판매 등록 할 수량"
+            android:textColor="@color/black" />
+
+        <Spinner
+            android:id="@+id/add_dial_sell_spinner"
+            android:layout_width="150dp"
+            android:layout_height="45dp"
+            android:layout_below="@+id/add_dial_sell_weight"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/boundary"
+            android:dropDownWidth="150dp"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/add_dial_sell_weight"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginRight="15dp"
+            android:layout_toRightOf="@id/add_dial_sell_spinner"
+            android:text="@string/box"
+            android:textColor="@color/black" />
+    </RelativeLayout>
+
+
 
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@+id/add_dial_sell_spinner"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/add_dial_layout"
+        android:layout_marginTop="25dp"
         android:layout_marginBottom="20dp"
         android:gravity="center">
 
@@ -120,8 +161,8 @@
             android:layout_height="wrap_content"
             android:background="#00ffff00"
             android:text="등 록"
-            android:textStyle="bold"
-            android:textColor="@color/primary_blue" />
+            android:textColor="@color/primary_blue"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/add_dial_cancel_btn"
@@ -130,7 +171,7 @@
             android:layout_marginLeft="25dp"
             android:background="#00ffff00"
             android:text="취 소"
-            android:textStyle="bold"
-            android:textColor="@color/primary_blue" />
+            android:textColor="@color/primary_blue"
+            android:textStyle="bold" />
     </TableRow>
 </RelativeLayout>

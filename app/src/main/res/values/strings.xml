@@ -12,4 +12,7 @@
     <string name="total_price">총 가격</string>
     <string name="count">수량</string>
     <string name="user_name">유저이름</string>
+    <string name="box">Box</string>
+    <string name="won">원</string>
+    <string name="kg">Kg</string>
 </resources>
