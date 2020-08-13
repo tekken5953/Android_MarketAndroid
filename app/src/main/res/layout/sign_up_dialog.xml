@@ -92,7 +92,6 @@
         android:layout_width="150dp"
         android:layout_height="35dp"
         android:layout_below="@+id/sign_up_name_tx"
-        android:inputType="numberPassword"
         android:background="@drawable/signup_edit"
         android:id="@+id/sign_up_pwd"
         android:textSize="15sp"
@@ -121,7 +120,6 @@
         android:gravity="center"
         android:layout_toRightOf="@id/sign_up_repwd_tx"
         android:layout_marginTop="32dp"
-        android:inputType="numberPassword"
         android:background="@drawable/signup_edit"/>
 
 
