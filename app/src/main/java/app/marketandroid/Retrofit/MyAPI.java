@@ -22,9 +22,11 @@ public interface MyAPI{
     @GET("/api/v1/auth/info/")
     Call<LoginItem> get_my_info(@Header("Authorization") String token);
 
+    //회원가입 정보 보내기
     @POST("/api/v1/auth/register/")
     Call<SignUpItem> post_signup_info(@Body SignUpItem post);
 
+    //GridView 아이템 Setting
     @GET("/products/")
     Call<List<ProductItem>> get_product(@Header("Authorization") String token);
 }

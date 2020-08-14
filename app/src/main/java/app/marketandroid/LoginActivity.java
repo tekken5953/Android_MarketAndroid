@@ -172,7 +172,7 @@ public class LoginActivity extends AppCompatActivity {
                             toastMsg("비밀번호가 일치하지 않습니다.");
                             keyboardUp(pwd);
                         } else {
-                            toastMsg("\t\t\t\t가입이 신청되었습니다.\n관리자 승인 후 로그인이 가능합니다.");
+                            toastMsg("가입이 신청되었습니다.\n관리자 승인 후 로그인이 가능합니다.");
                             initMyAPI();
 
                             final SignUpItem item = new SignUpItem();
@@ -222,7 +222,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initMyAPI() {
-        Log.d("retrofit", "initMyAPI : " + "http://13.209.84.206/");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://13.209.84.206/")
                 .addConverterFactory(GsonConverterFactory.create())

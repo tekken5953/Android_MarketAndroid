@@ -19,11 +19,15 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -32,6 +36,8 @@ import app.marketandroid.R;
 import app.marketandroid.Retrofit.MyAPI;
 import app.marketandroid.Retrofit.ProductItem;
 import app.marketandroid.SharedPreferenceManager;
+import okhttp3.Interceptor;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,7 +60,10 @@ public class NB_AddFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+
         super.onActivityCreated(savedInstanceState);
+
+        final RelativeLayout relativeLayout = getActivity().findViewById(R.id.add_main_layout);
 
         initMyAPI();
 
@@ -67,7 +76,7 @@ public class NB_AddFragment extends Fragment {
                     assert mList != null;
                     text = new String[mList.size()];
                     for (ProductItem item : mList) {
-                        for (int i = 9; i <= mList.size() + 15; i++) {
+                        for (int i = 9; i <= mList.size() + 20; i++) {
                             if (item.getId() == i) {
                                 text[count] = item.getName();
                                 count++;
@@ -75,14 +84,17 @@ public class NB_AddFragment extends Fragment {
                             }
                         }
                     }
+
                     int[] img = {
                             R.drawable.potato,
                             R.drawable.sweetpotato,
                             R.drawable.carrot,
                             R.drawable.garlic,
                             R.drawable.apple,
+                            R.drawable.sangchu,
+                            R.drawable.onion,
                             R.drawable.cucomber,
-                            R.drawable.pumpkin,
+                            R.drawable.pumpkin
                     };
 
                     MyAdapter adapter = new MyAdapter(
@@ -105,12 +117,20 @@ public class NB_AddFragment extends Fragment {
                     });
                 } else {
                     Log.d("retrofit", "Status Code : " + response.code());
+                    TextView error = new TextView(getContext());
+                    error.setText("세션이 만료되었습니다.\n다시 접속해주세요.");
+                    error.setTextColor(Color.parseColor("#000000"));
+                    LinearLayout linearLayout = new LinearLayout(getContext());
+                    linearLayout.addView(error);
+                    linearLayout.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                    relativeLayout.addView(linearLayout);
                 }
             }
 
             @Override
             public void onFailure(Call<List<ProductItem>> call, Throwable t) {
                 Log.d("retrofit", "Status Code : " + t.getMessage());
+
             }
         });
 
@@ -247,7 +267,6 @@ public class NB_AddFragment extends Fragment {
     }
 
     private void initMyAPI() {
-        Log.d("retrofit", "initMyAPI : " + "http://13.209.84.206/");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://13.209.84.206/")
                 .addConverterFactory(GsonConverterFactory.create())
