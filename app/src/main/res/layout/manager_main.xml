@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="관리자 모드"
+            android:text="@string/manager_mode"
             android:fontFamily="@font/cookierunbold"
             android:textColor="@color/white"
             android:textSize="28sp" />

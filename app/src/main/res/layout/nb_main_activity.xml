@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="유저 모드"
+            android:text="@string/user_mode"
             android:fontFamily="@font/cookierunbold"
             android:textColor="@color/white"
             android:textSize="28sp" />

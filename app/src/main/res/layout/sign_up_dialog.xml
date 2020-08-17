@@ -135,7 +135,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="가입하기"
+            android:text="@string/sign_up_ok"
             android:background="@drawable/button_blue"
             android:textColor="@color/white"
             android:layout_weight="1"
@@ -150,7 +150,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_blue"
             android:textColor="@color/white"
-            android:text="취 소"
+            android:text="@string/cancel"
             android:fontFamily="@font/cookierunregular"
             android:layout_weight="1"
             android:layout_marginLeft="20dp"

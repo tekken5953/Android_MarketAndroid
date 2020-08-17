@@ -89,7 +89,7 @@
             android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/add_dial_weight"
+            android:id="@+id/add_dial_limit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/add_dial_price_tx"
@@ -107,7 +107,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="35dp"
             android:layout_marginRight="15dp"
-            android:layout_toRightOf="@+id/add_dial_weight"
+            android:layout_toRightOf="@+id/add_dial_limit"
             android:text="@string/box"
             android:textColor="@color/black" />
 
@@ -157,7 +157,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#00ffff00"
-            android:text="등 록"
+            android:text="@string/ok"
             android:textColor="@color/primary_blue"
             android:textStyle="bold" />
 
@@ -167,7 +167,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:background="#00ffff00"
-            android:text="취 소"
+            android:text="@string/cancel"
             android:textColor="@color/primary_blue"
             android:textStyle="bold" />
     </TableRow>

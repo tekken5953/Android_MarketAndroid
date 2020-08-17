@@ -25,19 +25,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import app.marketandroid.R;
+import app.marketandroid.Retrofit.DemandItem;
 import app.marketandroid.Retrofit.MyAPI;
+import app.marketandroid.Retrofit.PriceNLimitItem;
 import app.marketandroid.Retrofit.ProductItem;
 import app.marketandroid.SharedPreferenceManager;
-import okhttp3.Interceptor;
-import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,7 +53,9 @@ public class NB_AddFragment extends Fragment {
     MyAPI mMyAPI;
     int text_position = 0;
     int count = 0;
-    String[] text;
+    int product_id = 1;
+    String[] product;
+    int[] demand_id;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -74,11 +73,11 @@ public class NB_AddFragment extends Fragment {
                 if (response.isSuccessful()) {
                     List<ProductItem> mList = response.body();
                     assert mList != null;
-                    text = new String[mList.size()];
-                    for (ProductItem item : mList) {
-                        for (int i = 9; i <= mList.size() + 20; i++) {
-                            if (item.getId() == i) {
-                                text[count] = item.getName();
+                    product = new String[mList.size()];
+                    for (final ProductItem item1 : mList) {
+                        for (int i = 1; count <= mList.size(); i++) {
+                            if (item1.getId() == i) {
+                                product[count] = item1.getName();
                                 count++;
                                 break;
                             }
@@ -97,11 +96,12 @@ public class NB_AddFragment extends Fragment {
                             R.drawable.pumpkin
                     };
 
+
                     MyAdapter adapter = new MyAdapter(
                             getContext(),
                             R.layout.gridview_row,       // GridView 항목의 레이아웃 row.xml
                             img,
-                            text);    // 데이터
+                            product);    // 데이터
 
                     GridView gv = (GridView) getActivity().findViewById(R.id.gridView1);
                     gv.setAdapter(adapter);  // 커스텀 아답타를 GridView 에 적용
@@ -110,8 +110,29 @@ public class NB_AddFragment extends Fragment {
                     gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view,
-                                                int position, long id) {
+                                                final int position, long id) {
                             text_position = position;
+                            list_weight.add(0, "눌러서 선택");
+                            Call<List<DemandItem>> get_demand = mMyAPI.get_demands(SharedPreferenceManager.getString(getContext(), "token"));
+                            get_demand.enqueue(new Callback<List<DemandItem>>() {
+                                @Override
+                                public void onResponse(Call<List<DemandItem>> call, Response<List<DemandItem>> response) {
+                                    List<DemandItem> mList = response.body();
+                                    assert mList != null;
+                                    demand_id = new int[mList.size()];
+                                    for (DemandItem item2 : mList) {
+                                        if (item2.getProduct() == position + 1) {
+                                            list_weight.add(product_id, item2.getWeight());
+                                            demand_id[product_id] = item2.getId();
+                                            product_id++;
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<List<DemandItem>> call, Throwable t) {
+                                }
+                            });
                             alertDialog();
                         }
                     });
@@ -137,15 +158,11 @@ public class NB_AddFragment extends Fragment {
         main_title = getActivity().findViewById(R.id.main_title);
         main_title.setText("출하물품 등록");
 
-        list_weight.add(0, "눌러서 선택");
         list_count.add(0, "눌러서 선택");
         for (int i = 1; i <= 9; i++) {
             list_count.add(String.valueOf(i));
         }
 
-        for (int i = 1; i <= 5; i++) {
-            list_weight.add(String.valueOf(10 * i));
-        }
         adapter_count = new ArrayAdapter<>(getContext(), R.layout.spinneritem, list_count);
         adapter_weight = new ArrayAdapter<>(getContext(), R.layout.spinneritem, list_weight);
 
@@ -179,7 +196,9 @@ public class NB_AddFragment extends Fragment {
         final TextView add_dial_title = view.findViewById(R.id.add_dial_title);
         final Spinner spinner_weight = view.findViewById(R.id.add_dial_weight_spinner);
         final RelativeLayout relativeLayout = view.findViewById(R.id.add_dial_layout);
-        add_dial_title.setText(text[text_position] + " 판매 신청");
+        final TextView price = view.findViewById(R.id.add_dial_price);
+        final TextView weight = view.findViewById(R.id.add_dial_limit);
+        add_dial_title.setText(product[text_position] + " 판매 신청");
 
         spinner_weight.setAdapter(adapter_weight);
         spinner_weight.setMinimumHeight(110);
@@ -187,9 +206,30 @@ public class NB_AddFragment extends Fragment {
         spinner_weight.setDropDownVerticalOffset(spinner_weight.getMinimumHeight());
         spinner_weight.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemSelected(final AdapterView<?> adapterView, View view, int i, long l) {
                 if (spinner_weight.getSelectedItemPosition() != 0) {
                     relativeLayout.setVisibility(View.VISIBLE);
+
+                    Call<List<PriceNLimitItem>> get_priceNlimit = mMyAPI.get_priceNlimits(SharedPreferenceManager.getString(getContext(), "token"));
+                    get_priceNlimit.enqueue(new Callback<List<PriceNLimitItem>>() {
+                        @Override
+                        public void onResponse(Call<List<PriceNLimitItem>> call, Response<List<PriceNLimitItem>> response) {
+                            List<PriceNLimitItem> mList = response.body();
+                            assert mList != null;
+                            for (PriceNLimitItem item3 : mList) {
+                                for (int i = spinner_weight.getSelectedItemPosition(); i <= spinner_weight.getSelectedItemPosition(); i++) {
+                                    if (demand_id[i] == item3.getDemand()) {
+                                        price.setText(String.valueOf(item3.getPrice()));
+                                        weight.setText(String.valueOf(item3.getLimit()));
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<PriceNLimitItem>> call, Throwable t) {
+                        }
+                    });
                 } else {
                     relativeLayout.setVisibility(View.GONE);
                 }
@@ -211,12 +251,16 @@ public class NB_AddFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 toastMsg("신청 완료");
+                list_weight.clear();
+                product_id = 1;
                 alertDialog.dismiss();
             }
         });
         cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                list_weight.clear();
+                product_id = 1;
                 alertDialog.dismiss();
             }
         });

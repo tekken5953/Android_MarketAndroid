@@ -10,7 +10,7 @@
         android:layout_marginLeft="15dp"
         android:paddingTop="25dp"
         android:paddingBottom="25dp"
-        android:text="품목"
+        android:text="@string/products"
         android:textColor="@color/black"
         android:textSize="18sp" />
 </RelativeLayout>

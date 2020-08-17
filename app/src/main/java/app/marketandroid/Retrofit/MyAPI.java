@@ -29,4 +29,11 @@ public interface MyAPI{
     //GridView 아이템 Setting
     @GET("/products/")
     Call<List<ProductItem>> get_product(@Header("Authorization") String token);
+
+    @GET("/demands/")
+    Call<List<DemandItem>> get_demands(@Header("Authorization") String token);
+
+    @GET("/priceNlimits/")
+    Call<List<PriceNLimitItem>> get_priceNlimits(@Header("Authorization") String token);
+
 }

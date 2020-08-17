@@ -126,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#00ffff00"
-            android:text="등 록"
+            android:text="@string/ok"
             android:textStyle="bold"
             android:textColor="@color/primary_blue" />
 
@@ -136,7 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:background="#00ffff00"
-            android:text="취 소"
+            android:text="@string/cancel"
             android:textStyle="bold"
             android:textColor="@color/primary_blue" />
     </TableRow>
