@@ -132,7 +132,9 @@ public class Manager_ListFragment extends Fragment {
                 List<SellItem> mList = response.body();
                 assert mList != null;
                 for (SellItem item : mList){
-                    addItem(item.getUser()+"",item.getId()+"", item.getPriceNlimit()+"Kg",item.getCount()+"Box","가격 x Box 원","(1Box 당 "+item.getPriceNlimit()+"원)");
+                    addItem(item.getPriceNlimit().getDemand().getProduct().getName()+"",item.getPriceNlimit().getDemand().getProduct().getName()+"",
+                            item.getPriceNlimit().getDemand().getWeight()+"Kg",item.getCount()+"Box",item.getCount()*item.getPriceNlimit().getPrice()+"원",
+                            "(1Box 당 "+item.getPriceNlimit().getPrice()+"원)");
                     mAdapter.notifyDataSetChanged();
                 }
             }
@@ -142,13 +144,6 @@ public class Manager_ListFragment extends Fragment {
 
             }
         });
-        addItem("농부1","감자","20Kg","3Box","300,000원","(1Box 당 100,000원)");
-        addItem("농부2","고구마","20Kg","3Box","300,000원","(1Box 당 100,000원)");
-        addItem("농부3","당근","20Kg","3Box","300,000원","(1Box 당 100,000원)");
-        addItem("농부4","사과","20Kg","3Box","300,000원","(1Box 당 100,000원)");
-        addItem("농부5","감자","20Kg","3Box","300,000원","(1Box 당 100,000원)");
-        addItem("농부6","복숭아","20Kg","3Box","300,000원","(1Box 당 100,000원)");
-        addItem("농부7","가지","20Kg","3Box","300,000원","(1Box 당 100,000원)");
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

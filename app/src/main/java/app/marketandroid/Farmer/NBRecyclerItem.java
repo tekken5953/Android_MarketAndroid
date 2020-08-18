@@ -4,11 +4,20 @@ import android.graphics.drawable.Drawable;
 
 public class NBRecyclerItem {
     private Drawable iconDrawable;
+    private String timeStr;
     private String productsStr;
     private String weightStr;
     private String countStr;
     private String total_priceStr;
     private String personal_priceStr;
+
+    public String getTimeStr() {
+        return timeStr;
+    }
+
+    public void setTimeStr(String timeStr) {
+        this.timeStr = timeStr;
+    }
 
     public Drawable getIconDrawable() {
         return iconDrawable;
@@ -58,8 +67,10 @@ public class NBRecyclerItem {
         this.personal_priceStr = personal_priceStr;
     }
 
-    public NBRecyclerItem(Drawable iconDrawable, String productsStr, String weightStr, String countStr, String total_priceStr, String personal_priceStr) {
+    public NBRecyclerItem(Drawable iconDrawable, String timeStr,  String productsStr, String weightStr, String countStr, String total_priceStr, String personal_priceStr) {
+
         this.iconDrawable = iconDrawable;
+        this.timeStr = timeStr;
         this.productsStr = productsStr;
         this.weightStr = weightStr;
         this.countStr = countStr;

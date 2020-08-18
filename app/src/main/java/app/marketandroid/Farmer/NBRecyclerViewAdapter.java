@@ -53,6 +53,7 @@ public class NBRecyclerViewAdapter extends RecyclerView.Adapter<NBRecyclerViewAd
         NBRecyclerItem item = mData.get(position);
 
         holder.icon.setImageDrawable(item.getIconDrawable());
+        holder.time.setText(item.getTimeStr());
         holder.product.setText(item.getProductsStr());
         holder.weight.setText(item.getWeightStr());
         holder.count.setText(item.getCountStr());
@@ -69,7 +70,7 @@ public class NBRecyclerViewAdapter extends RecyclerView.Adapter<NBRecyclerViewAd
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView icon;
-        TextView product,weight,count,total_price,personal_price;
+        TextView time,product,weight,count,total_price,personal_price;
         ImageView pop;
 
         ViewHolder(final View itemView) {
@@ -90,6 +91,8 @@ public class NBRecyclerViewAdapter extends RecyclerView.Adapter<NBRecyclerViewAd
 
             // 뷰 객체에 대한 참조. (hold strong reference)
             icon = itemView.findViewById(R.id.nbrecycle_img);
+
+            time = itemView.findViewById(R.id.nbrecycle_time);
             product = itemView.findViewById(R.id.mgrecycle_products);
             weight = itemView.findViewById(R.id.mgrecycle_weight);
             total_price = itemView.findViewById(R.id.mgrecycle_total_price);

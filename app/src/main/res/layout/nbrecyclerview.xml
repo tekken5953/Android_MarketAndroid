@@ -2,13 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="120dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:id="@+id/mg_list_layout">
+        android:layout_marginTop="7dp"
+        android:id="@+id/mg_list_layout"
+        android:layout_marginBottom="7dp">
 
         <ImageView
             android:id="@+id/nbrecycle_img"
@@ -17,12 +18,24 @@
             android:src="@drawable/potato" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="YYYY-MM-DD HH:mm:ss"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/nbrecycle_img"
+            android:layout_marginLeft="17dp"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/nbrecycle_time"/>
+
+        <TextView
             android:id="@+id/mgrecycle_products"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/nbrecycle_time"
             android:layout_marginLeft="17dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="7dp"
             android:layout_toRightOf="@+id/nbrecycle_img"
             android:text="@string/products"
             android:textColor="@color/black"
@@ -36,8 +49,8 @@
             android:text="@string/weight"
             android:textColor="@color/black"
             android:layout_marginLeft="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="20dp"
+            android:layout_below="@+id/nbrecycle_time"
+            android:layout_marginTop="7dp"
             android:textSize="17sp"/>
 
         <TextView
@@ -48,8 +61,8 @@
             android:text="@string/count"
             android:textColor="@color/black"
             android:layout_marginLeft="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="20dp"
+            android:layout_below="@+id/nbrecycle_time"
+            android:layout_marginTop="7dp"
             android:textSize="17sp"/>
 
         <TextView
@@ -60,7 +73,7 @@
             android:layout_marginLeft="17dp"
             android:textColor="@color/black"
             android:layout_toRightOf="@+id/nbrecycle_img"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/total_price"/>
 
         <TextView
@@ -68,10 +81,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="20dp"
             android:textColor="@color/black"
             android:layout_toRightOf="@+id/mgrecycle_total_price"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="10dp"
             android:text="(1Box 당 가격)"/>
 
         <ImageView
@@ -80,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="10dp"
             android:src="@drawable/option"
             app:tint="#000000" />
 

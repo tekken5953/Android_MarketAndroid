@@ -34,7 +34,7 @@ import app.marketandroid.Retrofit.DemandItem;
 import app.marketandroid.Retrofit.MyAPI;
 import app.marketandroid.Retrofit.PriceNLimitItem;
 import app.marketandroid.Retrofit.ProductItem;
-import app.marketandroid.Retrofit.SellItem;
+import app.marketandroid.Retrofit.SellItem_post;
 import app.marketandroid.SharedPreferenceManager;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -259,19 +259,20 @@ public class NB_AddFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //TODO
-                final SellItem item = new SellItem();
-                Call<SellItem> post_regist = mMyAPI.post_regists(SharedPreferenceManager.getString(getContext(), "token"), item);
-                item.setUser(SharedPreferenceManager.getInt(getContext(), "hp"));
-                item.setPriceNlimit(asd);
+                final SellItem_post item = new SellItem_post();
+                Call<SellItem_post> post_regist = mMyAPI.post_sell(SharedPreferenceManager.getString(getContext(), "token"), item);
+                item.setUser(SharedPreferenceManager.getInt(getContext(), "user_id"));
                 item.setCount(spinner_count.getSelectedItemPosition());
-                post_regist.enqueue(new Callback<SellItem>() {
+                item.setPriceNlimit(asd);
+
+                post_regist.enqueue(new Callback<SellItem_post>() {
                     @Override
-                    public void onResponse(Call<SellItem> call, Response<SellItem> response) {
+                    public void onResponse(Call<SellItem_post> call, Response<SellItem_post> response) {
                         toastMsg("신청 완료");
                     }
 
                     @Override
-                    public void onFailure(Call<SellItem> call, Throwable t) {
+                    public void onFailure(Call<SellItem_post> call, Throwable t) {
                     }
                 });
                 list_weight.clear();

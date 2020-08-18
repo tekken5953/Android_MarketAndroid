@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                                                         toastMsg("아이디 혹은 비밀번호가 올바르지 않습니다.");
                                                     }
                                                     SharedPreferenceManager.setInt(LoginActivity.this,
-                                                            "hp", response.body().getId());
+                                                            "user_id", response.body().getId());
                                                 }
 
                                                 @Override

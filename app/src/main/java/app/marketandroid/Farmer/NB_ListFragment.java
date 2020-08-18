@@ -20,7 +20,6 @@ import java.util.List;
 
 import app.marketandroid.R;
 import app.marketandroid.Retrofit.MyAPI;
-import app.marketandroid.Retrofit.ProductItem;
 import app.marketandroid.Retrofit.SellItem;
 import app.marketandroid.SharedPreferenceManager;
 import okhttp3.OkHttpClient;
@@ -37,7 +36,7 @@ public class NB_ListFragment extends Fragment {
     RecyclerView mRecyclerView = null;
     ArrayList<NBRecyclerItem> mList = new ArrayList<>();
     NBRecyclerViewAdapter mAdapter;
-    Drawable drawable_potato, drawable_apple;
+    Drawable drawable;
     TextView main_title;
     ArrayList<NBRecyclerItem> mData = null;
     MyAPI mMyAPI;
@@ -53,7 +52,7 @@ public class NB_ListFragment extends Fragment {
         mAdapter = new NBRecyclerViewAdapter(mList);
         mData = mList;
         mRecyclerView.setAdapter(mAdapter);
-        int[] img = {
+        final int[] img = {
                 R.drawable.potato,
                 R.drawable.sweetpotato,
                 R.drawable.carrot,
@@ -64,8 +63,6 @@ public class NB_ListFragment extends Fragment {
                 R.drawable.cucomber,
                 R.drawable.pumpkin
         };
-        drawable_potato = ResourcesCompat.getDrawable(getResources(), img[0], null);
-        drawable_apple = ResourcesCompat.getDrawable(getResources(), img[4], null);
 
         initMyAPI();
         Call<List<SellItem>> get_sell = mMyAPI.get_sell(SharedPreferenceManager.getString(getContext(),"token"));
@@ -75,7 +72,10 @@ public class NB_ListFragment extends Fragment {
                 List<SellItem> mList = response.body();
                 assert mList != null;
                 for (SellItem item : mList){
-                    addItem(drawable_potato, item.getId()+"", item.getPriceNlimit()+"Kg",item.getCount()+"개",item.getPriceNlimit()+"원","가격 x Box 원");
+                    String form_time = item.getCreated_at().substring(0,10)+"  "+item.getCreated_at().substring(11,16);
+                    drawable = ResourcesCompat.getDrawable(getResources(),img[item.getPriceNlimit().getDemand().getProduct().getId()-1],null);
+                    addItem(drawable,  form_time,item.getPriceNlimit().getDemand().getProduct().getName()+"", item.getPriceNlimit().getDemand().getWeight()+"Kg",
+                            item.getCount()+"개",(item.getCount()*item.getPriceNlimit().getPrice())+"원","(1Box 당 "+item.getPriceNlimit().getPrice()+"원)");
                     mAdapter.notifyDataSetChanged();
                 }
             }
@@ -86,8 +86,6 @@ public class NB_ListFragment extends Fragment {
             }
         });
 
-        addItem(drawable_potato, "감자", "20Kg", "3Box", "300,000원", "(1Box 당 100,000원)");
-        addItem(drawable_apple, "사과", "10Kg", "5Box", "200,000원", "(1Box 당 40,000원)");
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
@@ -105,9 +103,11 @@ public class NB_ListFragment extends Fragment {
         mList.clear();
     }
 
-    public void addItem(Drawable icon, String products, String weight, String count, String total_price, String personal_price) {
-        NBRecyclerItem item = new NBRecyclerItem(icon, products, weight, count, total_price, personal_price);
+    public void addItem(Drawable icon, String time, String products, String weight, String count, String total_price, String personal_price) {
+        NBRecyclerItem item = new NBRecyclerItem(icon, time, products, weight, count, total_price, personal_price);
+
         item.setIconDrawable(icon);
+        item.setTimeStr(time);
         item.setProductsStr(products);
         item.setWeightStr(weight);
         item.setCountStr(count);

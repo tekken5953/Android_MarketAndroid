@@ -33,7 +33,7 @@ public interface MyAPI{
     Call<List<PriceNLimitItem>> get_priceNlimits(@Header("Authorization") String token);
 
     @POST("/sells/")
-    Call<SellItem> post_regists(@Header("Authorization") String token, @Body SellItem post);
+    Call<SellItem_post> post_sell(@Header("Authorization") String token, @Body SellItem_post post);
 
     @GET("/sells/")
     Call<List<SellItem>> get_sell(@Header("Authorization") String token);
