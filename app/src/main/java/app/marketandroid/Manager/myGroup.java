@@ -8,10 +8,10 @@ public class myGroup {
 
     myGroup(String name) {
         groupName = name;
-        child_1 = new ArrayList<String>();
-        child_2 = new ArrayList<String>();
-        child_3 = new ArrayList<String>();
-        child__num = new ArrayList<String>();
+        child_1 = new ArrayList<>();
+        child_2 = new ArrayList<>();
+        child_3 = new ArrayList<>();
+        child__num = new ArrayList<>();
 
     }
 }

@@ -61,27 +61,31 @@ public class Manager_SettingFragment extends Fragment {
                 assert mList != null;
                 for (final ProductItem item : mList) {
                     final myGroup temp = new myGroup(item.getName());
+                    temp.child__num.add("구분");
+                    temp.child_1.add("중량");
+                    temp.child_2.add("1Box 당 가격");
+                    temp.child_3.add("수량");
 
-                    Call<List<DemandItem>> get_demand = mMyAPI.get_demands(SharedPreferenceManager.getString(getContext(),"token"));
+                    Call<List<DemandItem>> get_demand = mMyAPI.get_demands(SharedPreferenceManager.getString(getContext(), "token"));
                     get_demand.enqueue(new Callback<List<DemandItem>>() {
                         @Override
                         public void onResponse(Call<List<DemandItem>> call, Response<List<DemandItem>> response) {
                             List<DemandItem> dList = response.body();
                             int i = 1;
                             assert dList != null;
-                            for (final DemandItem item2 : dList){
-                                if (item2.getProduct() == item.getId()){
+                            for (final DemandItem item2 : dList) {
+                                if (item2.getProduct() == item.getId()) {
                                     temp.child__num.add(String.valueOf(i));
                                     temp.child_1.add(item2.getWeight());
 
-                                    Call<List<PriceNLimitItem>> get_priceNlimits = mMyAPI.get_priceNlimits(SharedPreferenceManager.getString(getContext(),"token"));
+                                    Call<List<PriceNLimitItem>> get_priceNlimits = mMyAPI.get_priceNlimits(SharedPreferenceManager.getString(getContext(), "token"));
                                     get_priceNlimits.enqueue(new Callback<List<PriceNLimitItem>>() {
                                         @Override
                                         public void onResponse(Call<List<PriceNLimitItem>> call, Response<List<PriceNLimitItem>> response) {
                                             List<PriceNLimitItem> pList = response.body();
-                                            assert  pList != null;
-                                            for (PriceNLimitItem item3 : pList){
-                                                if (item3.getDemand() == item2.getId()){
+                                            assert pList != null;
+                                            for (PriceNLimitItem item3 : pList) {
+                                                if (item3.getDemand() == item2.getId()) {
                                                     temp.child_2.add(String.valueOf(item3.getPrice()));
                                                     temp.child_3.add(String.valueOf(item3.getLimit()));
                                                 }
@@ -96,6 +100,7 @@ public class Manager_SettingFragment extends Fragment {
                                 }
                             }
                         }
+
                         @Override
                         public void onFailure(Call<List<DemandItem>> call, Throwable t) {
                         }

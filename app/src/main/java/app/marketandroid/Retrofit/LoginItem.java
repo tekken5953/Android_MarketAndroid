@@ -3,6 +3,7 @@ package app.marketandroid.Retrofit;
 public class LoginItem {
     private String phone; //Login 유저 아이디(핸드폰 번호) POST
     private String password; //Login 유저 비밀번호 POST
+    private int id;
 
     private String token; //Login 유저 토큰 정보 GET
 
@@ -11,6 +12,13 @@ public class LoginItem {
     private String is_active; //Login 유저 승인 정보 GET
     private String is_admin; //Login 유저 어드민 정보 GET
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getPhone() {
         return phone;

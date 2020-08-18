@@ -34,7 +34,10 @@ import app.marketandroid.Retrofit.DemandItem;
 import app.marketandroid.Retrofit.MyAPI;
 import app.marketandroid.Retrofit.PriceNLimitItem;
 import app.marketandroid.Retrofit.ProductItem;
+import app.marketandroid.Retrofit.SellItem;
 import app.marketandroid.SharedPreferenceManager;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,6 +59,7 @@ public class NB_AddFragment extends Fragment {
     int product_id = 1;
     String[] product;
     int[] demand_id;
+    int asd;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -106,6 +110,7 @@ public class NB_AddFragment extends Fragment {
                     GridView gv = (GridView) getActivity().findViewById(R.id.gridView1);
                     gv.setAdapter(adapter);  // 커스텀 아답타를 GridView 에 적용
 
+
                     // GridView 아이템을 클릭하면 상단 텍스트뷰에 position 출력
                     gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
@@ -140,10 +145,10 @@ public class NB_AddFragment extends Fragment {
                     Log.d("retrofit", "Status Code : " + response.code());
                     TextView error = new TextView(getContext());
                     error.setText("세션이 만료되었습니다.\n다시 접속해주세요.");
+                    error.setGravity(View.TEXT_ALIGNMENT_CENTER);
                     error.setTextColor(Color.parseColor("#000000"));
                     LinearLayout linearLayout = new LinearLayout(getContext());
                     linearLayout.addView(error);
-                    linearLayout.setGravity(View.TEXT_ALIGNMENT_CENTER);
                     relativeLayout.addView(linearLayout);
                 }
             }
@@ -157,11 +162,8 @@ public class NB_AddFragment extends Fragment {
 
         main_title = getActivity().findViewById(R.id.main_title);
         main_title.setText("출하물품 등록");
-
         list_count.add(0, "눌러서 선택");
-        for (int i = 1; i <= 9; i++) {
-            list_count.add(String.valueOf(i));
-        }
+
 
         adapter_count = new ArrayAdapter<>(getContext(), R.layout.spinneritem, list_count);
         adapter_weight = new ArrayAdapter<>(getContext(), R.layout.spinneritem, list_weight);
@@ -209,6 +211,8 @@ public class NB_AddFragment extends Fragment {
             public void onItemSelected(final AdapterView<?> adapterView, View view, int i, long l) {
                 if (spinner_weight.getSelectedItemPosition() != 0) {
                     relativeLayout.setVisibility(View.VISIBLE);
+                    list_count.clear();
+                    list_count.add(0, "눌러서 선택");
 
                     Call<List<PriceNLimitItem>> get_priceNlimit = mMyAPI.get_priceNlimits(SharedPreferenceManager.getString(getContext(), "token"));
                     get_priceNlimit.enqueue(new Callback<List<PriceNLimitItem>>() {
@@ -219,8 +223,12 @@ public class NB_AddFragment extends Fragment {
                             for (PriceNLimitItem item3 : mList) {
                                 for (int i = spinner_weight.getSelectedItemPosition(); i <= spinner_weight.getSelectedItemPosition(); i++) {
                                     if (demand_id[i] == item3.getDemand()) {
+                                        asd = item3.getId();
                                         price.setText(String.valueOf(item3.getPrice()));
                                         weight.setText(String.valueOf(item3.getLimit()));
+                                        for (int j = 1; j <= item3.getLimit(); j++) {
+                                            list_count.add(String.valueOf(j));
+                                        }
                                     }
                                 }
                             }
@@ -250,7 +258,22 @@ public class NB_AddFragment extends Fragment {
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toastMsg("신청 완료");
+                //TODO
+                final SellItem item = new SellItem();
+                Call<SellItem> post_regist = mMyAPI.post_regists(SharedPreferenceManager.getString(getContext(), "token"), item);
+                item.setUser(SharedPreferenceManager.getInt(getContext(), "hp"));
+                item.setPriceNlimit(asd);
+                item.setCount(spinner_count.getSelectedItemPosition());
+                post_regist.enqueue(new Callback<SellItem>() {
+                    @Override
+                    public void onResponse(Call<SellItem> call, Response<SellItem> response) {
+                        toastMsg("신청 완료");
+                    }
+
+                    @Override
+                    public void onFailure(Call<SellItem> call, Throwable t) {
+                    }
+                });
                 list_weight.clear();
                 product_id = 1;
                 alertDialog.dismiss();
@@ -311,9 +334,14 @@ public class NB_AddFragment extends Fragment {
     }
 
     private void initMyAPI() {
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        clientBuilder.addInterceptor(loggingInterceptor);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://13.209.84.206/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(clientBuilder.build())
                 .build();
 
         mMyAPI = retrofit.create(MyAPI.class);

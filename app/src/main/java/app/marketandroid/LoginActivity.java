@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                                             result.append("token : ").append(response.body().getToken());
                                             SharedPreferenceManager.setString(LoginActivity.this,
                                                     "token", "JWT " + response.body().getToken());
+
                                             Log.d("retrofit", result.toString());
                                             Call<LoginItem> post_token = mMyAPI.get_my_info("JWT " + response.body().getToken());
                                             post_token.enqueue(new Callback<LoginItem>() { //토큰 값 입력 후 사용자 정보 받아오기
@@ -101,6 +102,8 @@ public class LoginActivity extends AppCompatActivity {
                                                     } else {
                                                         toastMsg("아이디 혹은 비밀번호가 올바르지 않습니다.");
                                                     }
+                                                    SharedPreferenceManager.setInt(LoginActivity.this,
+                                                            "hp", response.body().getId());
                                                 }
 
                                                 @Override

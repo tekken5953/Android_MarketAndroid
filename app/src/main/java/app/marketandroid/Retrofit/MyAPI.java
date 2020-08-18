@@ -4,12 +4,9 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.PATCH;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 
 public interface MyAPI{
 
@@ -35,5 +32,9 @@ public interface MyAPI{
 
     @GET("/priceNlimits/")
     Call<List<PriceNLimitItem>> get_priceNlimits(@Header("Authorization") String token);
+
+    @POST("/sells/")
+    Call<SellItem> post_regists(@Header("Authorization") String token, @Body SellItem post);
+
 
 }

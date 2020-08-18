@@ -4,6 +4,15 @@ public class PriceNLimitItem {
     private int demand;
     private int price;
     private int limit;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getDemand() {
         return demand;
