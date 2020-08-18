@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -57,18 +58,66 @@ public class Manager_ListFragment extends Fragment {
         search_img = getActivity().findViewById(R.id.search_img);
         mg_products_spinner = getActivity().findViewById(R.id.mg_products_spinner);
         mg_weight_spinner = getActivity().findViewById(R.id.mg_weight_spinner);
-        plist.add(0,"농부");
-        wlist.add(0,"품종");
-        padapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_dropdown_item,plist);
-        wadapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_dropdown_item,wlist);
+        plist.add(0,"전체 보기");
+        plist.add(1,"농부1");
+        plist.add(2,"농부2");
+        plist.add(3,"농부3");
+        plist.add(4,"농부4");
+        wlist.add(0,"전체 보기");
+        wlist.add(1,"감자");
+        wlist.add(2,"고구마");
+        wlist.add(3,"사과");
+        wlist.add(4,"당근");
 
+        padapter = new ArrayAdapter<>(getContext(),R.layout.spinneritem,plist);
+        wadapter = new ArrayAdapter<>(getContext(),R.layout.spinneritem,wlist);
 
+        mg_weight_spinner.setGravity(View.TEXT_ALIGNMENT_CENTER);
+        mg_products_spinner.setGravity(View.TEXT_ALIGNMENT_CENTER);
         mg_products_spinner.setAdapter(padapter);
         mg_weight_spinner.setAdapter(wadapter);
         mg_products_spinner.setSelection(0);
         mg_weight_spinner.setSelection(0);
         mg_products_spinner.setDropDownVerticalOffset(180);
         mg_weight_spinner.setDropDownVerticalOffset(180);
+
+        mg_products_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (mg_products_spinner.getSelectedItemPosition() == 0){
+                    if (mg_weight_spinner.getSelectedItemPosition() == 0){
+                        fillter("");
+                    }else{
+                        fillter(mg_weight_spinner.getSelectedItem().toString());
+                    }
+                }else{
+                    fillter(mg_products_spinner.getSelectedItem().toString());
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        mg_weight_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (mg_weight_spinner.getSelectedItemPosition() == 0){
+                    if (mg_products_spinner.getSelectedItemPosition() == 0){
+                        fillter("");
+                    }else{
+                        fillter(mg_products_spinner.getSelectedItem().toString());
+                    }
+                }else{
+                    fillter(mg_weight_spinner.getSelectedItem().toString());
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
         mRecyclerView = getActivity().findViewById(R.id.mgrecyclerView);
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
@@ -83,7 +132,7 @@ public class Manager_ListFragment extends Fragment {
                 List<SellItem> mList = response.body();
                 assert mList != null;
                 for (SellItem item : mList){
-                    addItem(item.getUser()+"",item.getId()+"", item.getPriceNlimit()+"Kg",item.getCount()+"개","가격 x Box 원","(1Box 당 "+item.getPriceNlimit()+"원)");
+                    addItem(item.getUser()+"",item.getId()+"", item.getPriceNlimit()+"Kg",item.getCount()+"Box","가격 x Box 원","(1Box 당 "+item.getPriceNlimit()+"원)");
                     mAdapter.notifyDataSetChanged();
                 }
             }

@@ -17,17 +17,22 @@
         <Spinner
             android:id="@+id/mg_products_spinner"
             android:layout_width="150dp"
+            android:layout_weight="1"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="40dp"
-            android:dropDownWidth="130dp"
+            style="@style/Widget.AppCompat.Spinner"
+            android:textAlignment="center"
+            android:dropDownWidth="180dp"
             android:backgroundTint="@color/primary_blue" />
 
         <Spinner
             android:id="@+id/mg_weight_spinner"
             android:layout_width="150dp"
             android:layout_height="fill_parent"
-            android:dropDownWidth="130dp"
-            android:layout_marginLeft="30dp"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.Spinner"
+            android:textAlignment="center"
+            android:dropDownWidth="180dp"
+            android:layout_marginLeft="15dp"
             android:backgroundTint="@color/primary_blue" />
 
     </LinearLayout>
