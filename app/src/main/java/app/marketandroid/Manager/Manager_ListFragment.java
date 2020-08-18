@@ -20,10 +20,14 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import app.marketandroid.R;
 import app.marketandroid.Retrofit.MyAPI;
+import app.marketandroid.Retrofit.ProductItem;
 import app.marketandroid.Retrofit.SellItem;
 import app.marketandroid.SharedPreferenceManager;
 import okhttp3.OkHttpClient;
@@ -45,6 +49,8 @@ public class Manager_ListFragment extends Fragment {
     Spinner mg_products_spinner,mg_weight_spinner;
     ArrayList<String> plist = new ArrayList<>();
     ArrayList<String> wlist = new ArrayList<>();
+    ArrayList<String> plist2 = new ArrayList<>();
+    ArrayList<String> wlist2 = new ArrayList<>();
     ArrayAdapter<String> padapter;
     ArrayAdapter<String> wadapter;
     MyAPI mMyAPI;
@@ -59,27 +65,12 @@ public class Manager_ListFragment extends Fragment {
         mg_products_spinner = getActivity().findViewById(R.id.mg_products_spinner);
         mg_weight_spinner = getActivity().findViewById(R.id.mg_weight_spinner);
         plist.add(0,"전체 보기");
-        plist.add(1,"농부1");
-        plist.add(2,"농부2");
-        plist.add(3,"농부3");
-        plist.add(4,"농부4");
         wlist.add(0,"전체 보기");
-        wlist.add(1,"감자");
-        wlist.add(2,"고구마");
-        wlist.add(3,"사과");
-        wlist.add(4,"당근");
 
-        padapter = new ArrayAdapter<>(getContext(),R.layout.spinneritem,plist);
-        wadapter = new ArrayAdapter<>(getContext(),R.layout.spinneritem,wlist);
+        padapter = new ArrayAdapter<>(getContext(),R.layout.spinneritem,plist2);
+        wadapter = new ArrayAdapter<>(getContext(),R.layout.spinneritem,wlist2);
 
-        mg_weight_spinner.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        mg_products_spinner.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        mg_products_spinner.setAdapter(padapter);
-        mg_weight_spinner.setAdapter(wadapter);
-        mg_products_spinner.setSelection(0);
-        mg_weight_spinner.setSelection(0);
-        mg_products_spinner.setDropDownVerticalOffset(180);
-        mg_weight_spinner.setDropDownVerticalOffset(180);
+
 
         mg_products_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -129,6 +120,7 @@ public class Manager_ListFragment extends Fragment {
         get_sell.enqueue(new Callback<List<SellItem>>() {
             @Override
             public void onResponse(Call<List<SellItem>> call, Response<List<SellItem>> response) {
+
                 List<SellItem> mList = response.body();
                 assert mList != null;
                 for (SellItem item : mList){
@@ -136,8 +128,28 @@ public class Manager_ListFragment extends Fragment {
                     addItem(form_time,item.getUser().getName()+"",item.getPriceNlimit().getDemand().getProduct().getName()+"",
                             item.getPriceNlimit().getDemand().getWeight()+"Kg",item.getCount()+"Box",item.getCount()*item.getPriceNlimit().getPrice()+"원",
                             "(1Box 당 "+item.getPriceNlimit().getPrice()+"원)");
-                    mAdapter.notifyDataSetChanged();
+                    plist.add(item.getUser().getName());
+                    wlist.add(item.getPriceNlimit().getDemand().getProduct().getName());
                 }
+                for (int i=0; i<plist.size(); i++){
+                    if (!plist2.contains(plist.get(i))){
+                        plist2.add(plist.get(i));
+                    }
+                }
+                for (int i=0; i<wlist.size(); i++){
+                    if (!wlist2.contains(wlist.get(i))){
+                        wlist2.add(wlist.get(i));
+                    }
+                }
+                mg_weight_spinner.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                mg_products_spinner.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                mg_products_spinner.setAdapter(padapter);
+                mg_weight_spinner.setAdapter(wadapter);
+                mg_products_spinner.setSelection(0);
+                mg_weight_spinner.setSelection(0);
+                mg_products_spinner.setDropDownVerticalOffset(180);
+                mg_weight_spinner.setDropDownVerticalOffset(180);
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
