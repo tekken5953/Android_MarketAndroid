@@ -6,11 +6,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +33,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 public class Manager_ListFragment extends Fragment {
     ViewGroup viewGroup;
-    ArrayList<MGRecyclerItem> mData = null;
+    ArrayList<MGRecyclerItem> mData = new ArrayList<>();
     RecyclerView mRecyclerView = null;
     ArrayList<MGRecyclerItem> mList = new ArrayList<>();
     MGRecyclerViewAdapter mAdapter;
@@ -38,11 +47,14 @@ public class Manager_ListFragment extends Fragment {
     ArrayAdapter<String> padapter;
     ArrayAdapter<String> wadapter;
     MyAPI mMyAPI;
+    EditText mg_fillter_edit;
+    ImageView search_img;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        search_img = getActivity().findViewById(R.id.search_img);
         mg_products_spinner = getActivity().findViewById(R.id.mg_products_spinner);
         mg_weight_spinner = getActivity().findViewById(R.id.mg_weight_spinner);
         plist.add(0,"농부");
@@ -61,7 +73,6 @@ public class Manager_ListFragment extends Fragment {
         mRecyclerView = getActivity().findViewById(R.id.mgrecyclerView);
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
         mAdapter = new MGRecyclerViewAdapter(mList);
-        mData = mList;
         mRecyclerView.setAdapter(mAdapter);
 
         initMyAPI();
@@ -72,7 +83,7 @@ public class Manager_ListFragment extends Fragment {
                 List<SellItem> mList = response.body();
                 assert mList != null;
                 for (SellItem item : mList){
-                    addItem(item.getUser()+"",item.getId()+"", item.getPriceNlimit()+"Kg",item.getCount()+"개","가격 x Box 원","(1Box 당 "+item.getPriceNlimit()+"원");
+                    addItem(item.getUser()+"",item.getId()+"", item.getPriceNlimit()+"Kg",item.getCount()+"개","가격 x Box 원","(1Box 당 "+item.getPriceNlimit()+"원)");
                     mAdapter.notifyDataSetChanged();
                 }
             }
@@ -91,6 +102,32 @@ public class Manager_ListFragment extends Fragment {
         addItem("농부7","가지","20Kg","3Box","300,000원","(1Box 당 100,000원)");
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        mg_fillter_edit = getActivity().findViewById(R.id.mg_fillter_edit);
+        mg_fillter_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                search_img.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String searchText = mg_fillter_edit.getText().toString();
+                        fillter(searchText);
+                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                        assert imm != null;
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        Toast.makeText(getContext(),  mg_fillter_edit.getText().toString()+"로 검색", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 
     @Nullable
@@ -114,6 +151,7 @@ public class Manager_ListFragment extends Fragment {
         item.setTotal_priceStr(total_price);
         item.setPersonal_priceStr(personal_price);
         mList.add(item);
+        mData.add(item);
     }
 
     private void initMyAPI() {
@@ -128,6 +166,25 @@ public class Manager_ListFragment extends Fragment {
                 .build();
 
         mMyAPI = retrofit.create(MyAPI.class);
+    }
+
+    public void fillter(String searchText) {
+        mList.clear();
+        if(searchText.length() == 0)
+        {
+            mList.addAll(mData);
+        }
+        else
+        {
+            for( MGRecyclerItem item : mData)
+            {
+                if(item.getUser_name().contains(searchText) || item.getProductsStr().contains(searchText))
+                {
+                    mList.add(item);
+                }
+            }
+        }
+        mAdapter.notifyDataSetChanged();
     }
 
 }

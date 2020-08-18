@@ -44,9 +44,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:gravity="center"
+            android:hint="농부 or 품종"
             android:backgroundTint="@color/primary_blue" />
 
         <ImageView
+            android:id="@+id/search_img"
             android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
