@@ -16,40 +16,52 @@
 
         <Spinner
             android:id="@+id/mg_products_spinner"
-            android:layout_width="85dp"
+            android:layout_width="150dp"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="40dp"
+            android:dropDownWidth="130dp"
             android:backgroundTint="@color/primary_blue" />
 
         <Spinner
             android:id="@+id/mg_weight_spinner"
-            android:layout_width="85dp"
+            android:layout_width="150dp"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="20dp"
+            android:dropDownWidth="130dp"
+            android:layout_marginLeft="30dp"
             android:backgroundTint="@color/primary_blue" />
 
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mg_list_layout"
+        android:id="@+id/mg_relative"
+        android:layout_marginTop="10dp">
         <EditText
-            android:id="@+id/mg_filllter_edit"
-            android:layout_width="135dp"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="25dp"
+            android:id="@+id/mg_fillter_edit"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
             android:backgroundTint="@color/primary_blue" />
 
         <ImageView
-            android:layout_width="33dp"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/mg_fillter_edit"
             android:src="@drawable/search"
-            android:tint="@color/primary_blue" />
-    </LinearLayout>
-
+            app:tint="@color/primary_blue" />
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mgrecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/mg_list_layout"
+        android:layout_below="@+id/mg_relative"
         android:layout_marginTop="15dp" />
 
 </RelativeLayout>

@@ -11,8 +11,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import app.marketandroid.R;
 
@@ -22,10 +25,30 @@ public class Manager_ListFragment extends Fragment {
     RecyclerView mRecyclerView = null;
     ArrayList<MGRecyclerItem> mList = new ArrayList<>();
     MGRecyclerViewAdapter mAdapter;
+    Spinner mg_products_spinner,mg_weight_spinner;
+    ArrayList<String> plist = new ArrayList<>();
+    ArrayList<String> wlist = new ArrayList<>();
+    ArrayAdapter<String> padapter;
+    ArrayAdapter<String> wadapter;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        mg_products_spinner = getActivity().findViewById(R.id.mg_products_spinner);
+        mg_weight_spinner = getActivity().findViewById(R.id.mg_weight_spinner);
+        plist.add(0,"농부");
+        wlist.add(0,"품종");
+        padapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_dropdown_item,plist);
+        wadapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_dropdown_item,wlist);
+
+
+        mg_products_spinner.setAdapter(padapter);
+        mg_weight_spinner.setAdapter(wadapter);
+        mg_products_spinner.setSelection(0);
+        mg_weight_spinner.setSelection(0);
+        mg_products_spinner.setDropDownVerticalOffset(180);
+        mg_weight_spinner.setDropDownVerticalOffset(180);
 
         mRecyclerView = getActivity().findViewById(R.id.mgrecyclerView);
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
