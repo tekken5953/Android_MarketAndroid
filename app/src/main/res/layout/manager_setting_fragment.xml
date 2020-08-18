@@ -21,6 +21,6 @@
         android:layout_marginTop="10dp"
         android:groupIndicator="@null"
         android:transcriptMode="disabled"
-        android:id="@+id/manager_setting_list" />
+        android:id="@+id/manager_setting_list"/>
 
 </RelativeLayout>

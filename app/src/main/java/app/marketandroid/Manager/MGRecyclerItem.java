@@ -1,7 +1,5 @@
 package app.marketandroid.Manager;
 
-import android.widget.Button;
-
 public class MGRecyclerItem {
     private String user_name;
     private String productsStr;

@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,10 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
-
-import app.marketandroid.LoginActivity;
 import app.marketandroid.R;
 
 public class Manager_MainActivity extends AppCompatActivity {
@@ -110,7 +106,7 @@ public class Manager_MainActivity extends AppCompatActivity {
     }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {
-        ArrayList<Fragment> items = new ArrayList<Fragment>();
+        ArrayList<Fragment> items = new ArrayList<>();
 
         public ViewPagerAdapter(@NonNull FragmentManager fm) {
 

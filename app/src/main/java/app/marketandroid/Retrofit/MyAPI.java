@@ -1,7 +1,6 @@
 package app.marketandroid.Retrofit;
 
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -35,6 +34,9 @@ public interface MyAPI{
 
     @POST("/sells/")
     Call<SellItem> post_regists(@Header("Authorization") String token, @Body SellItem post);
+
+    @GET("/sells/")
+    Call<List<SellItem>> get_sell(@Header("Authorization") String token);
 
 
 }

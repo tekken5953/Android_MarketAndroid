@@ -9,12 +9,9 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
-
 import app.marketandroid.R;
 
 public class NBRecyclerViewAdapter extends RecyclerView.Adapter<NBRecyclerViewAdapter.ViewHolder> {

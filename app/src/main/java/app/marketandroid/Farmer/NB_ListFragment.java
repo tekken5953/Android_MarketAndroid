@@ -21,6 +21,7 @@ import java.util.List;
 import app.marketandroid.R;
 import app.marketandroid.Retrofit.MyAPI;
 import app.marketandroid.Retrofit.ProductItem;
+import app.marketandroid.Retrofit.SellItem;
 import app.marketandroid.SharedPreferenceManager;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -67,6 +68,23 @@ public class NB_ListFragment extends Fragment {
         drawable_apple = ResourcesCompat.getDrawable(getResources(), img[4], null);
 
         initMyAPI();
+        Call<List<SellItem>> get_sell = mMyAPI.get_sell(SharedPreferenceManager.getString(getContext(),"token"));
+        get_sell.enqueue(new Callback<List<SellItem>>() {
+            @Override
+            public void onResponse(Call<List<SellItem>> call, Response<List<SellItem>> response) {
+                List<SellItem> mList = response.body();
+                assert mList != null;
+                for (SellItem item : mList){
+                    addItem(drawable_potato, item.getId()+"", item.getPriceNlimit()+"Kg",item.getCount()+"개",item.getPriceNlimit()+"원","가격 x Box 원");
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<SellItem>> call, Throwable t) {
+
+            }
+        });
 
         addItem(drawable_potato, "감자", "20Kg", "3Box", "300,000원", "(1Box 당 100,000원)");
         addItem(drawable_apple, "사과", "10Kg", "5Box", "200,000원", "(1Box 당 40,000원)");

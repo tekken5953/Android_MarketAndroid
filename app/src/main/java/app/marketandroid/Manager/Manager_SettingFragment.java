@@ -2,33 +2,14 @@ package app.marketandroid.Manager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
-import android.graphics.Insets;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowInsets;
-import android.view.WindowManager;
-import android.view.WindowMetrics;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
-import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import app.marketandroid.R;
 import app.marketandroid.Retrofit.DemandItem;
 import app.marketandroid.Retrofit.MyAPI;
@@ -110,6 +91,7 @@ public class Manager_SettingFragment extends Fragment {
                 ExpandAdapter adapter = new ExpandAdapter(getContext().getApplicationContext(), R.layout.group_row, R.layout.child_row, list);
                 listView = getActivity().findViewById(R.id.manager_setting_list);
                 listView.setAdapter(adapter);
+
             }
 
             @Override

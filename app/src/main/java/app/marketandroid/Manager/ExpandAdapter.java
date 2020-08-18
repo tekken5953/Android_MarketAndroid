@@ -3,8 +3,6 @@ package app.marketandroid.Manager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +19,10 @@ import app.marketandroid.R;
 
 public class ExpandAdapter extends BaseExpandableListAdapter {
     private Context context;
-    private int groupLayout = 0;
-    private int chlidLayout = 0;
+    private int groupLayout;
+    private int chlidLayout;
     private ArrayList<myGroup> DataList;
-    private LayoutInflater myinf = null;
+    private LayoutInflater myinf;
     TextView groupName;
 
     public ExpandAdapter(Context context, int groupLay, int chlidLay, ArrayList<myGroup> DataList) {

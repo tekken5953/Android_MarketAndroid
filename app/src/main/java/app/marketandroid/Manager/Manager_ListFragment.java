@@ -5,19 +5,26 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import app.marketandroid.R;
+import app.marketandroid.Retrofit.MyAPI;
+import app.marketandroid.Retrofit.SellItem;
+import app.marketandroid.SharedPreferenceManager;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Manager_ListFragment extends Fragment {
     ViewGroup viewGroup;
@@ -30,6 +37,7 @@ public class Manager_ListFragment extends Fragment {
     ArrayList<String> wlist = new ArrayList<>();
     ArrayAdapter<String> padapter;
     ArrayAdapter<String> wadapter;
+    MyAPI mMyAPI;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -55,6 +63,25 @@ public class Manager_ListFragment extends Fragment {
         mAdapter = new MGRecyclerViewAdapter(mList);
         mData = mList;
         mRecyclerView.setAdapter(mAdapter);
+
+        initMyAPI();
+        Call<List<SellItem>> get_sell = mMyAPI.get_sell(SharedPreferenceManager.getString(getContext(),"token"));
+        get_sell.enqueue(new Callback<List<SellItem>>() {
+            @Override
+            public void onResponse(Call<List<SellItem>> call, Response<List<SellItem>> response) {
+                List<SellItem> mList = response.body();
+                assert mList != null;
+                for (SellItem item : mList){
+                    addItem(item.getUser()+"",item.getId()+"", item.getPriceNlimit()+"Kg",item.getCount()+"개","가격 x Box 원","(1Box 당 "+item.getPriceNlimit()+"원");
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<SellItem>> call, Throwable t) {
+
+            }
+        });
         addItem("농부1","감자","20Kg","3Box","300,000원","(1Box 당 100,000원)");
         addItem("농부2","고구마","20Kg","3Box","300,000원","(1Box 당 100,000원)");
         addItem("농부3","당근","20Kg","3Box","300,000원","(1Box 당 100,000원)");
@@ -87,6 +114,20 @@ public class Manager_ListFragment extends Fragment {
         item.setTotal_priceStr(total_price);
         item.setPersonal_priceStr(personal_price);
         mList.add(item);
+    }
+
+    private void initMyAPI() {
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        clientBuilder.addInterceptor(loggingInterceptor);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://13.209.84.206/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(clientBuilder.build())
+                .build();
+
+        mMyAPI = retrofit.create(MyAPI.class);
     }
 
 }

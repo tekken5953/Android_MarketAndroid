@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,10 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import app.marketandroid.Manager.Manager_MainActivity;
 import app.marketandroid.R;
 
 public class NB_MainActivity extends AppCompatActivity {
