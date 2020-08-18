@@ -1,12 +1,21 @@
 package app.marketandroid.Manager;
 
 public class MGRecyclerItem {
+    private String time;
     private String user_name;
     private String productsStr;
     private String weightStr;
     private String countStr;
     private String total_priceStr;
     private String personal_priceStr;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public String getProductsStr() {
         return productsStr;
@@ -56,8 +65,9 @@ public class MGRecyclerItem {
         this.personal_priceStr = personal_priceStr;
     }
 
-    public MGRecyclerItem( String user_name, String productsStr, String weightStr,
+    public MGRecyclerItem(String time, String user_name, String productsStr, String weightStr,
                           String countStr, String total_priceStr, String personal_priceStr) {
+        this.time = time;
         this.user_name = user_name;
         this.productsStr = productsStr;
         this.weightStr = weightStr;

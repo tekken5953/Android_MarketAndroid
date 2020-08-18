@@ -50,6 +50,7 @@ public class MGRecyclerViewAdapter extends RecyclerView.Adapter<MGRecyclerViewAd
 
         MGRecyclerItem item = mData.get(position);
 
+        holder.time.setText(item.getTime());
         holder.user_name.setText(item.getUser_name());
         holder.products.setText(item.getProductsStr());
         holder.weight.setText(item.getWeightStr());
@@ -66,7 +67,7 @@ public class MGRecyclerViewAdapter extends RecyclerView.Adapter<MGRecyclerViewAd
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView user_name,products,weight,count,total_price,personal_price;
+        TextView time, user_name,products,weight,count,total_price,personal_price;
         Button btn;
 
         ViewHolder(final View itemView) {
@@ -86,6 +87,7 @@ public class MGRecyclerViewAdapter extends RecyclerView.Adapter<MGRecyclerViewAd
             });
 
             // 뷰 객체에 대한 참조. (hold strong reference)
+            time = itemView.findViewById(R.id.mgrecycle_time);
             user_name = itemView.findViewById(R.id.mgrecycle_user_name);
             products = itemView.findViewById(R.id.mgrecycle_products);
             weight = itemView.findViewById(R.id.mgrecycle_weight);

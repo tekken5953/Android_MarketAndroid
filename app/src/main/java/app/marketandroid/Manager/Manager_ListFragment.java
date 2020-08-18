@@ -132,7 +132,8 @@ public class Manager_ListFragment extends Fragment {
                 List<SellItem> mList = response.body();
                 assert mList != null;
                 for (SellItem item : mList){
-                    addItem(item.getPriceNlimit().getDemand().getProduct().getName()+"",item.getPriceNlimit().getDemand().getProduct().getName()+"",
+                    String form_time = item.getCreated_at().substring(0,10)+"  "+item.getCreated_at().substring(11,16);
+                    addItem(form_time,item.getUser().getName()+"",item.getPriceNlimit().getDemand().getProduct().getName()+"",
                             item.getPriceNlimit().getDemand().getWeight()+"Kg",item.getCount()+"Box",item.getCount()*item.getPriceNlimit().getPrice()+"원",
                             "(1Box 당 "+item.getPriceNlimit().getPrice()+"원)");
                     mAdapter.notifyDataSetChanged();
@@ -186,8 +187,9 @@ public class Manager_ListFragment extends Fragment {
         super.onDestroyView();
     }
 
-    public void addItem(String user_name, String products, String weight, String count, String total_price, String personal_price) {
-        MGRecyclerItem item = new MGRecyclerItem(user_name,products,weight,count,total_price,personal_price);
+    public void addItem(String time, String user_name, String products, String weight, String count, String total_price, String personal_price) {
+        MGRecyclerItem item = new MGRecyclerItem(time, user_name,products,weight,count,total_price,personal_price);
+        item.setTime(time);
         item.setUser_name(user_name);
         item.setProductsStr(products);
         item.setWeightStr(weight);
