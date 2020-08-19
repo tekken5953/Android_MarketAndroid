@@ -66,7 +66,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
             child_num.setPadding(20, 0, 0, 0);
             child1.setPadding(80, 0, 0, 0);
             child2.setPadding(60, 0, 0, 0);
-            child3.setPadding(110, 0, 0, 0);
+            child3.setPadding(100, 0, 0, 0);
             childBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

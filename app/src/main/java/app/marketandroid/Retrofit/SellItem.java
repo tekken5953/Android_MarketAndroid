@@ -49,6 +49,7 @@ public class SellItem {
     public static class LoginItem {
         private int id;
         private String name;
+        private String phone;
 
         public int getId() {
             return id;
@@ -64,6 +65,14 @@ public class SellItem {
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
         }
     }
 

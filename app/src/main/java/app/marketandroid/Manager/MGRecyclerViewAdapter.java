@@ -1,19 +1,24 @@
 package app.marketandroid.Manager;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import app.marketandroid.R;
+import app.marketandroid.Retrofit.MyAPI;
 
 public class MGRecyclerViewAdapter extends RecyclerView.Adapter<MGRecyclerViewAdapter.ViewHolder> {
     private ArrayList<MGRecyclerItem> mData;
+    MyAPI mMyAPI;
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
     MGRecyclerViewAdapter(ArrayList<MGRecyclerItem> list) {
@@ -73,7 +78,7 @@ public class MGRecyclerViewAdapter extends RecyclerView.Adapter<MGRecyclerViewAd
         ViewHolder(final View itemView) {
             super(itemView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.findViewById(R.id.mgrecycle_call_btn).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
@@ -96,13 +101,8 @@ public class MGRecyclerViewAdapter extends RecyclerView.Adapter<MGRecyclerViewAd
             count = itemView.findViewById(R.id.mgrecycle_count);
             btn = itemView.findViewById(R.id.mgrecycle_call_btn);
 
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    final Context context = view.getContext();
-                    Toast.makeText(context, "전화걸기", Toast.LENGTH_SHORT).show();
-                }
-            });
+
         }
+
     }
 }

@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:gravity="center"
-            android:hint="농부 or 품종"
+            android:hint="농부 이름"
             android:backgroundTint="@color/primary_blue" />
 
         <ImageView

@@ -98,6 +98,8 @@ public class LoginActivity extends AppCompatActivity {
                                                     }
                                                     SharedPreferenceManager.setInt(LoginActivity.this,
                                                             "user_id", response.body().getId());
+                                                    SharedPreferenceManager.setString(LoginActivity.this,
+                                                            "user_phone", response.body().getPhone());
                                                 }
 
                                                 @Override

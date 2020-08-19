@@ -65,6 +65,7 @@ public class NB_ListFragment extends Fragment {
         };
 
         initMyAPI();
+
         Call<List<SellItem>> get_sell = mMyAPI.get_sell(SharedPreferenceManager.getString(getContext(),"token"));
         get_sell.enqueue(new Callback<List<SellItem>>() {
             @Override

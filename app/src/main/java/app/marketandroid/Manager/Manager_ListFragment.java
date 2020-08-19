@@ -5,9 +5,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +25,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import app.marketandroid.R;
 import app.marketandroid.Retrofit.MyAPI;
-import app.marketandroid.Retrofit.ProductItem;
 import app.marketandroid.Retrofit.SellItem;
 import app.marketandroid.SharedPreferenceManager;
 import okhttp3.OkHttpClient;
@@ -46,7 +47,7 @@ public class Manager_ListFragment extends Fragment {
     RecyclerView mRecyclerView = null;
     ArrayList<MGRecyclerItem> mList = new ArrayList<>();
     MGRecyclerViewAdapter mAdapter;
-    Spinner mg_products_spinner,mg_weight_spinner;
+    Spinner mg_products_spinner, mg_weight_spinner;
     ArrayList<String> plist = new ArrayList<>();
     ArrayList<String> wlist = new ArrayList<>();
     ArrayList<String> plist2 = new ArrayList<>();
@@ -61,28 +62,31 @@ public class Manager_ListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        initMyAPI();
+
         search_img = getActivity().findViewById(R.id.search_img);
         mg_products_spinner = getActivity().findViewById(R.id.mg_products_spinner);
         mg_weight_spinner = getActivity().findViewById(R.id.mg_weight_spinner);
-        plist.add(0,"전체 보기");
-        wlist.add(0,"전체 보기");
-
-        padapter = new ArrayAdapter<>(getContext(),R.layout.spinneritem,plist2);
-        wadapter = new ArrayAdapter<>(getContext(),R.layout.spinneritem,wlist2);
+        plist.add(0, "전체 보기");
+        wlist2.add(0, "전체 보기");
 
 
 
-        mg_products_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        padapter = new ArrayAdapter<>(getContext(), R.layout.spinneritem, plist2);
+        wadapter = new ArrayAdapter<>(getContext(), R.layout.spinneritem, wlist2);
+
+
+        mg_weight_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (mg_products_spinner.getSelectedItemPosition() == 0){
-                    if (mg_weight_spinner.getSelectedItemPosition() == 0){
-                        fillter("");
-                    }else{
-                        fillter(mg_weight_spinner.getSelectedItem().toString());
+                if (mg_weight_spinner.getSelectedItemPosition() == 0) {
+                    if (mg_products_spinner.getSelectedItemPosition() == 0) {
+                        fillter_weight("","");
+                    } else {
+                        fillter_product(mg_products_spinner.getSelectedItem().toString());
                     }
-                }else{
-                    fillter(mg_products_spinner.getSelectedItem().toString());
+                } else {
+                    fillter_weight(mg_products_spinner.getSelectedItem().toString(),mg_weight_spinner.getSelectedItem().toString());
                 }
             }
 
@@ -91,17 +95,44 @@ public class Manager_ListFragment extends Fragment {
             }
         });
 
-        mg_weight_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mg_products_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (mg_weight_spinner.getSelectedItemPosition() == 0){
-                    if (mg_products_spinner.getSelectedItemPosition() == 0){
-                        fillter("");
-                    }else{
-                        fillter(mg_products_spinner.getSelectedItem().toString());
+                wlist2.clear();
+                wlist2.add(0,"전체 보기");
+                mg_weight_spinner.setSelection(0);
+                if (mg_products_spinner.getSelectedItemPosition() == 0) {
+
+                    if (mg_weight_spinner.getSelectedItemPosition() == 0) {
+                        fillter_product("");
                     }
-                }else{
-                    fillter(mg_weight_spinner.getSelectedItem().toString());
+                } else {
+                    Call<List<SellItem>> get_sell = mMyAPI.get_sell(SharedPreferenceManager.getString(getContext(),"token"));
+                    get_sell.enqueue(new Callback<List<SellItem>>() {
+                        @Override
+                        public void onResponse(Call<List<SellItem>> call, Response<List<SellItem>> response) {
+                            List<SellItem> mList = response.body();
+                            assert mList != null;
+                            for (SellItem item : mList){
+                                if (mg_products_spinner.getSelectedItem().toString().equals(item.getPriceNlimit().getDemand().getProduct().getName())){
+                                    for (int i=0; i<wlist2.size(); i++){
+                                        if (!wlist2.contains(item.getPriceNlimit().getDemand().getWeight())){
+                                            wlist2.add(item.getPriceNlimit().getDemand().getWeight());
+                                            mAdapter.notifyDataSetChanged();
+                                        }
+                                    }
+
+                                    mAdapter.notifyDataSetChanged();
+                                }
+                            }
+                            fillter_product(mg_products_spinner.getSelectedItem().toString());
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<SellItem>> call, Throwable t) {
+
+                        }
+                    });
                 }
             }
 
@@ -115,32 +146,41 @@ public class Manager_ListFragment extends Fragment {
         mAdapter = new MGRecyclerViewAdapter(mList);
         mRecyclerView.setAdapter(mAdapter);
 
-        initMyAPI();
-        Call<List<SellItem>> get_sell = mMyAPI.get_sell(SharedPreferenceManager.getString(getContext(),"token"));
+
+        Call<List<SellItem>> get_sell = mMyAPI.get_sell(SharedPreferenceManager.getString(getContext(), "token"));
         get_sell.enqueue(new Callback<List<SellItem>>() {
             @Override
             public void onResponse(Call<List<SellItem>> call, Response<List<SellItem>> response) {
 
                 List<SellItem> mList = response.body();
                 assert mList != null;
-                for (SellItem item : mList){
-                    String form_time = item.getCreated_at().substring(0,10)+"  "+item.getCreated_at().substring(11,16);
-                    addItem(form_time,item.getUser().getName()+"",item.getPriceNlimit().getDemand().getProduct().getName()+"",
-                            item.getPriceNlimit().getDemand().getWeight()+"Kg",item.getCount()+"Box",item.getCount()*item.getPriceNlimit().getPrice()+"원",
-                            "(1Box 당 "+item.getPriceNlimit().getPrice()+"원)");
-                    plist.add(item.getUser().getName());
-                    wlist.add(item.getPriceNlimit().getDemand().getProduct().getName());
+                for (final SellItem item : mList) {
+                    String form_time = item.getCreated_at().substring(0, 10) + "  " + item.getCreated_at().substring(11, 16);
+                    addItem(form_time, item.getUser().getName(), item.getPriceNlimit().getDemand().getProduct().getName(),
+                            item.getPriceNlimit().getDemand().getWeight() + "Kg", item.getCount() + "Box", item.getCount() * item.getPriceNlimit().getPrice() + "원",
+                            "(1Box 당 " + item.getPriceNlimit().getPrice() + "원)");
+                    plist.add(item.getPriceNlimit().getDemand().getProduct().getName());
+
+                    mAdapter.setOnItemClickListener(new MGRecyclerViewAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View v, int position) {
+                            String tel = item.getUser().getPhone();
+                            String tel_uri = tel.substring(0, 3) + "-" + tel.substring(3, 7) + "-" + tel.substring(7);
+                            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + tel_uri));
+                            getActivity().startActivity(intent);
+                        }
+                    });
+                    mAdapter.notifyDataSetChanged();
                 }
-                for (int i=0; i<plist.size(); i++){
-                    if (!plist2.contains(plist.get(i))){
+
+
+
+                for (int i = 0; i < plist.size(); i++) {
+                    if (!plist2.contains(plist.get(i))) {
                         plist2.add(plist.get(i));
                     }
                 }
-                for (int i=0; i<wlist.size(); i++){
-                    if (!wlist2.contains(wlist.get(i))){
-                        wlist2.add(wlist.get(i));
-                    }
-                }
+
                 mg_weight_spinner.setGravity(View.TEXT_ALIGNMENT_CENTER);
                 mg_products_spinner.setGravity(View.TEXT_ALIGNMENT_CENTER);
                 mg_products_spinner.setAdapter(padapter);
@@ -176,11 +216,11 @@ public class Manager_ListFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         String searchText = mg_fillter_edit.getText().toString();
-                        fillter(searchText);
+                        fillter_edit(searchText);
                         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
                         assert imm != null;
                         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                        Toast.makeText(getContext(),  mg_fillter_edit.getText().toString()+"로 검색", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), mg_fillter_edit.getText().toString() + "로 검색", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -200,7 +240,7 @@ public class Manager_ListFragment extends Fragment {
     }
 
     public void addItem(String time, String user_name, String products, String weight, String count, String total_price, String personal_price) {
-        MGRecyclerItem item = new MGRecyclerItem(time, user_name,products,weight,count,total_price,personal_price);
+        MGRecyclerItem item = new MGRecyclerItem(time, user_name, products, weight, count, total_price, personal_price);
         item.setTime(time);
         item.setUser_name(user_name);
         item.setProductsStr(products);
@@ -226,18 +266,41 @@ public class Manager_ListFragment extends Fragment {
         mMyAPI = retrofit.create(MyAPI.class);
     }
 
-    public void fillter(String searchText) {
+    public void fillter_edit(String searchText) {
         mList.clear();
-        if(searchText.length() == 0)
-        {
+        if (searchText.length() == 0) {
             mList.addAll(mData);
+        } else {
+            for (MGRecyclerItem item : mData) {
+                if (item.getUser_name().contains(searchText)) {
+                    mList.add(item);
+                }
+            }
         }
-        else
-        {
-            for( MGRecyclerItem item : mData)
-            {
-                if(item.getUser_name().contains(searchText) || item.getProductsStr().contains(searchText))
-                {
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public void fillter_product(String searchText) {
+        mList.clear();
+        if (searchText.length() == 0) {
+            mList.addAll(mData);
+        } else {
+            for (MGRecyclerItem item : mData) {
+                if (item.getProductsStr().contains(searchText)) {
+                    mList.add(item);
+                }
+            }
+        }
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public void fillter_weight(String product,String searchText) {
+        mList.clear();
+        if (searchText.length() == 0) {
+            mList.addAll(mData);
+        } else {
+            for (MGRecyclerItem item : mData) {
+                if (item.getProductsStr().contains(product) && item.getWeightStr().contains(searchText)) {
                     mList.add(item);
                 }
             }
