@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/account_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="계좌정보 등록"
+        android:layout_centerHorizontal="true"
+        android:textSize="22sp"
+        android:fontFamily="@font/cookierunbold"
+        android:textColor="@color/black"
+        android:layout_marginTop="25dp"/>
+
+
+    <EditText
+        android:id="@+id/account_bank_edit"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/account_title"
+        android:hint="은행 명"
+        android:background="@drawable/boundary"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/account_name_edit"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/account_bank_edit"
+        android:hint="예금주 명"
+        android:background="@drawable/boundary"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/account_account_edit"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:hint="계좌번호"
+        android:background="@drawable/boundary"
+        android:gravity="center"
+        android:inputType="number"
+        android:layout_below="@+id/account_name_edit"
+        android:textColor="@color/black"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/account_ok_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_blue"
+        android:textColor="@color/white"
+        android:text="@string/ok"
+        android:fontFamily="@font/cookierunregular"
+        android:layout_below="@+id/account_account_edit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"/>
+
+</RelativeLayout>

@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import app.marketandroid.R;
@@ -49,7 +50,6 @@ public class Manager_ListFragment extends Fragment {
     MGRecyclerViewAdapter mAdapter;
     Spinner mg_products_spinner, mg_weight_spinner;
     ArrayList<String> plist = new ArrayList<>();
-    ArrayList<String> wlist = new ArrayList<>();
     ArrayList<String> plist2 = new ArrayList<>();
     ArrayList<String> wlist2 = new ArrayList<>();
     ArrayAdapter<String> padapter;
@@ -121,7 +121,7 @@ public class Manager_ListFragment extends Fragment {
                                             mAdapter.notifyDataSetChanged();
                                         }
                                     }
-
+                                    Collections.sort(wlist2); //오름차순
                                     mAdapter.notifyDataSetChanged();
                                 }
                             }
