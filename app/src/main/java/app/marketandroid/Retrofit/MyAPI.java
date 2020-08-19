@@ -1,11 +1,15 @@
 package app.marketandroid.Retrofit;
 
 import java.util.List;
+
+import app.marketandroid.SharedPreferenceManager;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface MyAPI{
 
@@ -38,5 +42,9 @@ public interface MyAPI{
     @GET("/sells/")
     Call<List<SellItem>> get_sell(@Header("Authorization") String token);
 
+    @GET("/accounts/")
+    Call<List<AccountItem>> get_account(@Header("Authorization") String token);
 
+    @PUT("/accounts/{id}/")
+    Call<AccountItem> put_account(@Path("id") int id, @Header("Authorization") String token, @Body AccountItem post);
 }

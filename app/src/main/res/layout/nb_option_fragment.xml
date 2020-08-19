@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/option_relative"
     tools:context=".Farmer.NB_OptionFragment">
 
     <TextView
@@ -42,10 +43,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/option_account_tx"
         android:layout_margin="15dp"
-        android:text="농협 1234-5678-0123451"
+        android:text="농협  1234-5678-0123451  예금주"
         android:fontFamily="@font/tmoneyroundwindextrabold"
         android:textColor="@color/black"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 
     <View
         android:layout_width="match_parent"

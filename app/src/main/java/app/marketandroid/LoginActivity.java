@@ -102,6 +102,8 @@ public class LoginActivity extends AppCompatActivity {
                                                             "user_id", response.body().getId());
                                                     SharedPreferenceManager.setString(LoginActivity.this,
                                                             "user_phone", response.body().getPhone());
+                                                    SharedPreferenceManager.setString(LoginActivity.this,
+                                                            "user_name",response.body().getName());
                                                 }
 
                                                 @Override
