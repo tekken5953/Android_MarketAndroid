@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,11 +51,26 @@ public class NB_OptionFragment extends Fragment {
                         View v = LayoutInflater.from(getContext()).inflate(R.layout.account_add_dialog,null,false);
                         builder.setView(v);
                         final AlertDialog alertDialog = builder.create();
-                        final Button btn = v.findViewById(R.id.account_ok_btn);
-                        btn.setOnClickListener(new View.OnClickListener() {
+                        final Button ok = v.findViewById(R.id.account_ok_btn);
+                        final Button cancel = v.findViewById(R.id.account_cancel_btn);
+                        final TextView warning_msg = v.findViewById(R.id.account_warning_msg);
+
+                        //경고 메시지 밑줄
+                        SpannableString content = new SpannableString(warning_msg.getText().toString());
+                        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+                        warning_msg.setText(content);
+
+                        ok.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Toast.makeText(getContext(), "등록 완료", Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                            }
+                        });
+
+                        cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
                                 alertDialog.dismiss();
                             }
                         });

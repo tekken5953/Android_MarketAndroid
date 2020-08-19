@@ -18,51 +18,82 @@
     <EditText
         android:id="@+id/account_bank_edit"
         android:layout_width="170dp"
-        android:layout_height="60dp"
+        android:layout_height="55dp"
         android:layout_below="@+id/account_title"
         android:hint="은행 명"
         android:background="@drawable/boundary"
         android:gravity="center"
         android:textColor="@color/black"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"/>
 
     <EditText
         android:id="@+id/account_name_edit"
         android:layout_width="170dp"
-        android:layout_height="60dp"
+        android:layout_height="55dp"
         android:layout_below="@+id/account_bank_edit"
         android:hint="예금주 명"
         android:background="@drawable/boundary"
         android:gravity="center"
         android:textColor="@color/black"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"/>
 
     <EditText
         android:id="@+id/account_account_edit"
         android:layout_width="250dp"
-        android:layout_height="60dp"
+        android:layout_height="55dp"
         android:hint="계좌번호"
         android:background="@drawable/boundary"
         android:gravity="center"
         android:inputType="number"
         android:layout_below="@+id/account_name_edit"
         android:textColor="@color/black"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"/>
 
-    <Button
-        android:id="@+id/account_ok_btn"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_blue"
-        android:textColor="@color/white"
-        android:text="@string/ok"
-        android:fontFamily="@font/cookierunregular"
+        android:text="계좌번호는 공백 없이 입력 해 주세요."
         android:layout_below="@+id/account_account_edit"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="13sp"
+        android:textColor="@android:color/holo_red_light"
+        android:id="@+id/account_warning_msg"/>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/account_warning_msg"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="30dp"
-        android:layout_marginTop="30dp"/>
+        android:gravity="center">
+        <Button
+            android:id="@+id/account_ok_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_blue"
+            android:textColor="@color/white"
+            android:text="@string/ok"
+            android:fontFamily="@font/cookierunregular"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"/>
+
+        <Button
+            android:id="@+id/account_cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_blue"
+            android:textColor="@color/white"
+            android:text="@string/cancel"
+            android:fontFamily="@font/cookierunregular"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="3dp"/>
+    </TableRow>
+
+
 
 </RelativeLayout>

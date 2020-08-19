@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -147,6 +149,13 @@ public class LoginActivity extends AppCompatActivity {
                 final EditText name = v.findViewById(R.id.sign_up_name);
                 final EditText pwd = v.findViewById(R.id.sign_up_pwd);
                 final EditText repwd = v.findViewById(R.id.sign_up_repwd);
+                final TextView warning_msg = v.findViewById(R.id.warning_msg);
+
+                //경고 메시지 밑줄
+                SpannableString content = new SpannableString(warning_msg.getText().toString());
+                content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+                warning_msg.setText(content);
+
                 alertDialog.setCanceledOnTouchOutside(true);
                 ok.setOnClickListener(new View.OnClickListener() {
                     @Override
