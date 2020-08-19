@@ -46,6 +46,7 @@ public class Manager_SettingFragment extends Fragment {
                     temp.child_1.add("중량");
                     temp.child_2.add("1Box 당 가격");
                     temp.child_3.add("수량");
+                    temp.child_4.add("id");
 
                     Call<List<DemandItem>> get_demand = mMyAPI.get_demands(SharedPreferenceManager.getString(getContext(), "token"));
                     get_demand.enqueue(new Callback<List<DemandItem>>() {
@@ -58,6 +59,7 @@ public class Manager_SettingFragment extends Fragment {
                                 if (item2.getProduct() == item.getId()) {
                                     temp.child__num.add(String.valueOf(i));
                                     temp.child_1.add(item2.getWeight());
+                                    i++;
 
                                     Call<List<PriceNLimitItem>> get_priceNlimits = mMyAPI.get_priceNlimits(SharedPreferenceManager.getString(getContext(), "token"));
                                     get_priceNlimits.enqueue(new Callback<List<PriceNLimitItem>>() {
@@ -69,6 +71,7 @@ public class Manager_SettingFragment extends Fragment {
                                                 if (item3.getDemand() == item2.getId()) {
                                                     temp.child_2.add(String.valueOf(item3.getPrice()));
                                                     temp.child_3.add(String.valueOf(item3.getLimit()));
+                                                    temp.child_4.add(String.valueOf(item3.getDemand()));
                                                 }
                                             }
                                         }

@@ -47,4 +47,7 @@ public interface MyAPI{
 
     @PUT("/accounts/{id}/")
     Call<AccountItem> put_account(@Path("id") int id, @Header("Authorization") String token, @Body AccountItem post);
+
+    @POST("/priceNlimts/")
+    Call<PriceNLimitItem> post_priceNlimits(@Header("Authorization") String token, @Body PriceNLimitItem post);
 }
