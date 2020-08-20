@@ -152,9 +152,9 @@ public class Manager_ListFragment extends Fragment {
             @Override
             public void onResponse(Call<List<SellItem>> call, Response<List<SellItem>> response) {
 
-                List<SellItem> mList = response.body();
-                assert mList != null;
-                for (final SellItem item : mList) {
+                List<SellItem> nList = response.body();
+                assert nList != null;
+                for (final SellItem item : nList) {
                     String form_time = item.getCreated_at().substring(0, 10) + "  " + item.getCreated_at().substring(11, 16);
                     addItem(form_time, item.getUser().getName(), item.getPriceNlimit().getDemand().getProduct().getName(),
                             item.getPriceNlimit().getDemand().getWeight() + "Kg", item.getCount() + "Box", item.getCount() * item.getPriceNlimit().getPrice() + "원",
@@ -170,7 +170,15 @@ public class Manager_ListFragment extends Fragment {
                             getActivity().startActivity(intent);
                         }
                     });
+
+                    if (mList.isEmpty()){
+                        getActivity().findViewById(R.id.nothing).setVisibility(View.VISIBLE);
+                    }else{
+                        getActivity().findViewById(R.id.nothing).setVisibility(View.GONE);
+                    }
+
                     mAdapter.notifyDataSetChanged();
+
                 }
 
 
@@ -225,6 +233,7 @@ public class Manager_ListFragment extends Fragment {
                 });
             }
         });
+
     }
 
     @Nullable

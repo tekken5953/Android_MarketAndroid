@@ -21,6 +21,8 @@ import app.marketandroid.R;
 import app.marketandroid.Retrofit.MyAPI;
 import app.marketandroid.Retrofit.PriceNLimitItem;
 import app.marketandroid.SharedPreferenceManager;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -85,6 +87,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
             childBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    initMyAPI();
                     final AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext());
                     View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.child_dialog, null, false);
                     builder.setView(v);
@@ -112,7 +115,6 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
                             if (et_price.getText().toString().equals("")){
                                 Toast.makeText(context, "가격은 필수 입력사항 입니다.", Toast.LENGTH_SHORT).show();
                             }else{
-                                initMyAPI();
                                 final PriceNLimitItem item = new PriceNLimitItem();
                                 Call<PriceNLimitItem> post_priceNlimits = mMyAPI.post_priceNlimits(SharedPreferenceManager.getString(context,"token"), item);
                                 item.setPrice(Integer.parseInt(et_price.getText().toString()));
@@ -203,9 +205,14 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
 
 
     private void initMyAPI() {
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        clientBuilder.addInterceptor(loggingInterceptor);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://13.209.84.206/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(clientBuilder.build())
                 .build();
 
         mMyAPI = retrofit.create(MyAPI.class);

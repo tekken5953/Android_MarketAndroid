@@ -16,6 +16,8 @@ import app.marketandroid.Retrofit.MyAPI;
 import app.marketandroid.Retrofit.PriceNLimitItem;
 import app.marketandroid.Retrofit.ProductItem;
 import app.marketandroid.SharedPreferenceManager;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -117,9 +119,14 @@ public class Manager_SettingFragment extends Fragment {
     }
 
     private void initMyAPI() {
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        clientBuilder.addInterceptor(loggingInterceptor);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://13.209.84.206/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(clientBuilder.build())
                 .build();
 
         mMyAPI = retrofit.create(MyAPI.class);
