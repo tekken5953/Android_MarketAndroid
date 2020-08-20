@@ -3,7 +3,6 @@ package app.marketandroid.Manager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import app.marketandroid.R;
@@ -112,19 +110,17 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
                     btn_ok.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if (et_price.getText().toString().equals("")){
+                            if (et_price.getText().toString().equals("")) {
                                 Toast.makeText(context, "가격은 필수 입력사항 입니다.", Toast.LENGTH_SHORT).show();
-                            }else{
+                            } else {
                                 final PriceNLimitItem item = new PriceNLimitItem();
-                                Call<PriceNLimitItem> post_priceNlimits = mMyAPI.post_priceNlimits(SharedPreferenceManager.getString(context,"token"), item);
+                                Call<PriceNLimitItem> post_priceNlimits = mMyAPI.post_priceNlimits(SharedPreferenceManager.getString(context, "token"), item);
                                 item.setPrice(Integer.parseInt(et_price.getText().toString()));
                                 item.setLimit(Integer.parseInt(et_limit.getText().toString()));
                                 item.setDemand(id);
                                 post_priceNlimits.enqueue(new Callback<PriceNLimitItem>() {
                                     @Override
                                     public void onResponse(Call<PriceNLimitItem> call, Response<PriceNLimitItem> response) {
-                                        Log.d("retrofit",response.code()+"");
-                                        Log.d("retrofit",response.message()+"");
                                         Toast.makeText(context, "수정 완료", Toast.LENGTH_SHORT).show();
                                     }
 
@@ -135,7 +131,6 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
                                 });
                                 alertDialog.dismiss();
                             }
-
                         }
                     });
                     btn_no.setOnClickListener(new View.OnClickListener() {
@@ -161,7 +156,6 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
 
         return convertView;
     }
-
 
     @Override
     public boolean hasStableIds() {
@@ -202,7 +196,6 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
     public long getGroupId(int groupPosition) {
         return groupPosition;
     }
-
 
     private void initMyAPI() {
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();

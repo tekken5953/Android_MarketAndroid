@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,7 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import app.marketandroid.R;
 
 public class NB_MainActivity extends AppCompatActivity {
@@ -23,7 +26,6 @@ public class NB_MainActivity extends AppCompatActivity {
     private NB_ListFragment NB_listFragment = new NB_ListFragment();
     private NB_AddFragment NB_addFragment = new NB_AddFragment();
     private NB_OptionFragment NB_optionFragment = new NB_OptionFragment();
-
     private FragmentManager fragmentManager = getSupportFragmentManager();
     Boolean isExitFlag = false;
 

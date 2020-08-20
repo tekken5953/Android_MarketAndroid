@@ -11,7 +11,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
-public interface MyAPI{
+public interface MyAPI {
 
     //아이디, 비밀번호 입력 후 서버에 사용자인지 아닌지 확인
     //사용자인 경우 토큰 값 받아오기

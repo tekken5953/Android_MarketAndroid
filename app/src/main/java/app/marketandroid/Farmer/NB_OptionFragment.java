@@ -43,7 +43,7 @@ public class NB_OptionFragment extends Fragment {
     ListView listView;
     ArrayAdapter adapter;
     ArrayList<String> list = new ArrayList<>();
-    TextView main_title,option_username,option_account;
+    TextView main_title, option_username, option_account;
     MyAPI mMyAPI;
     RelativeLayout relativeLayout;
 
@@ -56,27 +56,27 @@ public class NB_OptionFragment extends Fragment {
         relativeLayout = getActivity().findViewById(R.id.option_relative);
         option_account = getActivity().findViewById(R.id.option_account);
         listView = getActivity().findViewById(R.id.option_listView);
-        list.add(0,"등록계좌 정보 수정");
-        for (int i = 1; i <= 10; i++){
-            list.add(i+"번 옵션 아이템");
+        list.add(0, "등록계좌 정보 수정");
+        for (int i = 1; i <= 10; i++) {
+            list.add(i + "번 옵션 아이템");
         }
 
         initMyAPI();
 
-        final Call<List<AccountItem>> get_account = mMyAPI.get_account(SharedPreferenceManager.getString(getContext(),"token"));
+        final Call<List<AccountItem>> get_account = mMyAPI.get_account(SharedPreferenceManager.getString(getContext(), "token"));
         get_account.enqueue(new Callback<List<AccountItem>>() {
             @Override
             public void onResponse(Call<List<AccountItem>> call, Response<List<AccountItem>> response) {
-                if (response.isSuccessful()){
-                    option_username.setText(SharedPreferenceManager.getString(getContext(),"user_name")+"님");
+                if (response.isSuccessful()) {
+                    option_username.setText(SharedPreferenceManager.getString(getContext(), "user_name") + "님");
                     List<AccountItem> mList = response.body();
                     assert mList != null;
-                    for (AccountItem item : mList){
-                        if (item.getUser() == SharedPreferenceManager.getInt(getContext(),"user_id")){
+                    for (AccountItem item : mList) {
+                        if (item.getUser() == SharedPreferenceManager.getInt(getContext(), "user_id")) {
                             option_account.setText(item.getBank() + "  " + item.getAccount() + "  " + item.getAccount_name());
                         }
                     }
-                }else{
+                } else {
                     TextView error = new TextView(getContext());
                     error.setText("세션이 만료되었습니다.\n다시 접속해주세요.");
                     error.setGravity(View.TEXT_ALIGNMENT_CENTER);
@@ -86,8 +86,7 @@ public class NB_OptionFragment extends Fragment {
                     relativeLayout.removeAllViews();
                     relativeLayout.addView(linearLayout);
                 }
-                }
-
+            }
 
             @Override
             public void onFailure(Call<List<AccountItem>> call, Throwable t) {
@@ -95,16 +94,16 @@ public class NB_OptionFragment extends Fragment {
             }
         });
 
-        adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,list);
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                switch (position){
+                switch (position) {
                     case 0:
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                        View v = LayoutInflater.from(getContext()).inflate(R.layout.account_add_dialog,null,false);
+                        View v = LayoutInflater.from(getContext()).inflate(R.layout.account_add_dialog, null, false);
                         builder.setView(v);
                         final AlertDialog alertDialog = builder.create();
                         final Button ok = v.findViewById(R.id.account_ok_btn);
@@ -123,9 +122,9 @@ public class NB_OptionFragment extends Fragment {
                             @Override
                             public void onClick(View view) {
                                 final AccountItem item = new AccountItem();
-                                Call<AccountItem> put_account = mMyAPI.put_account(SharedPreferenceManager.getInt(getContext(),"user_id"),
-                                SharedPreferenceManager.getString(getContext(),"token"),item);
-                                item.setUser(SharedPreferenceManager.getInt(getContext(),"user_id"));
+                                Call<AccountItem> put_account = mMyAPI.put_account(SharedPreferenceManager.getInt(getContext(), "user_id"),
+                                        SharedPreferenceManager.getString(getContext(), "token"), item);
+                                item.setUser(SharedPreferenceManager.getInt(getContext(), "user_id"));
                                 item.setBank(bank.getText().toString());
                                 item.setAccount(account.getText().toString());
                                 item.setAccount_name(name.getText().toString());
@@ -137,7 +136,6 @@ public class NB_OptionFragment extends Fragment {
 
                                     @Override
                                     public void onFailure(Call<AccountItem> call, Throwable t) {
-
                                     }
                                 });
 

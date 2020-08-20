@@ -3,13 +3,16 @@ package app.marketandroid.Manager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import app.marketandroid.R;
 import app.marketandroid.Retrofit.DemandItem;
 import app.marketandroid.Retrofit.MyAPI;
@@ -96,7 +99,6 @@ public class Manager_SettingFragment extends Fragment {
                 ExpandAdapter adapter = new ExpandAdapter(getContext().getApplicationContext(), R.layout.group_row, R.layout.child_row, list);
                 listView = getActivity().findViewById(R.id.manager_setting_list);
                 listView.setAdapter(adapter);
-
             }
 
             @Override
@@ -131,5 +133,4 @@ public class Manager_SettingFragment extends Fragment {
 
         mMyAPI = retrofit.create(MyAPI.class);
     }
-
 }

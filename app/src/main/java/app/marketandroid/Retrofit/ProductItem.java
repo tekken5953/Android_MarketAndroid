@@ -29,7 +29,7 @@ public class ProductItem {
         this.demands = demands;
     }
 
-    public class DemandItem{
+    public class DemandItem {
         private int id;
         private String weight;
         private int product;
@@ -67,7 +67,7 @@ public class ProductItem {
             this.priceNlimits = priceNlimits;
         }
 
-        public class PriceNLimitItem{
+        public class PriceNLimitItem {
             private int demand;
             private int price;
             private int limit;

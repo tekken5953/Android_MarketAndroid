@@ -37,7 +37,7 @@ public class NB_ListFragment extends Fragment {
     ArrayList<NBRecyclerItem> mList = new ArrayList<>();
     NBRecyclerViewAdapter mAdapter;
     Drawable drawable;
-    TextView main_title,nothing;
+    TextView main_title, nothing;
     MyAPI mMyAPI;
 
     @Override
@@ -45,12 +45,13 @@ public class NB_ListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mRecyclerView = getActivity().findViewById(R.id.nbrecyclerView);
         nothing = getActivity().findViewById(R.id.nothing2);
-
         main_title = getActivity().findViewById(R.id.main_title);
         main_title.setText("금일 등록 현황");
+
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
         mAdapter = new NBRecyclerViewAdapter(mList);
         mRecyclerView.setAdapter(mAdapter);
+
         final int[] img = {
                 R.drawable.potato,
                 R.drawable.sweetpotato,
@@ -65,21 +66,21 @@ public class NB_ListFragment extends Fragment {
 
         initMyAPI();
 
-        Call<List<SellItem>> get_sell = mMyAPI.get_sell(SharedPreferenceManager.getString(getContext(),"token"));
+        Call<List<SellItem>> get_sell = mMyAPI.get_sell(SharedPreferenceManager.getString(getContext(), "token"));
         get_sell.enqueue(new Callback<List<SellItem>>() {
             @Override
             public void onResponse(Call<List<SellItem>> call, Response<List<SellItem>> response) {
                 List<SellItem> mList = response.body();
                 assert mList != null;
-                for (SellItem item : mList){
-                    String form_time = item.getCreated_at().substring(0,10)+"  "+item.getCreated_at().substring(11,16);
-                    drawable = ResourcesCompat.getDrawable(getResources(),img[item.getPriceNlimit().getDemand().getProduct().getId()-1],null);
-                    addItem(drawable,  form_time,item.getPriceNlimit().getDemand().getProduct().getName()+"", item.getPriceNlimit().getDemand().getWeight()+"Kg",
-                            item.getCount()+"개",(item.getCount()*item.getPriceNlimit().getPrice())+"원","(1Box 당 "+item.getPriceNlimit().getPrice()+"원)");
+                for (SellItem item : mList) {
+                    String form_time = item.getCreated_at().substring(0, 10) + "  " + item.getCreated_at().substring(11, 16);
+                    drawable = ResourcesCompat.getDrawable(getResources(), img[item.getPriceNlimit().getDemand().getProduct().getId() - 1], null);
+                    addItem(drawable, form_time, item.getPriceNlimit().getDemand().getProduct().getName() + "", item.getPriceNlimit().getDemand().getWeight() + "Kg",
+                            item.getCount() + "개", (item.getCount() * item.getPriceNlimit().getPrice()) + "원", "(1Box 당 " + item.getPriceNlimit().getPrice() + "원)");
                     mAdapter.notifyDataSetChanged();
-                    if (mList.isEmpty()){
+                    if (mList.isEmpty()) {
                         nothing.setVisibility(View.VISIBLE);
-                    }else{
+                    } else {
                         nothing.setVisibility(View.GONE);
                     }
                 }
@@ -87,13 +88,11 @@ public class NB_ListFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<SellItem>> call, Throwable t) {
-
             }
         });
 
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
     }
 
     @Nullable

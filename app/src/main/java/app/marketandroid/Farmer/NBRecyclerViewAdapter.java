@@ -9,9 +9,12 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
+
 import app.marketandroid.R;
 
 public class NBRecyclerViewAdapter extends RecyclerView.Adapter<NBRecyclerViewAdapter.ViewHolder> {
@@ -70,7 +73,7 @@ public class NBRecyclerViewAdapter extends RecyclerView.Adapter<NBRecyclerViewAd
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView icon;
-        TextView time,product,weight,count,total_price,personal_price;
+        TextView time, product, weight, count, total_price, personal_price;
         ImageView pop;
 
         ViewHolder(final View itemView) {
@@ -91,7 +94,6 @@ public class NBRecyclerViewAdapter extends RecyclerView.Adapter<NBRecyclerViewAd
 
             // 뷰 객체에 대한 참조. (hold strong reference)
             icon = itemView.findViewById(R.id.nbrecycle_img);
-
             time = itemView.findViewById(R.id.nbrecycle_time);
             product = itemView.findViewById(R.id.mgrecycle_products);
             weight = itemView.findViewById(R.id.mgrecycle_weight);
@@ -110,7 +112,6 @@ public class NBRecyclerViewAdapter extends RecyclerView.Adapter<NBRecyclerViewAd
                     popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem menuItem) {
-                            int position = getAdapterPosition();
                             switch (menuItem.getItemId()) {
                                 case R.id.pop_edit:
                                     Toast.makeText(context, "수정완료", Toast.LENGTH_SHORT).show();
