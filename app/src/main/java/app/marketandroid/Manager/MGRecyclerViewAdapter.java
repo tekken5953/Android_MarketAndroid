@@ -12,13 +12,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
+
 import app.marketandroid.R;
 import app.marketandroid.Retrofit.MyAPI;
 
 public class MGRecyclerViewAdapter extends RecyclerView.Adapter<MGRecyclerViewAdapter.ViewHolder> {
     private ArrayList<MGRecyclerItem> mData;
-    MyAPI mMyAPI;
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
     MGRecyclerViewAdapter(ArrayList<MGRecyclerItem> list) {
@@ -31,7 +32,6 @@ public class MGRecyclerViewAdapter extends RecyclerView.Adapter<MGRecyclerViewAd
     public MGRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         View view = inflater.inflate(R.layout.mgrecyclerview, parent, false);
         MGRecyclerViewAdapter.ViewHolder vh = new MGRecyclerViewAdapter.ViewHolder(view);
 
@@ -72,7 +72,7 @@ public class MGRecyclerViewAdapter extends RecyclerView.Adapter<MGRecyclerViewAd
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView time, user_name,products,weight,count,total_price,personal_price;
+        TextView time, user_name, products, weight, count, total_price, personal_price;
         Button btn;
 
         ViewHolder(final View itemView) {
@@ -100,8 +100,6 @@ public class MGRecyclerViewAdapter extends RecyclerView.Adapter<MGRecyclerViewAd
             personal_price = itemView.findViewById(R.id.mgrecycle_personal_price);
             count = itemView.findViewById(R.id.mgrecycle_count);
             btn = itemView.findViewById(R.id.mgrecycle_call_btn);
-
-
         }
 
     }

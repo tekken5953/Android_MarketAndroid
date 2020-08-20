@@ -67,7 +67,7 @@ public class NBRecyclerItem {
         this.personal_priceStr = personal_priceStr;
     }
 
-    public NBRecyclerItem(Drawable iconDrawable, String timeStr,  String productsStr, String weightStr, String countStr, String total_priceStr, String personal_priceStr) {
+    public NBRecyclerItem(Drawable iconDrawable, String timeStr, String productsStr, String weightStr, String countStr, String total_priceStr, String personal_priceStr) {
 
         this.iconDrawable = iconDrawable;
         this.timeStr = timeStr;

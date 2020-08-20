@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -70,23 +68,20 @@ public class Manager_ListFragment extends Fragment {
         plist.add(0, "전체 보기");
         wlist2.add(0, "전체 보기");
 
-
-
         padapter = new ArrayAdapter<>(getContext(), R.layout.spinneritem, plist2);
         wadapter = new ArrayAdapter<>(getContext(), R.layout.spinneritem, wlist2);
-
 
         mg_weight_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (mg_weight_spinner.getSelectedItemPosition() == 0) {
                     if (mg_products_spinner.getSelectedItemPosition() == 0) {
-                        fillter_weight("","");
+                        fillter_weight("", "");
                     } else {
                         fillter_product(mg_products_spinner.getSelectedItem().toString());
                     }
                 } else {
-                    fillter_weight(mg_products_spinner.getSelectedItem().toString(),mg_weight_spinner.getSelectedItem().toString());
+                    fillter_weight(mg_products_spinner.getSelectedItem().toString(), mg_weight_spinner.getSelectedItem().toString());
                 }
             }
 
@@ -99,7 +94,7 @@ public class Manager_ListFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 wlist2.clear();
-                wlist2.add(0,"전체 보기");
+                wlist2.add(0, "전체 보기");
                 mg_weight_spinner.setSelection(0);
                 if (mg_products_spinner.getSelectedItemPosition() == 0) {
 
@@ -107,16 +102,16 @@ public class Manager_ListFragment extends Fragment {
                         fillter_product("");
                     }
                 } else {
-                    Call<List<SellItem>> get_sell = mMyAPI.get_sell(SharedPreferenceManager.getString(getContext(),"token"));
+                    Call<List<SellItem>> get_sell = mMyAPI.get_sell(SharedPreferenceManager.getString(getContext(), "token"));
                     get_sell.enqueue(new Callback<List<SellItem>>() {
                         @Override
                         public void onResponse(Call<List<SellItem>> call, Response<List<SellItem>> response) {
                             List<SellItem> mList = response.body();
                             assert mList != null;
-                            for (SellItem item : mList){
-                                if (mg_products_spinner.getSelectedItem().toString().equals(item.getPriceNlimit().getDemand().getProduct().getName())){
-                                    for (int i=0; i<wlist2.size(); i++){
-                                        if (!wlist2.contains(item.getPriceNlimit().getDemand().getWeight())){
+                            for (SellItem item : mList) {
+                                if (mg_products_spinner.getSelectedItem().toString().equals(item.getPriceNlimit().getDemand().getProduct().getName())) {
+                                    for (int i = 0; i < wlist2.size(); i++) {
+                                        if (!wlist2.contains(item.getPriceNlimit().getDemand().getWeight())) {
                                             wlist2.add(item.getPriceNlimit().getDemand().getWeight());
                                             mAdapter.notifyDataSetChanged();
                                         }
@@ -152,9 +147,9 @@ public class Manager_ListFragment extends Fragment {
             @Override
             public void onResponse(Call<List<SellItem>> call, Response<List<SellItem>> response) {
 
-                List<SellItem> mList = response.body();
-                assert mList != null;
-                for (final SellItem item : mList) {
+                List<SellItem> nList = response.body();
+                assert nList != null;
+                for (final SellItem item : nList) {
                     String form_time = item.getCreated_at().substring(0, 10) + "  " + item.getCreated_at().substring(11, 16);
                     addItem(form_time, item.getUser().getName(), item.getPriceNlimit().getDemand().getProduct().getName(),
                             item.getPriceNlimit().getDemand().getWeight() + "Kg", item.getCount() + "Box", item.getCount() * item.getPriceNlimit().getPrice() + "원",
@@ -170,10 +165,16 @@ public class Manager_ListFragment extends Fragment {
                             getActivity().startActivity(intent);
                         }
                     });
+
+                    if (mList.isEmpty()) {
+                        getActivity().findViewById(R.id.nothing).setVisibility(View.VISIBLE);
+                    } else {
+                        getActivity().findViewById(R.id.nothing).setVisibility(View.GONE);
+                    }
+
                     mAdapter.notifyDataSetChanged();
+
                 }
-
-
 
                 for (int i = 0; i < plist.size(); i++) {
                     if (!plist2.contains(plist.get(i))) {
@@ -225,6 +226,7 @@ public class Manager_ListFragment extends Fragment {
                 });
             }
         });
+
     }
 
     @Nullable
@@ -294,7 +296,7 @@ public class Manager_ListFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
     }
 
-    public void fillter_weight(String product,String searchText) {
+    public void fillter_weight(String product, String searchText) {
         mList.clear();
         if (searchText.length() == 0) {
             mList.addAll(mData);
@@ -307,5 +309,4 @@ public class Manager_ListFragment extends Fragment {
         }
         mAdapter.notifyDataSetChanged();
     }
-
 }

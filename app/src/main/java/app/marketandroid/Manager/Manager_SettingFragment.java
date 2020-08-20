@@ -3,19 +3,24 @@ package app.marketandroid.Manager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import app.marketandroid.R;
 import app.marketandroid.Retrofit.DemandItem;
 import app.marketandroid.Retrofit.MyAPI;
 import app.marketandroid.Retrofit.PriceNLimitItem;
 import app.marketandroid.Retrofit.ProductItem;
 import app.marketandroid.SharedPreferenceManager;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,6 +51,7 @@ public class Manager_SettingFragment extends Fragment {
                     temp.child_1.add("중량");
                     temp.child_2.add("1Box 당 가격");
                     temp.child_3.add("수량");
+                    temp.child_4.add("id");
 
                     Call<List<DemandItem>> get_demand = mMyAPI.get_demands(SharedPreferenceManager.getString(getContext(), "token"));
                     get_demand.enqueue(new Callback<List<DemandItem>>() {
@@ -58,6 +64,7 @@ public class Manager_SettingFragment extends Fragment {
                                 if (item2.getProduct() == item.getId()) {
                                     temp.child__num.add(String.valueOf(i));
                                     temp.child_1.add(item2.getWeight());
+                                    i++;
 
                                     Call<List<PriceNLimitItem>> get_priceNlimits = mMyAPI.get_priceNlimits(SharedPreferenceManager.getString(getContext(), "token"));
                                     get_priceNlimits.enqueue(new Callback<List<PriceNLimitItem>>() {
@@ -69,6 +76,7 @@ public class Manager_SettingFragment extends Fragment {
                                                 if (item3.getDemand() == item2.getId()) {
                                                     temp.child_2.add(String.valueOf(item3.getPrice()));
                                                     temp.child_3.add(String.valueOf(item3.getLimit()));
+                                                    temp.child_4.add(String.valueOf(item3.getDemand()));
                                                 }
                                             }
                                         }
@@ -91,7 +99,6 @@ public class Manager_SettingFragment extends Fragment {
                 ExpandAdapter adapter = new ExpandAdapter(getContext().getApplicationContext(), R.layout.group_row, R.layout.child_row, list);
                 listView = getActivity().findViewById(R.id.manager_setting_list);
                 listView.setAdapter(adapter);
-
             }
 
             @Override
@@ -114,12 +121,16 @@ public class Manager_SettingFragment extends Fragment {
     }
 
     private void initMyAPI() {
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        clientBuilder.addInterceptor(loggingInterceptor);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://13.209.84.206/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(clientBuilder.build())
                 .build();
 
         mMyAPI = retrofit.create(MyAPI.class);
     }
-
 }

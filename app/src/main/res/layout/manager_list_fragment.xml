@@ -64,6 +64,15 @@
             app:tint="@color/primary_blue" />
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/nothing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="금일 등록 된 물품이 없습니다."
+        android:layout_centerInParent="true"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mgrecyclerView"
         android:layout_width="match_parent"

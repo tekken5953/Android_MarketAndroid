@@ -46,6 +46,7 @@ public class SellItem {
     public void setPriceNlimit(PriceNLimitItem priceNlimit) {
         this.priceNlimit = priceNlimit;
     }
+
     public static class LoginItem {
         private int id;
         private String name;
@@ -76,7 +77,7 @@ public class SellItem {
         }
     }
 
-    public static class PriceNLimitItem{
+    public static class PriceNLimitItem {
         private int price;
         private int limit;
         private int id;
@@ -114,7 +115,7 @@ public class SellItem {
             this.demand = demand;
         }
 
-        public static class DemandItem{
+        public static class DemandItem {
             private int id;
             private String weight;
             private ProductItem product;
@@ -143,7 +144,7 @@ public class SellItem {
                 this.product = product;
             }
 
-            public static class ProductItem{
+            public static class ProductItem {
                 private String name; //출하 물품 등록 페이지 품종
                 private int id;
 

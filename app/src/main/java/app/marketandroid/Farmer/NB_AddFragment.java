@@ -100,7 +100,6 @@ public class NB_AddFragment extends Fragment {
                             R.drawable.pumpkin
                     };
 
-
                     MyAdapter adapter = new MyAdapter(
                             getContext(),
                             R.layout.gridview_row,       // GridView 항목의 레이아웃 row.xml
@@ -109,7 +108,6 @@ public class NB_AddFragment extends Fragment {
 
                     GridView gv = (GridView) getActivity().findViewById(R.id.gridView1);
                     gv.setAdapter(adapter);  // 커스텀 아답타를 GridView 에 적용
-
 
                     // GridView 아이템을 클릭하면 상단 텍스트뷰에 position 출력
                     gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -163,7 +161,6 @@ public class NB_AddFragment extends Fragment {
         main_title = getActivity().findViewById(R.id.main_title);
         main_title.setText("출하물품 등록");
         list_count.add(0, "눌러서 선택");
-
 
         adapter_count = new ArrayAdapter<>(getContext(), R.layout.spinneritem, list_count);
         adapter_weight = new ArrayAdapter<>(getContext(), R.layout.spinneritem, list_weight);
@@ -360,5 +357,4 @@ public class NB_AddFragment extends Fragment {
         text.setText(s);
         toast.show();
     }
-
 }

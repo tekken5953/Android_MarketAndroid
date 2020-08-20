@@ -48,6 +48,13 @@
         android:text="등록제한"
         android:textSize="15sp"/>
 
+    <TextView
+        android:id="@+id/child4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="id"/>
+
     <Button
         android:id="@+id/child_btn"
         android:layout_width="45dp"

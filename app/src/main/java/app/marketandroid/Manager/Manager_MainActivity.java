@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,7 +17,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
+
 import app.marketandroid.R;
 
 public class Manager_MainActivity extends AppCompatActivity {
@@ -50,7 +53,7 @@ public class Manager_MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                switch (position){
+                switch (position) {
                     case 0:
                         setting_btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                         setting_btn.setTextColor(Color.parseColor("#ffffff"));
@@ -109,7 +112,6 @@ public class Manager_MainActivity extends AppCompatActivity {
         ArrayList<Fragment> items = new ArrayList<>();
 
         public ViewPagerAdapter(@NonNull FragmentManager fm) {
-
             super(fm);
         }
 
@@ -129,6 +131,7 @@ public class Manager_MainActivity extends AppCompatActivity {
         }
 
     }
+
     public void toastMsg(String s) {
         final LayoutInflater inflater = getLayoutInflater();
         final View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));

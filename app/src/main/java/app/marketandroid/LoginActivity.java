@@ -2,6 +2,7 @@ package app.marketandroid;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import app.marketandroid.Farmer.NB_MainActivity;
 import app.marketandroid.Manager.Manager_MainActivity;
 import app.marketandroid.Retrofit.MyAPI;
@@ -102,6 +104,8 @@ public class LoginActivity extends AppCompatActivity {
                                                             "user_id", response.body().getId());
                                                     SharedPreferenceManager.setString(LoginActivity.this,
                                                             "user_phone", response.body().getPhone());
+                                                    SharedPreferenceManager.setString(LoginActivity.this,
+                                                            "user_name", response.body().getName());
                                                 }
 
                                                 @Override
