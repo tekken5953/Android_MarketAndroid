@@ -17,8 +17,10 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -54,7 +56,7 @@ public class Manager_ListFragment extends Fragment {
     ArrayAdapter<String> wadapter;
     MyAPI mMyAPI;
     EditText mg_fillter_edit;
-    ImageView search_img;
+    Button search;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public class Manager_ListFragment extends Fragment {
 
         initMyAPI();
 
-        search_img = getActivity().findViewById(R.id.search_img);
+        search = getActivity().findViewById(R.id.search_btn);
         mg_products_spinner = getActivity().findViewById(R.id.mg_products_spinner);
         mg_weight_spinner = getActivity().findViewById(R.id.mg_weight_spinner);
         plist.add(0, "전체 보기");
@@ -213,17 +215,17 @@ public class Manager_ListFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                search_img.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String searchText = mg_fillter_edit.getText().toString();
-                        fillter_edit(searchText);
-                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
-                        assert imm != null;
-                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                        Toast.makeText(getContext(), mg_fillter_edit.getText().toString() + "로 검색", Toast.LENGTH_SHORT).show();
-                    }
-                });
+               search.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View view) {
+                       String searchText = mg_fillter_edit.getText().toString();
+                       fillter_edit(searchText);
+                       InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                       assert imm != null;
+                       imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                       Toast.makeText(getContext(), mg_fillter_edit.getText().toString() + "로 검색", Toast.LENGTH_SHORT).show();
+                   }
+               });
             }
         });
 

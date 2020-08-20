@@ -7,4 +7,5 @@
     <color name="white">#ffffff</color>
     <color name="line">#5f5f64</color>
     <color name="primary_blue">#0336FF</color>
+    <color name="pressed_blue">#072fcc</color>
 </resources>
