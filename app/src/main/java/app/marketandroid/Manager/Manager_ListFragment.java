@@ -117,19 +117,18 @@ public class Manager_ListFragment extends Fragment {
                             assert mList != null;
                             for (SellItem item : mList) {
                                 if (mg_products_spinner.getSelectedItem().toString().equals(item.getPriceNlimit().getDemand().getProduct().getName())) {
-                                    for (int i = 0; i < wlist2.size(); i++) {
-                                        if (!wlist.contains(item.getPriceNlimit().getDemand().getWeight())) {
-                                            wlist.add(item.getPriceNlimit().getDemand().getWeight());
-                                            mAdapter.notifyDataSetChanged();
-                                        }
+
+                                    if (!wlist.contains(item.getPriceNlimit().getDemand().getWeight())) {
+                                        wlist.add(item.getPriceNlimit().getDemand().getWeight() + "Kg");
+                                        mAdapter.notifyDataSetChanged();
                                     }
 
-                                    Collections.sort(wlist); //오름차순
-                                    wlist2.addAll(wlist);
-
-                                    mAdapter.notifyDataSetChanged();
                                 }
                             }
+                            Collections.sort(wlist); //오름차순
+                            wlist2.addAll(wlist);
+
+                            mAdapter.notifyDataSetChanged();
                             fillter_product(mg_products_spinner.getSelectedItem().toString());
                         }
 
@@ -223,17 +222,19 @@ public class Manager_ListFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-               search.setOnClickListener(new View.OnClickListener() {
-                   @Override
-                   public void onClick(View view) {
-                       String searchText = mg_fillter_edit.getText().toString();
-                       fillter_edit(searchText);
-                       InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
-                       assert imm != null;
-                       imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                       Toast.makeText(getContext(), mg_fillter_edit.getText().toString() + "로 검색", Toast.LENGTH_SHORT).show();
-                   }
-               });
+                search.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mg_weight_spinner.setSelection(0);
+                        mg_products_spinner.setSelection(0);
+                        String searchText = mg_fillter_edit.getText().toString();
+                        fillter_edit(searchText);
+                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                        assert imm != null;
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        Toast.makeText(getContext(), mg_fillter_edit.getText().toString() + "로 검색", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -284,7 +285,7 @@ public class Manager_ListFragment extends Fragment {
             mList.addAll(mData);
         } else {
             for (MGRecyclerItem item : mData) {
-                if (item.getUser_name().contains(searchText)) {
+                if (item.getUser_name().equals(searchText)) {
                     mList.add(item);
                 }
             }
@@ -298,7 +299,7 @@ public class Manager_ListFragment extends Fragment {
             mList.addAll(mData);
         } else {
             for (MGRecyclerItem item : mData) {
-                if (item.getProductsStr().contains(searchText)) {
+                if (item.getProductsStr().equals(searchText)) {
                     mList.add(item);
                 }
             }
@@ -312,7 +313,7 @@ public class Manager_ListFragment extends Fragment {
             mList.addAll(mData);
         } else {
             for (MGRecyclerItem item : mData) {
-                if (item.getProductsStr().contains(product) && item.getWeightStr().contains(searchText)) {
+                if (item.getProductsStr().equals(product) && item.getWeightStr().equals(searchText)) {
                     mList.add(item);
                 }
             }

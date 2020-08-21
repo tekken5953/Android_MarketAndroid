@@ -59,7 +59,7 @@ public class NB_AddFragment extends Fragment {
     int product_id = 1;
     String[] product;
     int[] demand_id;
-    int asd;
+    int priceNlimits;
     ArrayList<Integer> img_list = new ArrayList<>();
 
     @Override
@@ -225,7 +225,7 @@ public class NB_AddFragment extends Fragment {
                             for (PriceNLimitItem item3 : mList) {
                                 for (int i = spinner_weight.getSelectedItemPosition(); i <= spinner_weight.getSelectedItemPosition(); i++) {
                                     if (demand_id[i] == item3.getDemand()) {
-                                        asd = item3.getId();
+                                        priceNlimits = item3.getId();
                                         price.setText(String.valueOf(item3.getPrice()));
                                         weight.setText(String.valueOf(item3.getLimit()));
                                         for (int j = 1; j <= item3.getLimit(); j++) {
@@ -260,12 +260,12 @@ public class NB_AddFragment extends Fragment {
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (spinner_weight.getSelectedItemPosition() != 0){
+                if (spinner_weight.getSelectedItemPosition() != 0) {
                     final SellItem_post item = new SellItem_post();
                     Call<SellItem_post> post_regist = mMyAPI.post_sell(SharedPreferenceManager.getString(getContext(), "token"), item);
                     item.setUser(SharedPreferenceManager.getInt(getContext(), "user_id"));
                     item.setCount(spinner_count.getSelectedItemPosition());
-                    item.setPriceNlimit(asd);
+                    item.setPriceNlimit(priceNlimits);
 
                     post_regist.enqueue(new Callback<SellItem_post>() {
                         @Override
@@ -277,15 +277,14 @@ public class NB_AddFragment extends Fragment {
                         public void onFailure(Call<SellItem_post> call, Throwable t) {
                         }
                     });
-                }else if(spinner_count.getSelectedItemPosition() == 0){
-                    Toast.makeText(getContext(), "수량을 선택해주세요.", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                    alertDialog.dismiss();
+                } else if (spinner_weight.getSelectedItemPosition() == 0) {
                     Toast.makeText(getContext(), "중량을 선택해주세요.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "수량을 선택해주세요.", Toast.LENGTH_SHORT).show();
                 }
                 list_weight.clear();
                 product_id = 1;
-                alertDialog.dismiss();
             }
         });
         cancel_btn.setOnClickListener(new View.OnClickListener() {

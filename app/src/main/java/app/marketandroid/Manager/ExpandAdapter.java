@@ -94,7 +94,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
                 @Override
                 public void onClick(View view) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(aContext);
-                    View v = LayoutInflater.from(aContext).inflate(R.layout.add_weight_dialog,null,false);
+                    View v = LayoutInflater.from(aContext).inflate(R.layout.add_weight_dialog, null, false);
                     builder.setView(v);
                     final AlertDialog alertDialog = builder.create();
                     final TextView title = v.findViewById(R.id.add_weight_title);
@@ -111,26 +111,26 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
                         @Override
                         public void onClick(View view) {
                             product = Integer.parseInt(DataList.get(groupPosition).child_5.get(childPosition));
-                            Call<List<DemandItem>> get_demands = mMyAPI.get_demands(SharedPreferenceManager.getString(aContext,"token"));
+                            Call<List<DemandItem>> get_demands = mMyAPI.get_demands(SharedPreferenceManager.getString(aContext, "token"));
                             get_demands.enqueue(new Callback<List<DemandItem>>() {
                                 @Override
                                 public void onResponse(Call<List<DemandItem>> call, Response<List<DemandItem>> response) {
                                     List<DemandItem> mList = response.body();
                                     assert mList != null;
-                                    for (DemandItem item : mList){
-                                        if (item.getProduct() == product){
-                                            if (item.getWeight().equals(weight.getText().toString())){
+                                    for (DemandItem item : mList) {
+                                        if (item.getProduct() == product) {
+                                            if (item.getWeight().equals(weight.getText().toString())) {
                                                 Toast.makeText(aContext, "이미 존재하는 중량정보 입니다.", Toast.LENGTH_SHORT).show();
                                                 break;
-                                            }else if (weight.getText().toString().equals("")){
+                                            } else if (weight.getText().toString().equals("")) {
                                                 Toast.makeText(aContext, "중량정보를 입력해주세요.", Toast.LENGTH_SHORT).show();
                                                 break;
-                                            }else if (price.getText().toString().equals("")){
+                                            } else if (price.getText().toString().equals("")) {
                                                 Toast.makeText(aContext, "박스 당 가격을 입력해주세요.", Toast.LENGTH_SHORT).show();
                                                 break;
-                                            }else{
+                                            } else {
                                                 DemandItem_post demandItem = new DemandItem_post();
-                                                Call<DemandItem_post> post_demands = mMyAPI.post_demands(SharedPreferenceManager.getString(aContext,"token"),demandItem);
+                                                Call<DemandItem_post> post_demands = mMyAPI.post_demands(SharedPreferenceManager.getString(aContext, "token"), demandItem);
                                                 demandItem.setWeight(Integer.parseInt(weight.getText().toString()));
                                                 demandItem.setPrice(Integer.parseInt(price.getText().toString()));
                                                 demandItem.setLimit(Integer.parseInt(limit.getText().toString()));
@@ -139,7 +139,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
                                                     @Override
                                                     public void onResponse(Call<DemandItem_post> call, Response<DemandItem_post> response) {
                                                         Toast.makeText(aContext, "중량을 추가하였습니다.", Toast.LENGTH_SHORT).show();
-                                                        Log.d("retrofit",response.message());
+                                                        Log.d("retrofit", response.message());
                                                         alertDialog.dismiss();
                                                     }
 
@@ -207,7 +207,6 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
                     child_dial_title.setText(DataList.get(groupPosition).groupName + " 설정 변경");
 
 
-
                     btn_ok.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -253,9 +252,12 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
         child1.setText(DataList.get(groupPosition).child_1.get(childPosition));
         child2.setText(DataList.get(groupPosition).child_2.get(childPosition));
         child3.setText(DataList.get(groupPosition).child_3.get(childPosition));
-        child4.setText(DataList.get(groupPosition).child_4.get(childPosition));
-        child5.setText(DataList.get(groupPosition).child_5.get(childPosition));
-
+        try {
+            child4.setText(DataList.get(groupPosition).child_4.get(childPosition));
+            child5.setText(DataList.get(groupPosition).child_5.get(childPosition));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return convertView;
     }
 
