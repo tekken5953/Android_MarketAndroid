@@ -101,6 +101,5 @@ public class MGRecyclerViewAdapter extends RecyclerView.Adapter<MGRecyclerViewAd
             count = itemView.findViewById(R.id.mgrecycle_count);
             btn = itemView.findViewById(R.id.mgrecycle_call_btn);
         }
-
     }
 }

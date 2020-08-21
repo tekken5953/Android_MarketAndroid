@@ -3,6 +3,7 @@ package app.marketandroid.Manager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +62,7 @@ public class Manager_ListFragment extends Fragment {
     EditText mg_fillter_edit;
     Button search;
 
+    ImageView refresh;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -70,7 +73,20 @@ public class Manager_ListFragment extends Fragment {
         search = getActivity().findViewById(R.id.search_btn);
         mg_products_spinner = getActivity().findViewById(R.id.mg_products_spinner);
         mg_weight_spinner = getActivity().findViewById(R.id.mg_weight_spinner);
+        refresh = getActivity().findViewById(R.id.refresh);
 
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mData.clear();
+                mList.clear();
+                plist.clear();
+                plist2.clear();
+                wlist.clear();
+                wlist2.clear();
+                Refresh();
+            }
+        });
 
         plist.add(0, "전체 보기");
         wlist2.add(0, "전체 보기");
@@ -250,6 +266,7 @@ public class Manager_ListFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        Log.d("cycle","DestroyFragment");
     }
 
     public void addItem(String time, String user_name, String products, String weight, String count, String total_price, String personal_price) {
@@ -319,5 +336,11 @@ public class Manager_ListFragment extends Fragment {
             }
         }
         mAdapter.notifyDataSetChanged();
+    }
+
+    private void Refresh(){
+        assert getFragmentManager() != null;
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
     }
 }

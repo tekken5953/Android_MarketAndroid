@@ -38,12 +38,12 @@ public class Manager_MainActivity extends AppCompatActivity {
         setting_btn = findViewById(R.id.manager_setting_btn);
         main_title = findViewById(R.id.main_title);
         final ViewPager viewPager = findViewById(R.id.manager_viewpager);
-        viewPager.setOffscreenPageLimit(2);
         final ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addItem(listFragment);
         adapter.addItem(settingFragment);
         viewPager.setAdapter(adapter);
         viewPager.setClipToPadding(false);
+        viewPager.setOffscreenPageLimit(0);
         viewPager.setCurrentItem(0);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -62,6 +62,7 @@ public class Manager_MainActivity extends AppCompatActivity {
                         list_btn.setTextColor(getResources().getColor(R.color.colorPrimary));
                         list_btn.setTextSize(19);
                         break;
+
                     case 1:
                         list_btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                         list_btn.setTextColor(Color.parseColor("#ffffff"));

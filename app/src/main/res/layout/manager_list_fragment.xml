@@ -86,11 +86,20 @@
         android:text="금일 등록 된 물품이 없습니다."
         android:layout_centerInParent="true"/>
 
+    <ImageView
+        android:id="@+id/refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_refresh_24"
+        android:layout_below="@+id/mg_line"
+        app:tint="@color/primary_blue"
+        android:layout_margin="5dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mgrecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/mg_line"
+        android:layout_below="@+id/refresh"
         android:layout_marginTop="5dp" />
 
 </RelativeLayout>
