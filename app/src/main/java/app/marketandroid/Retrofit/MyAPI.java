@@ -56,7 +56,8 @@ public interface MyAPI {
 
     @POST("/demands/")
     Call<DemandItem_post> post_demands(@Header("Authorization") String token, @Body DemandItem_post post);
-    
+
+
     @GET("/sells/uname/{name}/")
     Call<List<SellItem>> get_sell_nb(@Path("name") int id, @Header("Authorization") String token);
 }

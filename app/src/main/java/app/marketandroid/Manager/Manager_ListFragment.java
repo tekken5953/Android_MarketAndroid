@@ -62,8 +62,6 @@ public class Manager_ListFragment extends Fragment {
     EditText mg_fillter_edit;
     Button search;
 
-    ImageView refresh;
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -73,20 +71,6 @@ public class Manager_ListFragment extends Fragment {
         search = getActivity().findViewById(R.id.search_btn);
         mg_products_spinner = getActivity().findViewById(R.id.mg_products_spinner);
         mg_weight_spinner = getActivity().findViewById(R.id.mg_weight_spinner);
-        refresh = getActivity().findViewById(R.id.refresh);
-
-        refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mData.clear();
-                mList.clear();
-                plist.clear();
-                plist2.clear();
-                wlist.clear();
-                wlist2.clear();
-                Refresh();
-            }
-        });
 
         plist.add(0, "전체 보기");
         wlist2.add(0, "전체 보기");
@@ -266,7 +250,12 @@ public class Manager_ListFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.d("cycle","DestroyFragment");
+        mData.clear();
+        mList.clear();
+        plist.clear();
+        plist2.clear();
+        wlist.clear();
+        wlist2.clear();
     }
 
     public void addItem(String time, String user_name, String products, String weight, String count, String total_price, String personal_price) {
@@ -336,11 +325,5 @@ public class Manager_ListFragment extends Fragment {
             }
         }
         mAdapter.notifyDataSetChanged();
-    }
-
-    private void Refresh(){
-        assert getFragmentManager() != null;
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.detach(this).attach(this).commit();
     }
 }

@@ -21,6 +21,16 @@
             android:fontFamily="@font/cookierunbold"
             android:textColor="@color/white"
             android:textSize="28sp" />
+
+        <ImageView
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_refresh_24"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="25dp"/>
+
     </RelativeLayout>
 
     <LinearLayout

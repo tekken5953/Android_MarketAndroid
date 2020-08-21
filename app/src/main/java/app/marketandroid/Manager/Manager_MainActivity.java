@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,12 +30,14 @@ public class Manager_MainActivity extends AppCompatActivity {
     Button list_btn, setting_btn;
     TextView main_title;
     Boolean isExitFlag = false;
+    ImageView refresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manager_main);
         list_btn = findViewById(R.id.manager_list_btn);
+        refresh = findViewById(R.id.refresh);
         setting_btn = findViewById(R.id.manager_setting_btn);
         main_title = findViewById(R.id.main_title);
         final ViewPager viewPager = findViewById(R.id.manager_viewpager);
@@ -89,6 +92,15 @@ public class Manager_MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 viewPager.setCurrentItem(1);
+            }
+        });
+
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               viewPager.removeAllViews();
+               viewPager.setAdapter(adapter);
+               viewPager.setCurrentItem(0);
             }
         });
     }

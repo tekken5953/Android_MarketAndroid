@@ -189,7 +189,6 @@ public class Manager_SettingFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         list.clear();
-        Log.d("cycle","DestroyFragment");
     }
 
     @Nullable
