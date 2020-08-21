@@ -60,6 +60,7 @@ public class Manager_ListFragment extends Fragment {
     EditText mg_fillter_edit;
     Button search;
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -100,6 +101,7 @@ public class Manager_ListFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 wlist2.clear();
+                wlist.clear();
                 wlist2.add(0, "전체 보기");
                 mg_weight_spinner.setSelection(0);
                 if (mg_products_spinner.getSelectedItemPosition() == 0) {
@@ -121,6 +123,7 @@ public class Manager_ListFragment extends Fragment {
                                             mAdapter.notifyDataSetChanged();
                                         }
                                     }
+
                                     Collections.sort(wlist); //오름차순
                                     wlist2.addAll(wlist);
 
