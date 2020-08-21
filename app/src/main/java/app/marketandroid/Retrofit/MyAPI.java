@@ -30,6 +30,9 @@ public interface MyAPI {
     @GET("/products/")
     Call<List<ProductItem>> get_product(@Header("Authorization") String token);
 
+    @POST("/products/")
+    Call<ProductItem> post_product(@Header("Authorization") String token, @Body ProductItem post);
+
     @GET("/demands/")
     Call<List<DemandItem>> get_demands(@Header("Authorization") String token);
 
@@ -50,4 +53,7 @@ public interface MyAPI {
 
     @POST("/priceNlimits/")
     Call<PriceNLimitItem> post_priceNlimits(@Header("Authorization") String token, @Body PriceNLimitItem post);
+
+    @POST("/demands/")
+    Call<DemandItem_post> post_demands(@Header("Authorization") String token, @Body DemandItem_post post);
 }

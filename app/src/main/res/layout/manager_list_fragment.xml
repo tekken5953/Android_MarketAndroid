@@ -6,12 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".Manager.Manager_ListFragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mg_relative"
+        android:background="@drawable/boundary_search"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+        <EditText
+            android:id="@+id/mg_fillter_edit"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="#00ffff00"
+            android:gravity="center"
+            android:hint="농부 이름으로 검색"
+            android:drawableTint="@color/primary_blue"
+            android:drawableLeft="@drawable/search"/>
+
+        <Button
+            android:id="@+id/search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:text="검 색"
+            android:background="@drawable/button_blue_fill"
+            android:textColor="@color/white"
+            android:fontFamily="@font/cookierunregular"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/mg_list_layout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:gravity="center_vertical"
+        android:layout_below="@id/mg_relative"
         android:orientation="horizontal">
 
         <Spinner
@@ -37,32 +69,13 @@
 
     </LinearLayout>
 
-    <RelativeLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0.7dp"
+        android:background="@color/line"
         android:layout_below="@+id/mg_list_layout"
-        android:id="@+id/mg_relative"
-        android:layout_marginTop="10dp">
-        <EditText
-            android:id="@+id/mg_fillter_edit"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:gravity="center"
-            android:hint="농부 이름"
-            android:backgroundTint="@color/primary_blue" />
+        android:id="@+id/mg_line"/>
 
-        <ImageView
-            android:id="@+id/search_img"
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/mg_fillter_edit"
-            android:src="@drawable/search"
-            app:tint="@color/primary_blue" />
-    </RelativeLayout>
 
     <TextView
         android:id="@+id/nothing"
@@ -77,7 +90,7 @@
         android:id="@+id/mgrecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/mg_relative"
-        android:layout_marginTop="15dp" />
+        android:layout_below="@+id/mg_line"
+        android:layout_marginTop="5dp" />
 
 </RelativeLayout>

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,8 +18,10 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -50,11 +53,13 @@ public class Manager_ListFragment extends Fragment {
     ArrayList<String> plist = new ArrayList<>();
     ArrayList<String> plist2 = new ArrayList<>();
     ArrayList<String> wlist2 = new ArrayList<>();
+    ArrayList<String> wlist = new ArrayList<>();
     ArrayAdapter<String> padapter;
     ArrayAdapter<String> wadapter;
     MyAPI mMyAPI;
     EditText mg_fillter_edit;
-    ImageView search_img;
+    Button search;
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -62,9 +67,11 @@ public class Manager_ListFragment extends Fragment {
 
         initMyAPI();
 
-        search_img = getActivity().findViewById(R.id.search_img);
+        search = getActivity().findViewById(R.id.search_btn);
         mg_products_spinner = getActivity().findViewById(R.id.mg_products_spinner);
         mg_weight_spinner = getActivity().findViewById(R.id.mg_weight_spinner);
+
+
         plist.add(0, "전체 보기");
         wlist2.add(0, "전체 보기");
 
@@ -94,10 +101,10 @@ public class Manager_ListFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 wlist2.clear();
+                wlist.clear();
                 wlist2.add(0, "전체 보기");
                 mg_weight_spinner.setSelection(0);
                 if (mg_products_spinner.getSelectedItemPosition() == 0) {
-
                     if (mg_weight_spinner.getSelectedItemPosition() == 0) {
                         fillter_product("");
                     }
@@ -111,12 +118,15 @@ public class Manager_ListFragment extends Fragment {
                             for (SellItem item : mList) {
                                 if (mg_products_spinner.getSelectedItem().toString().equals(item.getPriceNlimit().getDemand().getProduct().getName())) {
                                     for (int i = 0; i < wlist2.size(); i++) {
-                                        if (!wlist2.contains(item.getPriceNlimit().getDemand().getWeight())) {
-                                            wlist2.add(item.getPriceNlimit().getDemand().getWeight());
+                                        if (!wlist.contains(item.getPriceNlimit().getDemand().getWeight())) {
+                                            wlist.add(item.getPriceNlimit().getDemand().getWeight());
                                             mAdapter.notifyDataSetChanged();
                                         }
                                     }
-                                    Collections.sort(wlist2); //오름차순
+
+                                    Collections.sort(wlist); //오름차순
+                                    wlist2.addAll(wlist);
+
                                     mAdapter.notifyDataSetChanged();
                                 }
                             }
@@ -213,17 +223,17 @@ public class Manager_ListFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                search_img.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String searchText = mg_fillter_edit.getText().toString();
-                        fillter_edit(searchText);
-                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
-                        assert imm != null;
-                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                        Toast.makeText(getContext(), mg_fillter_edit.getText().toString() + "로 검색", Toast.LENGTH_SHORT).show();
-                    }
-                });
+               search.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View view) {
+                       String searchText = mg_fillter_edit.getText().toString();
+                       fillter_edit(searchText);
+                       InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                       assert imm != null;
+                       imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                       Toast.makeText(getContext(), mg_fillter_edit.getText().toString() + "로 검색", Toast.LENGTH_SHORT).show();
+                   }
+               });
             }
         });
 

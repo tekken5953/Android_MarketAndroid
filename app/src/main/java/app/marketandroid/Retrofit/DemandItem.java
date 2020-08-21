@@ -28,4 +28,5 @@ public class DemandItem {
     public void setProduct(int product) {
         this.product = product;
     }
+
 }

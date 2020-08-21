@@ -9,16 +9,27 @@
         android:id="@+id/main_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:text="중량 제한 및 시세 설정"
         android:textColor="@color/black"
         android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/mg_set_add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="품목 추가"
+        android:background="@drawable/button_blue"
+        android:textColor="@color/white"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/cookierunregular"/>
 
     <ExpandableListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/main_text"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:groupIndicator="@null"
         android:transcriptMode="disabled"
         android:id="@+id/manager_setting_list"/>
