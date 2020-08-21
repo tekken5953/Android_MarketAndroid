@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/product_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="품목 추가하기"
+        android:textColor="@color/primary_blue"
+        android:textSize="25sp"
+        android:fontFamily="@font/cookierunbold"
+        android:layout_margin="25dp"/>
+
+    <EditText
+        android:id="@+id/product_edit"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:background="@drawable/boundary_search"
+        android:layout_below="@+id/product_title"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_marginTop="15dp"/>
+
+    <Button
+        android:id="@+id/product_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00ffff00"
+        android:textColor="@color/primary_blue"
+        android:text="추 가"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:fontFamily="@font/lotte_medium"
+        android:layout_below="@+id/product_edit"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="15dp"
+        android:layout_toLeftOf="@+id/product_cancel"/>
+
+    <Button
+        android:id="@+id/product_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00ffff00"
+        android:textColor="@color/primary_blue"
+        android:text="취 소"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/lotte_medium"
+        android:layout_below="@+id/product_edit"
+        android:layout_alignParentRight="true"/>
+
+
+</RelativeLayout>

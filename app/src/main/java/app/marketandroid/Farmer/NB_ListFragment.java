@@ -7,12 +7,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -36,14 +39,16 @@ public class NB_ListFragment extends Fragment {
     RecyclerView mRecyclerView = null;
     ArrayList<NBRecyclerItem> mList = new ArrayList<>();
     NBRecyclerViewAdapter mAdapter;
-    Drawable drawable;
+    Drawable drawable,noimg;
     TextView main_title, nothing;
     MyAPI mMyAPI;
+    RelativeLayout relativeLayout;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mRecyclerView = getActivity().findViewById(R.id.nbrecyclerView);
+        relativeLayout = getActivity().findViewById(R.id.nb_list_relative);
         nothing = getActivity().findViewById(R.id.nothing2);
         main_title = getActivity().findViewById(R.id.main_title);
         main_title.setText("금일 등록 현황");
@@ -70,19 +75,38 @@ public class NB_ListFragment extends Fragment {
         get_sell.enqueue(new Callback<List<SellItem>>() {
             @Override
             public void onResponse(Call<List<SellItem>> call, Response<List<SellItem>> response) {
-                List<SellItem> mList = response.body();
-                assert mList != null;
-                for (SellItem item : mList) {
-                    String form_time = item.getCreated_at().substring(0, 10) + "  " + item.getCreated_at().substring(11, 16);
-                    drawable = ResourcesCompat.getDrawable(getResources(), img[item.getPriceNlimit().getDemand().getProduct().getId() - 1], null);
-                    addItem(drawable, form_time, item.getPriceNlimit().getDemand().getProduct().getName() + "", item.getPriceNlimit().getDemand().getWeight() + "Kg",
-                            item.getCount() + "개", (item.getCount() * item.getPriceNlimit().getPrice()) + "원", "(1Box 당 " + item.getPriceNlimit().getPrice() + "원)");
-                    mAdapter.notifyDataSetChanged();
-                    if (mList.isEmpty()) {
-                        nothing.setVisibility(View.VISIBLE);
-                    } else {
-                        nothing.setVisibility(View.GONE);
+                if (response.isSuccessful()){
+                    List<SellItem> mList = response.body();
+                    assert mList != null;
+                    for (SellItem item : mList) {
+                        String form_time = item.getCreated_at().substring(0, 10) + "  " + item.getCreated_at().substring(11, 16);
+
+                        drawable = ResourcesCompat.getDrawable(getResources(), img[item.getPriceNlimit().getDemand().getProduct().getId() - 1], null);
+                        noimg = ResourcesCompat.getDrawable(getResources(), R.drawable.noimg, null);
+                        if (drawable != null){
+                            addItem(drawable, form_time, item.getPriceNlimit().getDemand().getProduct().getName() + "", item.getPriceNlimit().getDemand().getWeight() + "Kg",
+                                    item.getCount() + "개", (item.getCount() * item.getPriceNlimit().getPrice()) + "원", "(1Box 당 " + item.getPriceNlimit().getPrice() + "원)");
+                        }else{
+                            addItem(noimg, form_time, item.getPriceNlimit().getDemand().getProduct().getName() + "", item.getPriceNlimit().getDemand().getWeight() + "Kg",
+                                    item.getCount() + "개", (item.getCount() * item.getPriceNlimit().getPrice()) + "원", "(1Box 당 " + item.getPriceNlimit().getPrice() + "원)");
+                        }
+                        mAdapter.notifyDataSetChanged();
+
+                        if (mList.isEmpty()) {
+                            nothing.setVisibility(View.VISIBLE);
+                        } else {
+                            nothing.setVisibility(View.GONE);
+                        }
                     }
+                }else{
+                    TextView error = new TextView(getContext());
+                    error.setText("세션이 만료되었습니다.\n다시 접속해주세요.");
+                    error.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                    error.setTextColor(Color.parseColor("#000000"));
+                    LinearLayout linearLayout = new LinearLayout(getContext());
+                    linearLayout.addView(error);
+                    relativeLayout.removeAllViews();
+                    relativeLayout.addView(linearLayout);
                 }
             }
 

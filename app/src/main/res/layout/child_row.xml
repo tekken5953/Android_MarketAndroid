@@ -55,6 +55,13 @@
         android:visibility="gone"
         android:text="id"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/child5"
+        android:visibility="gone"
+        android:text="product"/>
+
     <Button
         android:id="@+id/child_btn"
         android:layout_width="45dp"

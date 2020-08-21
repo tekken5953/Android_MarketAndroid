@@ -60,6 +60,7 @@ public class NB_AddFragment extends Fragment {
     String[] product;
     int[] demand_id;
     int asd;
+    ArrayList<Integer> img_list = new ArrayList<>();
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -70,11 +71,23 @@ public class NB_AddFragment extends Fragment {
 
         initMyAPI();
 
+
         final Call<List<ProductItem>> get_product = mMyAPI.get_product(SharedPreferenceManager.getString(getContext(), "token"));
         get_product.enqueue(new Callback<List<ProductItem>>() {
             @Override
             public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
                 if (response.isSuccessful()) {
+
+                    img_list.add(R.drawable.potato);
+                    img_list.add(R.drawable.sweetpotato);
+                    img_list.add(R.drawable.carrot);
+                    img_list.add(R.drawable.garlic);
+                    img_list.add(R.drawable.apple);
+                    img_list.add(R.drawable.sangchu);
+                    img_list.add(R.drawable.onion);
+                    img_list.add(R.drawable.cucomber);
+                    img_list.add(R.drawable.pumpkin);
+
                     List<ProductItem> mList = response.body();
                     assert mList != null;
                     product = new String[mList.size()];
@@ -83,27 +96,18 @@ public class NB_AddFragment extends Fragment {
                             if (item1.getId() == i) {
                                 product[count] = item1.getName();
                                 count++;
+                                if (i > img_list.size()) {
+                                    img_list.add(count - 1, R.drawable.noimg);
+                                }
                                 break;
                             }
                         }
                     }
 
-                    int[] img = {
-                            R.drawable.potato,
-                            R.drawable.sweetpotato,
-                            R.drawable.carrot,
-                            R.drawable.garlic,
-                            R.drawable.apple,
-                            R.drawable.sangchu,
-                            R.drawable.onion,
-                            R.drawable.cucomber,
-                            R.drawable.pumpkin
-                    };
-
                     MyAdapter adapter = new MyAdapter(
                             getContext(),
                             R.layout.gridview_row,       // GridView 항목의 레이아웃 row.xml
-                            img,
+                            img_list,
                             product);    // 데이터
 
                     GridView gv = (GridView) getActivity().findViewById(R.id.gridView1);
@@ -181,6 +185,7 @@ public class NB_AddFragment extends Fragment {
         adapter_weight.clear();
         count = 0;
         text_position = 0;
+        img_list.clear();
     }
 
     public void alertDialog() {
@@ -255,23 +260,29 @@ public class NB_AddFragment extends Fragment {
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
-                final SellItem_post item = new SellItem_post();
-                Call<SellItem_post> post_regist = mMyAPI.post_sell(SharedPreferenceManager.getString(getContext(), "token"), item);
-                item.setUser(SharedPreferenceManager.getInt(getContext(), "user_id"));
-                item.setCount(spinner_count.getSelectedItemPosition());
-                item.setPriceNlimit(asd);
+                if (spinner_weight.getSelectedItemPosition() != 0){
+                    final SellItem_post item = new SellItem_post();
+                    Call<SellItem_post> post_regist = mMyAPI.post_sell(SharedPreferenceManager.getString(getContext(), "token"), item);
+                    item.setUser(SharedPreferenceManager.getInt(getContext(), "user_id"));
+                    item.setCount(spinner_count.getSelectedItemPosition());
+                    item.setPriceNlimit(asd);
 
-                post_regist.enqueue(new Callback<SellItem_post>() {
-                    @Override
-                    public void onResponse(Call<SellItem_post> call, Response<SellItem_post> response) {
-                        toastMsg("신청 완료");
-                    }
+                    post_regist.enqueue(new Callback<SellItem_post>() {
+                        @Override
+                        public void onResponse(Call<SellItem_post> call, Response<SellItem_post> response) {
+                            toastMsg("신청 완료");
+                        }
 
-                    @Override
-                    public void onFailure(Call<SellItem_post> call, Throwable t) {
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<SellItem_post> call, Throwable t) {
+                        }
+                    });
+                }else if(spinner_count.getSelectedItemPosition() == 0){
+                    Toast.makeText(getContext(), "수량을 선택해주세요.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getContext(), "중량을 선택해주세요.", Toast.LENGTH_SHORT).show();
+                }
                 list_weight.clear();
                 product_id = 1;
                 alertDialog.dismiss();
@@ -291,11 +302,11 @@ public class NB_AddFragment extends Fragment {
     static class MyAdapter extends BaseAdapter {
         Context context;
         int layout;
-        int[] img;
+        ArrayList<Integer> img;
         String[] text;
         LayoutInflater inf;
 
-        public MyAdapter(Context context, int layout, int[] img, String[] text) {
+        public MyAdapter(Context context, int layout, ArrayList<Integer> img, String[] text) {
             this.context = context;
             this.layout = layout;
             this.img = img;
@@ -306,7 +317,7 @@ public class NB_AddFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return img.length;
+            return img.size();
         }
 
         @Override
@@ -325,7 +336,7 @@ public class NB_AddFragment extends Fragment {
                 convertView = inf.inflate(layout, null);
             ImageView iv = (ImageView) convertView.findViewById(R.id.imageView1);
             TextView tv = (TextView) convertView.findViewById(R.id.textView1);
-            iv.setImageResource(img[position]);
+            iv.setImageResource(img.get(position));
             tv.setText(text[position]);
             return convertView;
         }

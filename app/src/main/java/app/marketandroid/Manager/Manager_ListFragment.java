@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -52,6 +53,7 @@ public class Manager_ListFragment extends Fragment {
     ArrayList<String> plist = new ArrayList<>();
     ArrayList<String> plist2 = new ArrayList<>();
     ArrayList<String> wlist2 = new ArrayList<>();
+    ArrayList<String> wlist = new ArrayList<>();
     ArrayAdapter<String> padapter;
     ArrayAdapter<String> wadapter;
     MyAPI mMyAPI;
@@ -67,6 +69,8 @@ public class Manager_ListFragment extends Fragment {
         search = getActivity().findViewById(R.id.search_btn);
         mg_products_spinner = getActivity().findViewById(R.id.mg_products_spinner);
         mg_weight_spinner = getActivity().findViewById(R.id.mg_weight_spinner);
+
+
         plist.add(0, "전체 보기");
         wlist2.add(0, "전체 보기");
 
@@ -99,7 +103,6 @@ public class Manager_ListFragment extends Fragment {
                 wlist2.add(0, "전체 보기");
                 mg_weight_spinner.setSelection(0);
                 if (mg_products_spinner.getSelectedItemPosition() == 0) {
-
                     if (mg_weight_spinner.getSelectedItemPosition() == 0) {
                         fillter_product("");
                     }
@@ -113,12 +116,14 @@ public class Manager_ListFragment extends Fragment {
                             for (SellItem item : mList) {
                                 if (mg_products_spinner.getSelectedItem().toString().equals(item.getPriceNlimit().getDemand().getProduct().getName())) {
                                     for (int i = 0; i < wlist2.size(); i++) {
-                                        if (!wlist2.contains(item.getPriceNlimit().getDemand().getWeight())) {
-                                            wlist2.add(item.getPriceNlimit().getDemand().getWeight());
+                                        if (!wlist.contains(item.getPriceNlimit().getDemand().getWeight())) {
+                                            wlist.add(item.getPriceNlimit().getDemand().getWeight());
                                             mAdapter.notifyDataSetChanged();
                                         }
                                     }
-                                    Collections.sort(wlist2); //오름차순
+                                    Collections.sort(wlist); //오름차순
+                                    wlist2.addAll(wlist);
+
                                     mAdapter.notifyDataSetChanged();
                                 }
                             }

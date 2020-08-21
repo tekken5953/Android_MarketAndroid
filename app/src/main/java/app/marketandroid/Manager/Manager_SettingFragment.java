@@ -4,11 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +36,83 @@ public class Manager_SettingFragment extends Fragment {
     ArrayList<myGroup> list = new ArrayList<>();
     ExpandableListView listView;
     MyAPI mMyAPI;
+    Button add_product;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         initMyAPI();
+
+        add_product = getActivity().findViewById(R.id.mg_set_add_btn);
+
+        add_product.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                View v = LayoutInflater.from(getContext()).inflate(R.layout.add_product_dialog,null,false);
+                builder.setView(v);
+                final AlertDialog alertDialog = builder.create();
+                final EditText edit = v.findViewById(R.id.product_edit);
+                final Button ok = v.findViewById(R.id.product_ok);
+                final Button cancel = v.findViewById(R.id.product_cancel);
+
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Call<List<ProductItem>> get_product = mMyAPI.get_product(SharedPreferenceManager.getString(getContext(),"token"));
+                        get_product.enqueue(new Callback<List<ProductItem>>() {
+                            @Override
+                            public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
+                                List<ProductItem> mList = response.body();
+                                assert mList != null;
+                                for (ProductItem item : mList){
+                                    if (item.getName().equals(edit.getText().toString())){
+                                        Toast.makeText(getContext(), "이미 존재하는 품목입니다.", Toast.LENGTH_SHORT).show();
+                                        edit.setText("");
+                                    }else if (edit.getText().toString().equals("")){
+                                        Toast.makeText(getContext(), "품목명을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else{
+                                        final ProductItem productItem = new ProductItem();
+                                        Call<ProductItem> post_product = mMyAPI.post_product(SharedPreferenceManager.getString(getContext(),"token"),productItem);
+                                        productItem.setName(edit.getText().toString());
+                                        post_product.enqueue(new Callback<ProductItem>() {
+                                            @Override
+                                            public void onResponse(Call<ProductItem> call, Response<ProductItem> response) {
+                                                Toast.makeText(getContext(), "추가 완료", Toast.LENGTH_SHORT).show();
+                                                alertDialog.dismiss();
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<ProductItem> call, Throwable t) {
+
+                                            }
+                                        });
+                                    }
+                                    break;
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<ProductItem>> call, Throwable t) {
+
+                            }
+                        });
+                    }
+                });
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                alertDialog.show();
+            }
+        });
+
 
         Call<List<ProductItem>> get_product = mMyAPI.get_product(SharedPreferenceManager.getString(getContext(), "token"));
         get_product.enqueue(new Callback<List<ProductItem>>() {
@@ -64,6 +139,8 @@ public class Manager_SettingFragment extends Fragment {
                                 if (item2.getProduct() == item.getId()) {
                                     temp.child__num.add(String.valueOf(i));
                                     temp.child_1.add(item2.getWeight());
+                                    temp.child_5.add(String.valueOf(item2.getProduct()));
+                                    temp.child_5.add(0,String.valueOf(item2.getProduct()));
                                     i++;
 
                                     Call<List<PriceNLimitItem>> get_priceNlimits = mMyAPI.get_priceNlimits(SharedPreferenceManager.getString(getContext(), "token"));
