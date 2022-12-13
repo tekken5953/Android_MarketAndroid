@@ -7,9 +7,6 @@ Cooperation
 </br><h1>OKHTTP & Retrofit을 이용한 API서버 데이터 통신</h1></br>
 ![market_api2](https://user-images.githubusercontent.com/52855326/173198649-39d160cc-4b1f-4b8f-8ec0-48ccbaa69bfc.png)
 
-</br><h1>PieCharm + AWS EC2 Token 방식의 로그인 서비스 구현</h1></br>
-![market_login](https://user-images.githubusercontent.com/52855326/173198732-fb0366a1-6aea-4f94-a389-cdeeb525af7f.png)
-
 </br><h1>농부의 물품 신청 관련코드</h1></br>
 ![market_additem](https://user-images.githubusercontent.com/52855326/173198765-d953549f-ae97-40fc-b99e-40df5f0e1340.png)
 
