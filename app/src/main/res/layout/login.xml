@@ -13,9 +13,10 @@
         android:layout_above="@+id/login_edit_id"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/cookierunbold"
-        android:text="App Name"
+        android:text="Farmers Market"
+        android:gravity="center"
         android:textColor="@color/primary_blue"
-        android:textSize="60sp"
+        android:textSize="45sp"
         android:textStyle="bold" />
 
     <EditText

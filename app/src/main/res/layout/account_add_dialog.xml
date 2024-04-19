@@ -17,10 +17,12 @@
 
     <EditText
         android:id="@+id/account_bank_edit"
-        android:layout_width="170dp"
+        android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:layout_below="@+id/account_title"
         android:hint="은행 명"
+        android:layout_alignStart="@+id/account_account_edit"
+        android:layout_alignEnd="@+id/account_account_edit"
         android:background="@drawable/boundary"
         android:gravity="center"
         android:textColor="@color/black"
@@ -29,10 +31,12 @@
 
     <EditText
         android:id="@+id/account_name_edit"
-        android:layout_width="170dp"
+        android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:layout_below="@+id/account_bank_edit"
         android:hint="예금주 명"
+        android:layout_alignStart="@+id/account_account_edit"
+        android:layout_alignEnd="@+id/account_account_edit"
         android:background="@drawable/boundary"
         android:gravity="center"
         android:textColor="@color/black"
@@ -72,25 +76,30 @@
         android:gravity="center">
         <Button
             android:id="@+id/account_ok_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_blue"
             android:textColor="@color/white"
+            android:layout_weight="0.5"
             android:text="@string/ok"
+            android:layout_marginStart="24dp"
             android:fontFamily="@font/cookierunregular"
             android:layout_marginTop="3dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="3dp"/>
 
         <Button
             android:id="@+id/account_cancel_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_blue"
             android:textColor="@color/white"
+            android:layout_weight="0.5"
             android:text="@string/cancel"
             android:fontFamily="@font/cookierunregular"
             android:layout_marginTop="3dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="20dp"
             android:layout_marginBottom="3dp"/>
     </TableRow>
 

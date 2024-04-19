@@ -95,7 +95,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="7dp"
-            android:background="@drawable/button_blue"
+            android:background="@drawable/button_call"
             android:text="전화\n걸기"
             android:textColor="@color/white"
             android:textSize="18sp" />

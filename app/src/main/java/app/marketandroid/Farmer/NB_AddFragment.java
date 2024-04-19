@@ -137,8 +137,7 @@ public class NB_AddFragment extends Fragment {
                                 }
 
                                 @Override
-                                public void onFailure(Call<List<DemandItem>> call, Throwable t) {
-                                }
+                                public void onFailure(Call<List<DemandItem>> call, Throwable t) {}
                             });
                             alertDialog();
                         }

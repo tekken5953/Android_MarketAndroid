@@ -2,6 +2,7 @@ package app.marketandroid.Manager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,6 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -62,6 +65,7 @@ public class Manager_ListFragment extends Fragment {
     EditText mg_fillter_edit;
     Button search;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -77,6 +81,8 @@ public class Manager_ListFragment extends Fragment {
 
         padapter = new ArrayAdapter<>(getContext(), R.layout.spinneritem, plist2);
         wadapter = new ArrayAdapter<>(getContext(), R.layout.spinneritem, wlist2);
+
+
 
         mg_weight_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -150,6 +156,11 @@ public class Manager_ListFragment extends Fragment {
         mAdapter = new MGRecyclerViewAdapter(mList);
         mRecyclerView.setAdapter(mAdapter);
 
+
+        addItem(LocalDateTime.now().toString(), "농부1", "감자", "50Kg", "2Box","총 : 56,000￦", "박스당 : 28,000￦");
+        addItem(LocalDateTime.now().toString(), "농부2", "옥수수", "70Kg", "4Box","총 : 126,000￦", "박스당 : 32,500￦");
+        getActivity().findViewById(R.id.nothing).setVisibility(View.GONE);
+        mAdapter.notifyDataSetChanged();
 
         Call<List<SellItem>> get_sell = mMyAPI.get_sell(SharedPreferenceManager.getString(getContext(), "token"));
         get_sell.enqueue(new Callback<List<SellItem>>() {
@@ -237,6 +248,8 @@ public class Manager_ListFragment extends Fragment {
                 });
             }
         });
+
+
 
     }
 

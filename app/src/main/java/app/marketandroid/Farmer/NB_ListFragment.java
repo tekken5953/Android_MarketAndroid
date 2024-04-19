@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +57,7 @@ public class NB_ListFragment extends Fragment {
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
         mAdapter = new NBRecyclerViewAdapter(mList);
         mRecyclerView.setAdapter(mAdapter);
+
 
         final int[] img = {
                 R.drawable.potato,
@@ -115,6 +117,12 @@ public class NB_ListFragment extends Fragment {
             }
         });
 
+        addItem(ResourcesCompat.getDrawable(getResources(), R.drawable.potato,null), LocalDateTime.now().toString(),
+                "감자", "50" + "Kg",
+                "2" + "Box",  "56,000" + "원", "(1Box 당 " + "28,000" + "원)");
+        addItem(ResourcesCompat.getDrawable(getResources(), R.drawable.carrot,null),
+                LocalDateTime.now().toString(), "옥수수", "70Kg", "4Box", "126,000원","32,500원");
+        nothing.setVisibility(View.GONE);
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
